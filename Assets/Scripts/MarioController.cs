@@ -23,7 +23,7 @@ public class MarioController : MonoBehaviour {
 
             if (Input.GetAxis("Horizontal") > 0)
             {
-                Debug.Log(Input.GetAxis("Horizontal"));
+                //Debug.Log(Input.GetAxis("Horizontal"));
                 _marioMovement.GotoRight();
             }
             else if (Input.GetAxis("Horizontal") < 0)
