@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ad578cf74563bb247b97caedcfbb7a7e
-timeCreated: 1462004911
+timeCreated: 1462034038
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -59,14 +59,14 @@ TextureImporter:
     21300104: backgrounds-objects_52
     21300106: backgrounds-objects_53
     21300108: backgrounds-objects_54
-    21300110: backgrounds-objects_55
+    21300110: pipe_top
     21300112: backgrounds-objects_56
     21300114: backgrounds-objects_57
     21300116: brick_1
     21300118: brick_2
     21300120: brick_3
     21300122: brick_4
-    21300124: backgrounds-objects_62
+    21300124: pipe
     21300126: backgrounds-objects_63
     21300128: backgrounds-objects_64
     21300130: backgrounds-objects_65
@@ -162,6 +162,15 @@ TextureImporter:
     21300310: backgrounds-objects_155
     21300312: backgrounds-objects_156
     21300314: backgrounds-objects_157
+    21300316: greenblock_topleft
+    21300318: greenblock_topright
+    21300320: greenblock_top
+    21300322: greenblock_botleft
+    21300324: greenblock_bot
+    21300326: greenblock_botright
+    21300328: greenblock_inside
+    21300330: greenblock_right
+    21300332: greenblock_left
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -516,7 +525,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 968
-        y: 1378
+        y: 1379
         width: 32
         height: 32
       alignment: 0
@@ -928,13 +937,13 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: backgrounds-objects_55
+    - name: pipe_top
       rect:
         serializedVersion: 2
         x: 102
-        y: 1316
+        y: 1321
         width: 32
-        height: 21
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1005,13 +1014,13 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: backgrounds-objects_62
+    - name: pipe
       rect:
         serializedVersion: 2
         x: 103
-        y: 1286
+        y: 1294
         width: 30
-        height: 27
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1187,22 +1196,6 @@ TextureImporter:
         - {x: -40, y: -40}
         - {x: 40, y: -40}
         - {x: 40, y: 40}
-    - name: backgrounds-objects_77
-      rect:
-        serializedVersion: 2
-        x: 110
-        y: 1170
-        width: 176
-        height: 96
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -45, y: 48}
-        - {x: -88, y: 5}
-        - {x: -88, y: -48}
-        - {x: 88, y: -48}
-        - {x: 88, y: 48}
     - name: backgrounds-objects_78
       rect:
         serializedVersion: 2
@@ -1397,22 +1390,6 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: backgrounds-objects_95
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 1035
-        width: 80
-        height: 144
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -11, y: 72}
-        - {x: -40, y: -10}
-        - {x: -40, y: -72}
-        - {x: 40, y: -72}
-        - {x: 40, y: 72}
     - name: backgrounds-objects_96
       rect:
         serializedVersion: 2
@@ -2280,6 +2257,105 @@ TextureImporter:
         x: 12
         y: 1359
         width: 120
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: greenblock_topleft
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 1186
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: greenblock_topright
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 1186
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: greenblock_top
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 1186
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: greenblock_botleft
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 1170
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: greenblock_bot
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 1170
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: greenblock_botright
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 1170
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: greenblock_inside
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 1153
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: greenblock_right
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 1153
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: greenblock_left
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 1153
+        width: 16
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

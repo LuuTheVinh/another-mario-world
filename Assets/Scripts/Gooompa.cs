@@ -31,8 +31,17 @@ public class Gooompa : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collisiion) 
     {
-        checkHitByPlayer(collisiion);
+        if (collisiion.gameObject.tag == "Player")
+            checkHitByPlayer(collisiion);
+        if (collisiion.gameObject.tag == "Ground")
+            checkWithGround(collisiion);
+    }
 
+    private void checkWithGround(Collision2D collision)
+    {
+        Vector3 distance = (this.transform.position - collision.gameObject.transform.position).normalized;
+        if (distance.y < 0 && Mathf.Abs(distance.x) < 0.5)
+            (_imovement as LinearMovement).Xspeed = -(_imovement as LinearMovement).Xspeed;
     }
 
     public void SetSpeed(Vector3 s)
@@ -45,13 +54,13 @@ public class Gooompa : MonoBehaviour {
     {
         if (_aniamtor.GetCurrentAnimatorStateInfo(0).IsName("GoompaNormal") == false)
             return;
-        if (col.gameObject.tag != "Player")
-            return;
+
         // Nếu goompa đang trong trạng thái normal và va chạm với player
         // thì kiểm tra hướng va chạm.
         Vector3 distance = (this.transform.position - col.gameObject.transform.position).normalized;
 
-        if (distance.y < 0 && Mathf.Abs(distance.x) < -distance.y)
+        //if (distance.y < 0 && Mathf.Abs(distance.x) < -distance.y)
+        if (distance.y < 0 && Mathf.Abs(distance.x) < 0.5)
         {
             // Hướng từ trên xuống, goompa chết.
             _aniamtor.SetInteger("status", 1);

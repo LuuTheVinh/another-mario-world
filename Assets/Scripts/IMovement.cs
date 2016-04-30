@@ -10,9 +10,15 @@ public interface IMovement  {
 public class LinearMovement : IMovement
 {
     private float _xspeed;
+
+
     private float _yspeed;
     private float _zspeed;
-
+    public float Xspeed
+    {
+        get { return _xspeed; }
+        set { _xspeed = value; }
+    }
     public LinearMovement(float xspeed, float yspeed, float zspeed = 0)
     {
         _xspeed = xspeed;
@@ -22,7 +28,7 @@ public class LinearMovement : IMovement
     public void Movement(GameObject go)
     {
         go.transform.position += new Vector3(
-        _xspeed,
+        Xspeed,
         _yspeed,
         _zspeed);
     }

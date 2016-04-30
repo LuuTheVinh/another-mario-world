@@ -38,8 +38,10 @@ public class MysteryItem : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Kiểm tra bị player đội từ dưới   
-        checkHit(collision);
+        string tag = collision.gameObject.tag;
+        // Kiểm tra bị player đội từ dưới  
+        if (tag == "Player")
+           checkHit(collision);
 
     }
 
@@ -47,6 +49,11 @@ public class MysteryItem : MonoBehaviour {
     {
         if (_animator.GetCurrentAnimatorStateInfo(0).IsTag("Mystery Item Normal") == false)
             return;
+        // Nếu mario đang rơi thì không tính
+        if (col.gameObject.GetComponent<Rigidbody2D>().velocity.y < 0)
+            return;
+
+
         // Khoảng cách giữa vật mở item và player.
         // Dùng x và y để xác định hướng
         Vector3 distance = (this.transform.position - col.gameObject.transform.position).normalized;

@@ -23,13 +23,14 @@ public class Item : MonoBehaviour{
     public float _floatingUp;
     public float _deltaUp;
     public float _delayTime;
-    private float _height;
 
     public bool IsRunable { get; set; }
     public AppearMode _appearMode { get; set; }
 
     private int type;
-	// Use this for initialization
+    private float _height;
+    private float _delayNoneHit;
+    // Use this for initialization
 	void Start () {
         type = System.Convert.ToInt32(_type);
 
@@ -54,14 +55,16 @@ public class Item : MonoBehaviour{
         // Chọn kiểu di chuyển.
         _imovement = initMovement();
 
-
+        // delay lại không thôi vừa mơi chạm được cục gạch thì ăn item.
+        // cho nữa giây sau mới ăn được.
+        _delayNoneHit = 0.5f;
 	}
 
     // Update is called once per frame
 	void Update () {
         if (IsUseAnimator[type] == -1)
             customRun();
-
+        _delayTime -= Time.deltaTime;
  
 	}
 
@@ -101,6 +104,8 @@ public class Item : MonoBehaviour{
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if (_delayTime > 0)
+            return;
         if (this._type == ItemType.COIN)
             return;
         string tag = collision.gameObject.tag;
@@ -109,6 +114,15 @@ public class Item : MonoBehaviour{
         {
             Destroy(this.gameObject);
         }
+        if (tag == "Ground")
+            checkWithGround(collision);
+    }
+
+    private void checkWithGround(Collision2D collision)
+    {
+        Vector3 distance = (this.transform.position - collision.gameObject.transform.position).normalized;
+        if (distance.y < 0 && Mathf.Abs(distance.x) < 0.5)
+            (_imovement as LinearMovement).Xspeed = -(_imovement as LinearMovement).Xspeed;
     }
 
     private IMovement initMovement()
