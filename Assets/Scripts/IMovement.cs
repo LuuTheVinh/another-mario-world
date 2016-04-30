@@ -21,7 +21,6 @@ public class LinearMovement : IMovement
     }
     public void Movement(GameObject go)
     {
-
         go.transform.position += new Vector3(
         _xspeed,
         _yspeed,

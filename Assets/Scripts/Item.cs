@@ -37,11 +37,13 @@ public class Item : MonoBehaviour{
         // Delta Up chọn từ inspector xác định độ cao tối đa trồi lên của item.
         _height = this.transform.position.y + _deltaUp;
 
+        // Note: chọn hướng di chuyển trước, chọn kiểu di chuyển sau.
+        // Chọn hướng di chuyển.
+        runDirection();
+
         // Chọn kiểu di chuyển.
         _imovement = initMovement();
 
-        // Chọn hướng di chuyển.
-        runDirection();
 
 	}
 	
@@ -72,8 +74,18 @@ public class Item : MonoBehaviour{
 
             _imovement.Movement(this.gameObject);
         }
+
 	}
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        string tag = collision.gameObject.tag;
+        string name = collision.gameObject.name;
+        if (tag == "Player")
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     private IMovement initMovement()
     {
@@ -96,7 +108,7 @@ public class Item : MonoBehaviour{
         switch (_appearMode)
         {
             case AppearMode.LEFT:
-                this._speedX = -Mathf.Abs(_speedX);
+                this._speedX = - Mathf.Abs(_speedX);
                 break;
             case AppearMode.RIGHT:
                 this._speedX = Mathf.Abs(_speedX);

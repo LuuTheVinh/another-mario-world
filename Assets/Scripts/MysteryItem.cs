@@ -19,18 +19,9 @@ public class MysteryItem : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Mystery Item Discovered")
-            && (_item.gameObject.activeSelf == false))
-        {
-            // Active item (item Start)
-            _item.gameObject.SetActive(true);
-        }
-	}
+        checkForActiveItem();
 
-    void OnTriggerEnter(Collider other)
-    {
-        Destroy(other.gameObject);
-    }
+	}
 
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -45,7 +36,7 @@ public class MysteryItem : MonoBehaviour {
             this._animator.SetTrigger("hit");
 
             // Xác định player đội chệch về trái hay phải để xác định hướng chạy của item.
-            if (distance.x > 0)
+            if (distance.x < 0)
             {
                 _item._appearMode = global::Item.AppearMode.LEFT;
             }
@@ -56,7 +47,20 @@ public class MysteryItem : MonoBehaviour {
 
 
         }
-        Debug.Log("Y : " + distance.y);
-
     }
+    private void checkForActiveItem()
+    {
+        if (_item == null)
+            return;
+        if (_item.gameObject == null)
+            return;
+        if (_item.gameObject.activeSelf == true)
+            return;
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Mystery Item Discovered"))
+        {
+            // Active item (item Start)
+            _item.gameObject.SetActive(true);
+        }
+    }
+
 }
