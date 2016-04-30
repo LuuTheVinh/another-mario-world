@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class MarioMovement : MonoBehaviour {
-
+    
     private Mario _mario;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody2D;
@@ -15,24 +15,47 @@ public class MarioMovement : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
+	void FixedUpdate () {
+
+        float h = Input.GetAxis("Horizontal");
+
+        _rigidbody2D.AddForce(Vector2.right * _mario.MovingForce * h);
+        
+        if (Mathf.Abs(_rigidbody2D.velocity.x) > _mario.MaxSpeed)
+        {
+            _rigidbody2D.velocity = new Vector2(Mathf.Sign(_rigidbody2D.velocity.x) * _mario.MaxSpeed, _rigidbody2D.velocity.y);
+        }
+
+        // lật hình mario
+        var sign = Mathf.Sign(_rigidbody2D.velocity.x);
+
+        if (h > 0 && sign > 0 && !_spriteRenderer.flipX)
+        {
+            _spriteRenderer.flipX = true;
+        }
+        else if (h < 0 && sign < 0 && _spriteRenderer.flipX)
+        {
+            _spriteRenderer.flipX = false;
+        }
+    }
 
     public void GotoLeft()
     {
-        this.transform.Translate(Vector2.left * _mario.Velocity * Time.deltaTime);
-        _spriteRenderer.flipX = false;
+        //_spriteRenderer.flipX = false;
     }
 
     public void GotoRight()
     {
-        this.transform.Translate(Vector2.right * _mario.Velocity * Time.deltaTime);
-        _spriteRenderer.flipX = true;
+        //_spriteRenderer.flipX = true;
     }
 
     public void Jump()
     {
-        _rigidbody2D.AddForce(Vector2.up * _mario.JumpSpeed);
+        _rigidbody2D.AddForce(Vector2.up * _mario.JumpForce);
+    }
+
+    public void Dash()
+    {
+        //_rigidbody2D.AddForce(Vector2.right * 100 * (_spriteRenderer.flipX == true ? 1 : -1));
     }
 }

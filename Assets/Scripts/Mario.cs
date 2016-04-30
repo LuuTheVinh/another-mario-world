@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Mario : MonoBehaviour {
-
-    public float Velocity = 3.0f;
-    public float JumpSpeed = 5.0f;
-
-
+    
+    public float JumpForce = 200.0f;
+    public float MovingForce = 20.0f;
+    public float MaxSpeed = 3.0f;
+    
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider2D;
  
@@ -24,7 +24,7 @@ public class Mario : MonoBehaviour {
         if(_boxCollider2D.size != spriteSize)
         {
             _boxCollider2D.size = spriteSize;
-            _boxCollider2D.offset = new Vector2(spriteSize.x / 2, 0);
+            //_boxCollider2D.offset = new Vector2(spriteSize.x / 2, 0);
         }
 	}
 
