@@ -19,8 +19,7 @@ public class Item : MonoBehaviour{
 
     public ItemType _type = ItemType.MUSHROOM;
     public Sprite[] _sprites;
-    public float _speedX;
-    public float _speedY;
+    public Vector3 _speed;
     public float _floatingUp;
     public float _deltaUp;
     public float _delayTime;
@@ -117,7 +116,7 @@ public class Item : MonoBehaviour{
         switch (_type)
         {
             case ItemType.MUSHROOM:
-                return new LinearMovement(this._speedX, this._speedY);
+                return new LinearMovement(_speed.x, _speed.y, _speed.z);
             case ItemType.FIREFLOWER:
                 return null;
             case ItemType.AMAZING_STAR:
@@ -143,10 +142,10 @@ public class Item : MonoBehaviour{
         switch (_appearMode)
         {
             case AppearMode.LEFT:
-                this._speedX = - Mathf.Abs(_speedX);
+                this._speed.x = - Mathf.Abs(_speed.x);
                 break;
             case AppearMode.RIGHT:
-                this._speedX = Mathf.Abs(_speedX);
+                this._speed.x = Mathf.Abs(_speed.x);
                 break;
             default:
                 break;
