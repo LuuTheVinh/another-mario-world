@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PipeApproachBound : MonoBehaviour {
 
-    private GameObject _mario;
     private GameObject _enemy = null;
 
     public GameObject Enemy
@@ -13,7 +12,6 @@ public class PipeApproachBound : MonoBehaviour {
     }
 	// Use this for initialization
 	void Start () {
-        _mario = GameObject.FindGameObjectsWithTag("Player")[0];
 	}
 	
 	// Update is called once per frame
@@ -28,7 +26,6 @@ public class PipeApproachBound : MonoBehaviour {
         string tag = collider.gameObject.tag;
         if (tag == "Player")
             Enemy.GetComponent<Animator>().SetBool("approach", true);
-        Debug.Log("Enter");
     }
 
     void OnTriggerExit2D(Collider2D collider)
@@ -38,6 +35,5 @@ public class PipeApproachBound : MonoBehaviour {
         string tag = collider.gameObject.tag;
         if (tag == "Player")
             Enemy.GetComponent<Animator>().SetBool("approach", false);
-        Debug.Log("Exit");
     }
 }

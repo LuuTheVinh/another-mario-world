@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ad578cf74563bb247b97caedcfbb7a7e
-timeCreated: 1462073170
+timeCreated: 1462096083
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -58,7 +58,7 @@ TextureImporter:
     21300102: backgrounds-objects_51
     21300104: backgrounds-objects_52
     21300106: backgrounds-objects_53
-    21300108: backgrounds-objects_54
+    21300108: hard_brick
     21300110: pipe_top
     21300112: backgrounds-objects_56
     21300114: backgrounds-objects_57
@@ -68,7 +68,7 @@ TextureImporter:
     21300122: brick_4
     21300124: pipe
     21300126: backgrounds-objects_63
-    21300128: backgrounds-objects_64
+    21300128: big_hard_brick
     21300130: backgrounds-objects_65
     21300132: backgrounds-objects_66
     21300134: backgrounds-objects_67
@@ -926,7 +926,7 @@ TextureImporter:
         - {x: -64, y: -16}
         - {x: 64, y: -16}
         - {x: 64, y: 16}
-    - name: backgrounds-objects_54
+    - name: hard_brick
       rect:
         serializedVersion: 2
         x: 13
@@ -1040,7 +1040,7 @@ TextureImporter:
         - {x: -16, y: -16}
         - {x: 16, y: -16}
         - {x: 16, y: 16}
-    - name: backgrounds-objects_64
+    - name: big_hard_brick
       rect:
         serializedVersion: 2
         x: 186

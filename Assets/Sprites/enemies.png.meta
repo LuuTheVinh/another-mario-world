@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 57d5fac470ee7234aaa06e49ad95ffd2
-timeCreated: 1462029201
+timeCreated: 1462106014
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -40,10 +40,10 @@ TextureImporter:
     21300066: enemies_33
     21300068: enemies_34
     21300070: enemies_35
-    21300072: enemies_36
-    21300074: enemies_37
-    21300076: enemies_38
-    21300078: enemies_39
+    21300072: red_troopa_1
+    21300074: red_troopa_2
+    21300076: troopa_shell
+    21300078: troopa_shell_revive
     21300080: enemies_40
     21300082: enemies_41
     21300084: enemies_42
@@ -676,7 +676,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_36
+    - name: red_troopa_1
       rect:
         serializedVersion: 2
         x: 6
@@ -687,7 +687,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_37
+    - name: red_troopa_2
       rect:
         serializedVersion: 2
         x: 28
@@ -698,7 +698,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_38
+    - name: troopa_shell
       rect:
         serializedVersion: 2
         x: 50
@@ -709,7 +709,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_39
+    - name: troopa_shell_revive
       rect:
         serializedVersion: 2
         x: 71
