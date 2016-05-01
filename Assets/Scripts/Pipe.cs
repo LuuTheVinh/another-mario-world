@@ -10,41 +10,28 @@ public class Pipe : MonoBehaviour {
 
     private GameObject _mario;
     private Animator _plant_animator;
+    private GameObject _enemy;
 	// Use this for initialization
 	void Start () {
         initPipetype();
+        _mario = GameObject.FindGameObjectsWithTag("Player")[0];
+        (this.transform.FindChild("approach_bound")
+            .GetComponent(typeof(PipeApproachBound)) as PipeApproachBound)
+            .Enemy = _enemy;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        checkPlayerLeave();
-
 	}
-
-    private void checkPlayerLeave()
-    {
-        // Nếu cây không xuất hiện thì kiểm tra khoảng cách với mario cho nó xuất hiện lại
-        if (_plant_animator.GetBool("approach") == false)
-            return;
-        Vector3 distance = this.transform.position - _mario.transform.position;
-        if (Mathf.Abs(distance.y) < 2)
-            return;
-        if (Mathf.Abs(distance.x) < 2)
-            return;
-        _plant_animator.SetBool("approach", false);
-    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         string tag = collision.gameObject.tag;
        
-        // Nếu player chạm cống thì cây không xuất hiện nữa.
         if (tag == "Player")
         {
-            if (this._mario == null)
-                this._mario = collision.gameObject;
-            _plant_animator.SetBool("approach", true);
+
         }
 
     }
@@ -70,6 +57,7 @@ public class Pipe : MonoBehaviour {
         }
         if (obj != null)
         {
+            _enemy = obj;
             obj.gameObject.transform.parent = this.transform;
             _plant_animator = obj.gameObject.GetComponent<Animator>();
         }
