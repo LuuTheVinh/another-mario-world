@@ -64,8 +64,8 @@ public class Gooompa : MonoBehaviour {
         {
             // Hướng từ trên xuống, goompa chết.
             _aniamtor.SetInteger("status", 1);
-            GetComponent<BoxCollider2D>().enabled = false;
-            GetComponent<Rigidbody2D>().isKinematic = true;
+            //GetComponent<BoxCollider2D>().enabled = false;
+            //GetComponent<Rigidbody2D>().isKinematic = true;
             this.SetSpeed(Vector3.zero);
         }
         else

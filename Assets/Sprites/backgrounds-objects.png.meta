@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ad578cf74563bb247b97caedcfbb7a7e
-timeCreated: 1462034038
+timeCreated: 1462073170
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -35,7 +35,7 @@ TextureImporter:
     21300056: backgrounds-objects_28
     21300058: backgrounds-objects_29
     21300060: backgrounds-objects_30
-    21300062: backgrounds-objects_31
+    21300062: land_left
     21300064: item_amazing_star
     21300066: item_gain_mushroom
     21300068: item_fire_flower
@@ -156,8 +156,8 @@ TextureImporter:
     21300298: backgrounds-objects_150
     21300300: backgrounds-objects_151
     21300302: backgrounds-objects_152
-    21300304: backgrounds-objects_153
-    21300306: backgrounds-objects_154
+    21300304: land_mid
+    21300306: land_right
     21300308: backgrounds-objects_79
     21300310: backgrounds-objects_155
     21300312: backgrounds-objects_156
@@ -613,7 +613,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: backgrounds-objects_31
+    - name: land_left
       rect:
         serializedVersion: 2
         x: 12
@@ -2184,7 +2184,7 @@ TextureImporter:
         - {x: -127, y: -62.5}
         - {x: 127, y: -62.5}
         - {x: 127, y: 62.5}
-    - name: backgrounds-objects_153
+    - name: land_mid
       rect:
         serializedVersion: 2
         x: 28
@@ -2195,7 +2195,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: backgrounds-objects_154
+    - name: land_right
       rect:
         serializedVersion: 2
         x: 116

@@ -64,7 +64,7 @@ public class Item : MonoBehaviour{
 	void Update () {
         if (IsUseAnimator[type] == -1)
             customRun();
-        _delayTime -= Time.deltaTime;
+        _delayNoneHit -= Time.deltaTime;
  
 	}
 
@@ -104,7 +104,7 @@ public class Item : MonoBehaviour{
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (_delayTime > 0)
+        if (_delayNoneHit > 0)
             return;
         if (this._type == ItemType.COIN)
             return;
