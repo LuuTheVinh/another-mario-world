@@ -29,18 +29,22 @@ public class Gooompa : MonoBehaviour {
             _imovement.Movement(this.gameObject);
 	}
 
-    void OnCollisionEnter2D(Collision2D collisiion) 
+    void OnCollisionEnter2D(Collision2D collision) 
     {
-        if (collisiion.gameObject.tag == "Player")
-            checkHitByPlayer(collisiion);
-        if (collisiion.gameObject.tag == "Ground")
-            checkWithGround(collisiion);
+        string tag = collision.gameObject.tag;
+        if (tag == "Player")
+            checkHitByPlayer(collision);
+        if (tag == "Ground")
+            checkWithGround(collision);
     }
 
     private void checkWithGround(Collision2D collision)
     {
-        Vector3 distance = (this.transform.position - collision.gameObject.transform.position).normalized;
-        if (distance.y < 0 && Mathf.Abs(distance.x) < 0.5)
+        //Vector3 distance = (this.transform.position - collision.gameObject.transform.position).normalized;
+        //if (distance.y < 0 && Mathf.Abs(distance.x) < 0.5)
+        //    (_imovement as LinearMovement).Xspeed = -(_imovement as LinearMovement).Xspeed;
+        float top = collision.collider.bounds.max.y;
+        if (top - this.GetComponent<Collider2D>().bounds.min.y > 0.5)
             (_imovement as LinearMovement).Xspeed = -(_imovement as LinearMovement).Xspeed;
     }
 
@@ -64,8 +68,6 @@ public class Gooompa : MonoBehaviour {
         {
             // Hướng từ trên xuống, goompa chết.
             _aniamtor.SetInteger("status", 1);
-            //GetComponent<BoxCollider2D>().enabled = false;
-            //GetComponent<Rigidbody2D>().isKinematic = true;
             this.SetSpeed(Vector3.zero);
         }
         else

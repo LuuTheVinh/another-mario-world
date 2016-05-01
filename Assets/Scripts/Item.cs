@@ -120,8 +120,8 @@ public class Item : MonoBehaviour{
 
     private void checkWithGround(Collision2D collision)
     {
-        Vector3 distance = (this.transform.position - collision.gameObject.transform.position).normalized;
-        if (distance.y < 0 && Mathf.Abs(distance.x) < 0.5)
+        float top = collision.collider.bounds.max.y;
+        if (top - this.GetComponent<Collider2D>().bounds.min.y > 0.5)
             (_imovement as LinearMovement).Xspeed = -(_imovement as LinearMovement).Xspeed;
     }
 
