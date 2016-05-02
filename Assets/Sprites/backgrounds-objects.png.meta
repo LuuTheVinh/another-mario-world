@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ad578cf74563bb247b97caedcfbb7a7e
-timeCreated: 1462096083
+timeCreated: 1462178091
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -171,6 +171,12 @@ TextureImporter:
     21300328: greenblock_inside
     21300330: greenblock_right
     21300332: greenblock_left
+    21300334: land_inside
+    21300336: land_under_left
+    21300338: land_under_right
+    21300340: high_land_left
+    21300342: high_land_mid
+    21300344: high_land_right
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -2206,62 +2212,6 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: backgrounds-objects_79
-      rect:
-        serializedVersion: 2
-        x: 433
-        y: 1238
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 16}
-    - name: backgrounds-objects_155
-      rect:
-        serializedVersion: 2
-        x: 544
-        y: 1238
-        width: 33
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16.5, y: 16}
-        - {x: -16.5, y: -16}
-        - {x: 16.5, y: -16}
-        - {x: 16.5, y: 16}
-    - name: backgrounds-objects_156
-      rect:
-        serializedVersion: 2
-        x: 465
-        y: 1238
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 16}
-    - name: backgrounds-objects_157
-      rect:
-        serializedVersion: 2
-        x: 12
-        y: 1359
-        width: 120
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
     - name: greenblock_topleft
       rect:
         serializedVersion: 2
@@ -2361,6 +2311,51 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+    - name: high_land_left
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 1238
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: 16}
+        - {x: -16, y: -16}
+        - {x: 16, y: -16}
+        - {x: 16, y: 16}
+    - name: high_land_mid
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 1238
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: 16}
+        - {x: -16, y: -16}
+        - {x: 16, y: -16}
+        - {x: 16, y: 16}
+    - name: high_land_right
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 1238
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: 16}
+        - {x: -16, y: -16}
+        - {x: 16, y: -16}
+        - {x: 16, y: 16}
     outline: []
   spritePackingTag: 
   userData: 
