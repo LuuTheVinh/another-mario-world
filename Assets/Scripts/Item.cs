@@ -19,18 +19,18 @@ public class Item : MonoBehaviour{
 
     public ItemType _type = ItemType.MUSHROOM;
     public Sprite[] _sprites;
-    public float _speedX;
-    public float _speedY;
+    public Vector3 _speed;
     public float _floatingUp;
     public float _deltaUp;
     public float _delayTime;
-    private float _height;
 
     public bool IsRunable { get; set; }
     public AppearMode _appearMode { get; set; }
 
     private int type;
-	// Use this for initialization
+    private float _height;
+    private float _delayNoneHit;
+    // Use this for initialization
 	void Start () {
         type = System.Convert.ToInt32(_type);
 
@@ -55,14 +55,16 @@ public class Item : MonoBehaviour{
         // Chọn kiểu di chuyển.
         _imovement = initMovement();
 
-
+        // delay lại không thôi vừa mơi chạm được cục gạch thì ăn item.
+        // cho nữa giây sau mới ăn được.
+        _delayNoneHit = 0.5f;
 	}
 
     // Update is called once per frame
 	void Update () {
         if (IsUseAnimator[type] == -1)
             customRun();
-
+        _delayNoneHit -= Time.deltaTime;
  
 	}
 
@@ -102,6 +104,8 @@ public class Item : MonoBehaviour{
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if (_delayNoneHit > 0)
+            return;
         if (this._type == ItemType.COIN)
             return;
         string tag = collision.gameObject.tag;
@@ -110,6 +114,15 @@ public class Item : MonoBehaviour{
         {
             Destroy(this.gameObject);
         }
+        if (tag == "Ground")
+            checkWithGround(collision);
+    }
+
+    private void checkWithGround(Collision2D collision)
+    {
+        float top = collision.collider.bounds.max.y;
+        if (top - this.GetComponent<Collider2D>().bounds.min.y > 0.5)
+            (_imovement as LinearMovement).Xspeed = -(_imovement as LinearMovement).Xspeed;
     }
 
     private IMovement initMovement()
@@ -117,7 +130,7 @@ public class Item : MonoBehaviour{
         switch (_type)
         {
             case ItemType.MUSHROOM:
-                return new LinearMovement(this._speedX, this._speedY);
+                return new LinearMovement(_speed.x, _speed.y, _speed.z);
             case ItemType.FIREFLOWER:
                 return null;
             case ItemType.AMAZING_STAR:
@@ -143,10 +156,10 @@ public class Item : MonoBehaviour{
         switch (_appearMode)
         {
             case AppearMode.LEFT:
-                this._speedX = - Mathf.Abs(_speedX);
+                this._speed.x = - Mathf.Abs(_speed.x);
                 break;
             case AppearMode.RIGHT:
-                this._speedX = Mathf.Abs(_speedX);
+                this._speed.x = Mathf.Abs(_speed.x);
                 break;
             default:
                 break;
