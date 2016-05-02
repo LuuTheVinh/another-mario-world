@@ -19,7 +19,7 @@ public class MarioMovement : MonoBehaviour {
 
         float h = Input.GetAxis("Horizontal");
 
-        _rigidbody2D.AddForce(Vector2.right * _mario.MovingForce * h);
+        _rigidbody2D.AddForce(Vector2.right * _mario.MovingForce * h, ForceMode2D.Force);
         
         if (Mathf.Abs(_rigidbody2D.velocity.x) > _mario.MaxSpeed)
         {
@@ -49,9 +49,12 @@ public class MarioMovement : MonoBehaviour {
         //_spriteRenderer.flipX = true;
     }
 
-    public void Jump()
+    public void Jump(bool max = false)
     {
-        _rigidbody2D.AddForce(Vector2.up * _mario.JumpForce);
+        if(!max)
+            _rigidbody2D.AddForce(Vector2.up * _mario.JumpForce, ForceMode2D.Impulse);
+        else
+            _rigidbody2D.AddForce(Vector2.up * _mario.JumpMaxForce, ForceMode2D.Impulse);
     }
 
     public void Dash()

@@ -4,10 +4,13 @@ using System.Collections;
 public class MarioController : MonoBehaviour {
 
     public float DashSpeed = 1;
+    public float HoldJumpTime = 0.25f;
 
     private Animator _animator;
     private MarioMovement _marioMovement;
     private Rigidbody2D _rigidbody2D;
+    
+    private float _timer = 0;
 
     // Use this for initialization
     void Start () {
@@ -55,13 +58,33 @@ public class MarioController : MonoBehaviour {
             _animator.ResetTrigger("dash");
         }
 
-        if (Input.GetButtonDown("Jump") && !_animator.GetBool("isJumping"))
+        // nhảy
+        if (!_animator.GetBool("isJumping"))
         {
-            _animator.SetBool("isJumping", true);
-            _marioMovement.Jump();
-            _animator.ResetTrigger("dash");
+            if (Input.GetButton("Jump"))
+            {
+                _timer += Time.deltaTime;
+
+                if (_timer >= HoldJumpTime)
+                {
+                    _animator.SetTrigger("Jump");
+                    _animator.SetBool("isJumping", true);
+                    _animator.ResetTrigger("dash");
+                    _marioMovement.Jump(true);
+                }
+            }
+            else if (Input.GetButtonUp("Jump"))
+            {
+                _animator.SetTrigger("Jump");
+                _animator.SetBool("isJumping", true);
+                _animator.ResetTrigger("dash");
+                _marioMovement.Jump();
+            }
         }
-        
+        else
+        {
+            _timer = 0;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -69,6 +92,7 @@ public class MarioController : MonoBehaviour {
         if (col.gameObject.tag == "Ground")
         {
             _animator.SetBool("isJumping", false);
+            _animator.ResetTrigger("Jump");
         }
     }
 }
