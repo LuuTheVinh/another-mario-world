@@ -29,6 +29,7 @@ public class Troopa : Enemy {
         base.OnCollisionEnter2D(collision);
     }
 
+
     public override void back()
     {
         base.back();

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ad578cf74563bb247b97caedcfbb7a7e
-timeCreated: 1462178091
+timeCreated: 1462292122
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -13,8 +13,8 @@ TextureImporter:
     21300012: backgrounds-objects_6
     21300014: backgrounds-objects_7
     21300016: backgrounds-objects_8
-    21300018: backgrounds-objects_9
-    21300020: backgrounds-objects_10
+    21300018: big_trunk_top
+    21300020: trunk mid
     21300022: backgrounds-objects_11
     21300024: backgrounds-objects_12
     21300026: backgrounds-objects_13
@@ -177,6 +177,14 @@ TextureImporter:
     21300340: high_land_left
     21300342: high_land_mid
     21300344: high_land_right
+    21300346: trunk_top
+    21300348: trunk_bot
+    21300350: big_trunk_mid
+    21300352: big_trunk_bot
+    21300354: brick_smash_1
+    21300356: brick_smash_2
+    21300358: brick_smash_3
+    21300360: brick_smash_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -332,32 +340,6 @@ TextureImporter:
         y: 1415
         width: 16
         height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: backgrounds-objects_9
-      rect:
-        serializedVersion: 2
-        x: 821
-        y: 1382
-        width: 32
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 24}
-        - {x: -16, y: -24}
-        - {x: 16, y: -24}
-        - {x: 16, y: 24}
-    - name: backgrounds-objects_10
-      rect:
-        serializedVersion: 2
-        x: 858
-        y: 1382
-        width: 16
-        height: 48
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2356,6 +2338,116 @@ TextureImporter:
         - {x: -16, y: -16}
         - {x: 16, y: -16}
         - {x: 16, y: 16}
+    - name: trunk_top
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 1414
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: trunk mid
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 1398
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: trunk_bot
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 1382
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: big_trunk_top
+      rect:
+        serializedVersion: 2
+        x: 821
+        y: 1414
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: big_trunk_mid
+      rect:
+        serializedVersion: 2
+        x: 821
+        y: 1398
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: big_trunk_bot
+      rect:
+        serializedVersion: 2
+        x: 821
+        y: 1382
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: brick_smash_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 1312
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: brick_smash_2
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 1312
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: brick_smash_3
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 1300
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: brick_smash_4
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 1300
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
     outline: []
   spritePackingTag: 
   userData: 

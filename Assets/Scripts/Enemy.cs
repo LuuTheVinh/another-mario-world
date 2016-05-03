@@ -14,7 +14,7 @@ public abstract class Enemy: MonoBehaviour {
     public eMoveDirection _moveDirection;
 
     public Vector3 _speed;
-
+    public bool _isSmart;
     protected virtual void Start()
     {
         _aniamtor = GetComponent<Animator>();
@@ -77,9 +77,8 @@ public abstract class Enemy: MonoBehaviour {
 
         // Nếu goompa đang trong trạng thái normal và va chạm với player
         // thì kiểm tra hướng va chạm.
-        Vector3 distance = (this.transform.position - col.gameObject.transform.position).normalized;
-
-        if (distance.y < 0 && Mathf.Abs(distance.x) < 0.5)
+        Vector3 distance = (this.transform.position - col.gameObject.transform.position);
+        if (distance.y < 0 && Mathf.Abs(distance.x) < 0.65)
         {
             _hitbyplayer.Hit(this);
         }

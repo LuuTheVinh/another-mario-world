@@ -22,12 +22,12 @@ public class Gooompa : Enemy {
             _imovement.Movement(this.gameObject);
 	}
 
-    protected void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
     }
 
-    public void SetSpeed(Vector3 s)
+    public override void SetSpeed(Vector3 s)
     {
         base.SetSpeed(s);
         _imovement = new LinearMovement(s.x, s.y, s.z);
