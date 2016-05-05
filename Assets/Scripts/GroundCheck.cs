@@ -3,6 +3,8 @@ using System.Collections;
 
 public class GroundCheck : MonoBehaviour {
 
+    [HideInInspector] public bool IsAttack = false;
+
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider;
@@ -22,6 +24,15 @@ public class GroundCheck : MonoBehaviour {
     void OnTriggerEnter2D()
     {
         _animator.SetBool("isJumping", false);
-        Debug.Log("Not Jump!");
+
+        //nếu enemy tấn công được
+        // if (...)
+            IsAttack = true;
+        // else
+    }
+
+    void OnTriggerExit2D()
+    {
+        IsAttack = false;
     }
 }

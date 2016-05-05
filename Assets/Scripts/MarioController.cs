@@ -10,7 +10,7 @@ public class MarioController : MonoBehaviour {
     private MarioMovement _marioMovement;
     private Rigidbody2D _rigidbody2D;
     
-    private float _timer = 0;
+    private float _timer = 0;   // đếm thời gian giữ nhảy
 
     private bool _canJump = true;
 
@@ -67,26 +67,15 @@ public class MarioController : MonoBehaviour {
             {
                 _timer += Time.deltaTime;
 
-                if (_timer >= HoldJumpTime && _canJump)
+                if (_timer >= HoldJumpTime)
                 {
-                    _animator.SetTrigger("Jump");
-                    _animator.SetBool("isJumping", true);
-                    _animator.ResetTrigger("dash");
-                    _marioMovement.Jump(true);
-                    _canJump = false;
+                    JumpWithAnimate(true);  // nhảy tối đa
                 }
             }
-            else if (Input.GetButtonUp("Jump") && _canJump)
+            else if (Input.GetButtonUp("Jump"))
             {
-                _animator.SetTrigger("Jump");
-                _animator.SetBool("isJumping", true);
-                _animator.ResetTrigger("dash");
-                _marioMovement.Jump();
+                JumpWithAnimate(false);     // nhảy bình thường
             }
-        }
-        else
-        {
-            _timer = 0;
         }
 
         if (Input.GetButtonUp("Jump") && !_canJump)
@@ -96,17 +85,18 @@ public class MarioController : MonoBehaviour {
 
         Debug.Log("Timer: " + _timer);
     }
-
-    void OnCollisionEnter2D(Collision2D col)
+    
+    public void JumpWithAnimate(bool max)
     {
-        //if (col.gameObject.tag == "Ground")
-        //{
-        //    _animator.SetBool("isJumping", false);
-        //}
-    }
+        if (!_canJump)
+            return;
 
-    public void Die()
-    {
+        _animator.SetBool("isJumping", true);
+        _animator.SetTrigger("Jump");
+        _animator.ResetTrigger("dash");
 
+        _canJump = false;
+        _marioMovement.Jump(max);
+        _timer = 0;
     }
 }

@@ -102,9 +102,15 @@ public class Mario : MonoBehaviour {
         switch (Status)
         {
             case eMarioStatus.SMALL:
-                { 
-                    this.GetComponent<Animator>().SetBool("isDead", true);
-                    Die();
+                {
+                    if (!this.GetComponentInChildren<GroundCheck>().IsAttack)
+                    {
+                        Die();
+                    }
+                    else
+                    {
+                    }
+
                     break;
                 }
             case eMarioStatus.BIG:
@@ -123,11 +129,13 @@ public class Mario : MonoBehaviour {
 
     private void Die()
     {
+        this.GetComponent<Animator>().SetBool("isDead", true);
+
         _rigidbody2D.velocity = new Vector2(0, 0);
         this.GetComponent<MarioMovement>().Jump();
 
-        this.GetComponent<BoxCollider2D>().enabled = false;
-        this.GetComponent<MarioController>().enabled = false;
-        this.GetComponent<MarioMovement>().enabled = false;
+        //this.GetComponent<BoxCollider2D>().enabled = false;
+        //this.GetComponent<MarioController>().enabled = false;
+        //this.GetComponent<MarioMovement>().enabled = false;
     }
 }
