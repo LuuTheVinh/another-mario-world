@@ -12,6 +12,8 @@ public class MarioController : MonoBehaviour {
     
     private float _timer = 0;
 
+    private bool _canJump = true;
+
     // Use this for initialization
     void Start () {
         _animator = this.GetComponent<Animator>();
@@ -65,15 +67,16 @@ public class MarioController : MonoBehaviour {
             {
                 _timer += Time.deltaTime;
 
-                if (_timer >= HoldJumpTime)
+                if (_timer >= HoldJumpTime && _canJump)
                 {
                     _animator.SetTrigger("Jump");
                     _animator.SetBool("isJumping", true);
                     _animator.ResetTrigger("dash");
                     _marioMovement.Jump(true);
+                    _canJump = false;
                 }
             }
-            else if (Input.GetButtonUp("Jump"))
+            else if (Input.GetButtonUp("Jump") && _canJump)
             {
                 _animator.SetTrigger("Jump");
                 _animator.SetBool("isJumping", true);
@@ -85,14 +88,20 @@ public class MarioController : MonoBehaviour {
         {
             _timer = 0;
         }
+
+        if (Input.GetButtonUp("Jump") && !_canJump)
+        {
+            _canJump = true;
+        }
+
+        Debug.Log("Timer: " + _timer);
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Ground")
-        {
-            _animator.SetBool("isJumping", false);
-            _animator.ResetTrigger("Jump");
-        }
+        //if (col.gameObject.tag == "Ground")
+        //{
+        //    _animator.SetBool("isJumping", false);
+        //}
     }
 }

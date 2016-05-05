@@ -30,20 +30,20 @@ public class Mario : MonoBehaviour {
         _rigidbody2D = this.GetComponent<Rigidbody2D>();
 
         // lực nhảy = căn (2 * g * scale (tại thằng này gravity gấp 2) * độ cao) + khối lượng (lực kéo xuống)
-        JumpForce = Mathf.Sqrt(2 * Physics.gravity.magnitude * _rigidbody2D.gravityScale * JumpHeight) + _rigidbody2D.mass;
+        JumpForce = Mathf.Sqrt(2 * Physics.gravity.magnitude * _rigidbody2D.gravityScale * JumpHeight) + _rigidbody2D.mass + _rigidbody2D.drag;
         
-        JumpMaxForce = Mathf.Sqrt(2 * Physics.gravity.magnitude * _rigidbody2D.gravityScale * HoldJumpHeight) + _rigidbody2D.mass;
+        JumpMaxForce = Mathf.Sqrt(2 * Physics.gravity.magnitude * _rigidbody2D.gravityScale * HoldJumpHeight) + _rigidbody2D.mass + _rigidbody2D.drag;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
         //test, chỉnh lại size collider theo sprite
-        Vector2 spriteSize = _spriteRenderer.sprite.bounds.size;
-        if(_boxCollider2D.size != spriteSize)
-        {
-            _boxCollider2D.size = spriteSize;
-        }
+        //Vector2 spriteSize = _spriteRenderer.sprite.bounds.size;
+        //if(_boxCollider2D.size != spriteSize)
+        //{
+        //    _boxCollider2D.size = spriteSize;
+        //}
 	}
 
     void OnCollisionEnter2D(Collision2D collision)
