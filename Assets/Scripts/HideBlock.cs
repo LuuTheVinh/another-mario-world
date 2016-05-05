@@ -19,7 +19,8 @@ public class HideBlock : MonoBehaviour {
         string tag = obj.tag;
         if (tag != "Enemy")
             return;
-        if (obj.GetComponent<Enemy>()._isSmart)
-            obj.GetComponent<Enemy>().back();
+        Enemy enemy = obj.GetComponent<Enemy>();
+        if (enemy._isSmart && enemy._aniamtor.GetInteger("status") != (int)Troopa.eStatus.SpeedShell)
+            enemy.back();
     }
 }

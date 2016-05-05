@@ -3,7 +3,7 @@ using System.Collections;
 
 // Created by Ho Hoang Tung
 public class Troopa : Enemy {
-    public enum eStatus { Normal, Shell, SpeedShell}
+    public enum eStatus { Normal, Shell, Hit, SpeedShell}
     protected override void Start()
     {
 
@@ -19,9 +19,14 @@ public class Troopa : Enemy {
 
     protected override void Update()
     {
+        //if (_renderer.isVisible)
+        //    _rigidBody2D.WakeUp();
+        //else
+        //{
+        //    _rigidBody2D.Sleep();
+        //}
         base.Update();
-        if (_imovement != null)
-            _imovement.Movement(this.gameObject);
+
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
@@ -29,6 +34,16 @@ public class Troopa : Enemy {
         base.OnCollisionEnter2D(collision);
     }
 
+    protected override void checkHitByPlayer(Collision2D col)
+    {
+        if (this._aniamtor.GetInteger("status") == (int)eStatus.Shell)
+        {
+            _aniamtor.SetInteger("status", (int)Troopa.eStatus.SpeedShell);
+            this.SetSpeed(new Vector3(0.3f, 0f, 0f));
+        }
+        else
+            base.checkHitByPlayer(col);
+    }
 
     public override void back()
     {
@@ -58,7 +73,9 @@ public class Troopa : Enemy {
                 break;
             case eStatus.SpeedShell:
                 // kill them all :v
-
+                Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+                if (enemy._canHitByShell)
+                    enemy.GetComponent<Animator>().SetInteger("status", (int)Enemy.eStatus.Hit);
                 break;
 
         }

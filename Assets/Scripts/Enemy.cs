@@ -7,6 +7,8 @@ public abstract class Enemy: MonoBehaviour {
     public enum eStatus { Normal, Die, Hit}
     [HideInInspector]
     public Animator _aniamtor;
+    protected Renderer _renderer;
+    protected Rigidbody2D _rigidBody2D;
 
     protected IMovement _imovement;
     protected IHitByPlayer _hitbyplayer;
@@ -18,21 +20,44 @@ public abstract class Enemy: MonoBehaviour {
     protected virtual void Start()
     {
         _aniamtor = GetComponent<Animator>();
+        _renderer = GetComponent<Renderer>();
+        _rigidBody2D = GetComponent<Rigidbody2D>();
 
         // Chọn hướng di chuyển.
         runDirection();
+
     }
 
     protected virtual void Update()
     {
-        if (this.GetComponent<Renderer>().isVisible == false && _aniamtor.GetInteger("status") == (int)eStatus.Hit)
+        //if (_renderer.isVisible)
+        //    _rigidBody2D.WakeUp();
+        //else
+        //{
+        //    _rigidBody2D.Sleep();
+        //}
+        if (checkDestroyHit())
             _aniamtor.SetTrigger("outofscreen");
+
+        if (_imovement != null)
+            _imovement.Movement(this.gameObject);
+    }
+
+    private bool checkDestroyHit()
+    {
+        if (_renderer.isVisible == true)
+            return false;
+        if (this.transform.position.y > 0)
+            return false;
+        if (_aniamtor.GetInteger("status") != (int)eStatus.Hit)
+            return false;
+        return true;
     }
 
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (this._aniamtor.GetInteger("status") == 2)
+        if (this._aniamtor.GetInteger("status") == (int)eStatus.Hit)
             return;
         string name = collision.gameObject.name;
         string tag = collision.gameObject.tag;
@@ -78,7 +103,7 @@ public abstract class Enemy: MonoBehaviour {
         back();
     }
 
-    protected void checkHitByPlayer(Collision2D col)
+    protected virtual void checkHitByPlayer(Collision2D col)
     {
         //if (_aniamtor.GetCurrentAnimatorStateInfo(0).IsName("GoompaNormal") == false)
         //    return;
@@ -96,18 +121,17 @@ public abstract class Enemy: MonoBehaviour {
         }
     }
 
-    private void checkWithBlock(Collision2D collision)
+    protected virtual void checkWithBlock(Collision2D collision)
     {
         Animator anim = collision.gameObject.GetComponent<Animator>();
         if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Normal") == false)
         {
             this._aniamtor.SetInteger("status", (int)eStatus.Hit);
-
         }
 
     }
 
-    protected void runDirection()
+    protected virtual void runDirection()
     {
 
         switch (_moveDirection)

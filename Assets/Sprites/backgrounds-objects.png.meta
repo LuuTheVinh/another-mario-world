@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ad578cf74563bb247b97caedcfbb7a7e
-timeCreated: 1462381599
+timeCreated: 1462436351
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -124,7 +124,7 @@ TextureImporter:
     21300234: backgrounds-objects_118
     21300236: backgrounds-objects_119
     21300238: backgrounds-objects_120
-    21300240: backgrounds-objects_121
+    21300240: hill
     21300242: backgrounds-objects_122
     21300244: backgrounds-objects_123
     21300246: backgrounds-objects_124
@@ -194,6 +194,9 @@ TextureImporter:
     21300374: blueblock_botleft
     21300376: blueblock_bot
     21300378: blueblock_botright
+    21300380: hill_top
+    21300382: hill_bot
+    21300384: hill_inside
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -1681,38 +1684,17 @@ TextureImporter:
         - {x: -31, y: -31.5}
         - {x: 31, y: -31.5}
         - {x: 31, y: 31.5}
-    - name: backgrounds-objects_120
+    - name: hill
       rect:
         serializedVersion: 2
-        x: 291
-        y: 1036
-        width: 56
-        height: 64
+        x: 351
+        y: 1082
+        width: 32
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 32}
-        - {x: -28, y: -32}
-        - {x: 28, y: -32}
-        - {x: 28, y: 32}
-    - name: backgrounds-objects_121
-      rect:
-        serializedVersion: 2
-        x: 350
-        y: 1036
-        width: 62
-        height: 63
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -20, y: 31.5}
-        - {x: -31, y: 31.5}
-        - {x: -31, y: -31.5}
-        - {x: 31, y: -31.5}
-        - {x: 31, y: 2.5}
-        - {x: 26, y: 7.5}
+      outline: []
     - name: backgrounds-objects_122
       rect:
         serializedVersion: 2
@@ -2541,6 +2523,52 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+    - name: hill_top
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 1068
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: 16}
+        - {x: -16, y: -16}
+        - {x: 16, y: -16}
+        - {x: 16, y: 16}
+    - name: hill_bot
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 1036
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32, y: 16}
+        - {x: -32, y: -16}
+        - {x: 32, y: -16}
+        - {x: 32, y: 15}
+        - {x: 31, y: 16}
+    - name: hill_inside
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 1052
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: 16}
+        - {x: -16, y: -16}
+        - {x: 16, y: -16}
+        - {x: 16, y: 16}
     outline: []
   spritePackingTag: 
   userData: 

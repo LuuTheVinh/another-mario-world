@@ -1,0 +1,242 @@
+fileFormatVersion: 2
+guid: 86f9f3ac58673744382710858ad3cb5e
+timeCreated: 1462464267
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: fighting_frog_0
+    21300002: fighting_frog_1
+    21300004: fighting_frog_2
+    21300006: fighting_frog_3
+    21300008: fighting_frog_4
+    21300010: fighting_frog_5
+    21300012: fighting_frog_6
+    21300014: fighting_frog_7
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 16
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: fighting_frog_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 7
+        width: 231
+        height: 190
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 36.33168, y: -65.0594}
+        - {x: 32.33168, y: -69.0594}
+        - {x: 32.33168, y: -74.0594}
+        - {x: 79.33168, y: -74.0594}
+        - {x: 79.33168, y: -67.0594}
+        - {x: 77.33168, y: -65.0594}
+        - {x: 67.33168, y: -63.059402}
+        - {x: 65.33168, y: -63.059402}
+        - {x: 69.33168, y: -62.059402}
+        - {x: 76.33168, y: -58.059402}
+        - {x: 90.33168, y: -30.059402}
+        - {x: 90.33168, y: 14.940598}
+        - {x: 73.33168, y: 74.9406}
+        - {x: -89.66832, y: 74.9406}
+        - {x: -89.66832, y: -74.0594}
+        - {x: -39.66832, y: -74.0594}
+        - {x: 38.33168, y: -63.059402}
+        - {x: 40.33168, y: -61.059402}
+        - {x: 38.33168, y: -65.0594}
+    - name: fighting_frog_1
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 5
+        width: 264
+        height: 190
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 103.80197, y: -33.61386}
+        - {x: 84.80197, y: 20.386139}
+        - {x: 31.801971, y: 75.38614}
+        - {x: -102.19803, y: 75.38614}
+        - {x: -102.19803, y: 13.386139}
+        - {x: -68.19803, y: -72.61386}
+        - {x: -58.19803, y: -73.61386}
+        - {x: -21.198029, y: -73.61386}
+        - {x: -19.198029, y: -71.61386}
+        - {x: -3.1980286, y: -73.61386}
+        - {x: 103.80197, y: -73.61386}
+    - name: fighting_frog_2
+      rect:
+        serializedVersion: 2
+        x: 1483
+        y: 9
+        width: 285
+        height: 191
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -91.87134, y: 75.99505}
+        - {x: -110.87134, y: 67.99505}
+        - {x: -110.87134, y: -74.00495}
+        - {x: 112.12866, y: -74.00495}
+        - {x: 112.12866, y: 75.99505}
+    - name: fighting_frog_3
+      rect:
+        serializedVersion: 2
+        x: 1788
+        y: 7
+        width: 397
+        height: 191
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -101.316895, y: 74.9406}
+        - {x: -87.316895, y: 53.940598}
+        - {x: -84.316895, y: 49.940598}
+        - {x: -140.3169, y: 60.940598}
+        - {x: -154.3169, y: 52.940598}
+        - {x: -154.3169, y: -74.0594}
+        - {x: 155.6831, y: -74.0594}
+        - {x: 155.6831, y: 38.940598}
+        - {x: 140.6831, y: 67.9406}
+        - {x: 121.683105, y: 74.9406}
+    - name: fighting_frog_4
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 5
+        width: 285
+        height: 189
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -85.638626, y: 74.88614}
+        - {x: -101.638626, y: 21.886139}
+        - {x: -85.638626, y: 13.886139}
+        - {x: -110.638626, y: -8.113861}
+        - {x: -110.638626, y: -73.11386}
+        - {x: 112.361374, y: -73.11386}
+        - {x: 112.361374, y: 74.88614}
+    - name: fighting_frog_5
+      rect:
+        serializedVersion: 2
+        x: 894
+        y: 6
+        width: 180
+        height: 189
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 46.341553, y: -61.33663}
+        - {x: 50.341553, y: -60.33663}
+        - {x: 61.341553, y: -57.33663}
+        - {x: 69.34155, y: -33.33663}
+        - {x: 71.34155, y: -23.336632}
+        - {x: 71.34155, y: 31.663368}
+        - {x: 39.341553, y: 74.66337}
+        - {x: -20.658447, y: 74.66337}
+        - {x: -60.658447, y: 67.66337}
+        - {x: -69.65845, y: 45.66337}
+        - {x: -69.65845, y: -73.33663}
+        - {x: -12.658447, y: -73.33663}
+        - {x: -11.658447, y: -70.33663}
+        - {x: -11.658447, y: -63.33663}
+        - {x: 19.341553, y: -61.33663}
+        - {x: 21.341553, y: -59.33663}
+        - {x: 15.341553, y: -67.33663}
+        - {x: 15.341553, y: -73.33663}
+        - {x: 60.341553, y: -73.33663}
+        - {x: 60.341553, y: -65.33663}
+        - {x: 58.341553, y: -63.33663}
+        - {x: 48.341553, y: -61.33663}
+    - name: fighting_frog_6
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 7
+        width: 325
+        height: 190
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -38.495056, y: 74.9406}
+        - {x: -112.495056, y: 57.940598}
+        - {x: -126.495056, y: 49.940598}
+        - {x: -126.495056, y: 8.940598}
+        - {x: -98.495056, y: -74.0594}
+        - {x: 127.504944, y: -74.0594}
+        - {x: 127.504944, y: 25.940598}
+        - {x: 66.504944, y: 74.9406}
+    - name: fighting_frog_7
+      rect:
+        serializedVersion: 2
+        x: 2219
+        y: 8
+        width: 364
+        height: 191
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -141.33179, y: 74.71782}
+        - {x: -141.33179, y: -10.282181}
+        - {x: -123.33179, y: -64.28218}
+        - {x: -104.33179, y: -74.28218}
+        - {x: 142.66821, y: -74.28218}
+        - {x: 142.66821, y: 31.71782}
+        - {x: 115.66821, y: 74.71782}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
