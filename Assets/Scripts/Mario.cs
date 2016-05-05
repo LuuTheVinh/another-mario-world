@@ -24,12 +24,18 @@ public class Mario : MonoBehaviour {
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider2D;
     private Rigidbody2D _rigidbody2D;
+    private Animator _animator;
+
+    [HideInInspector] public eMarioStatus Status;
 
     // Use this for initialization
     void Start () {
         _spriteRenderer = this.GetComponent<SpriteRenderer>();
         _boxCollider2D = this.GetComponent<BoxCollider2D>();
         _rigidbody2D = this.GetComponent<Rigidbody2D>();
+        _animator = this.GetComponent<Animator>();
+
+        Status = eMarioStatus.SMALL;
 
         // lực nhảy = căn (2 * g * scale (tại thằng này gravity gấp 2) * độ cao) + khối lượng (lực kéo xuống)
         JumpForce = Mathf.Sqrt(2 * Physics.gravity.magnitude * _rigidbody2D.gravityScale * JumpHeight) + _rigidbody2D.mass + _rigidbody2D.drag;
@@ -46,6 +52,11 @@ public class Mario : MonoBehaviour {
         //{
         //    _boxCollider2D.size = spriteSize;
         //}
+
+        if(Status != (eMarioStatus)_animator.GetInteger("status"))
+        {
+            Status = (eMarioStatus)_animator.GetInteger("status");
+        }
 	}
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -56,6 +67,11 @@ public class Mario : MonoBehaviour {
         {
             //Item item = collision.gameObject.GetComponents(typeof(Item))[0] as Item;
             //updateStatusByItem(item);
+        }
+
+        if(tag == "Enemy")
+        {
+            this.GotHit();
         }
     }
 
@@ -77,4 +93,41 @@ public class Mario : MonoBehaviour {
     //            break;
     //    }
     //}
+    
+    /// <summary>
+    /// Mario đụng Enemy
+    /// </summary>
+    public void GotHit()
+    {
+        switch (Status)
+        {
+            case eMarioStatus.SMALL:
+                { 
+                    this.GetComponent<Animator>().SetBool("isDead", true);
+                    Die();
+                    break;
+                }
+            case eMarioStatus.BIG:
+                _animator.SetInteger("status", (int)eMarioStatus.SMALL);
+                break;
+            case eMarioStatus.WHITE:
+                _animator.SetInteger("status", (int)eMarioStatus.BIG);
+                break;
+            case eMarioStatus.RACOON:
+                _animator.SetInteger("status", (int)eMarioStatus.BIG);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void Die()
+    {
+        _rigidbody2D.velocity = new Vector2(0, 0);
+        this.GetComponent<MarioMovement>().Jump();
+
+        this.GetComponent<BoxCollider2D>().enabled = false;
+        this.GetComponent<MarioController>().enabled = false;
+        this.GetComponent<MarioMovement>().enabled = false;
+    }
 }

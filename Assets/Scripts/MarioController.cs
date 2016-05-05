@@ -104,4 +104,9 @@ public class MarioController : MonoBehaviour {
         //    _animator.SetBool("isJumping", false);
         //}
     }
+
+    public void Die()
+    {
+
+    }
 }
