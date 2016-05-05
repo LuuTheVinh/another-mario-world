@@ -4,7 +4,6 @@ using System.Collections;
 // Creaeted by Ho Hoang Tung
 public class Gooompa : Enemy {
 
-
     // Use this for initialization
 	protected override void Start () {
 
@@ -17,17 +16,27 @@ public class Gooompa : Enemy {
 	
 	// Update is called once per frame
 	protected override void Update () {
+        //if (_renderer.isVisible)
+        //    _rigidBody2D.WakeUp();
+        //else
+        //{
+        //    _rigidBody2D.Sleep();
+        //    return;
+        //}
         base.Update();
-        if (_imovement != null)
-            _imovement.Movement(this.gameObject);
+        //if (_imovement != null)
+        //    _imovement.Movement(this.gameObject);
+
 	}
 
-    protected void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
+
         base.OnCollisionEnter2D(collision);
+
     }
 
-    public void SetSpeed(Vector3 s)
+    public override void SetSpeed(Vector3 s)
     {
         base.SetSpeed(s);
         _imovement = new LinearMovement(s.x, s.y, s.z);

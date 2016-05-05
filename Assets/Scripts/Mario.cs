@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class Mario : MonoBehaviour {
-
+    
+    // Tung: Hiện tại tui kiểm tra status >= BIG thì cho phép đập đá
+    // nên nếu có thêm status nào mà không đập đá được thì cho nó nhỏ hơn BIG nhé
     public enum eMarioStatus
     {
         SMALL = 0,
@@ -52,27 +54,27 @@ public class Mario : MonoBehaviour {
         string name = collision.gameObject.name;
         if (tag == "Item")
         {
-            Item item = collision.gameObject.GetComponents(typeof(Item))[0] as Item;
-            updateStatusByItem(item);
+            //Item item = collision.gameObject.GetComponents(typeof(Item))[0] as Item;
+            //updateStatusByItem(item);
         }
     }
 
-    private void updateStatusByItem(Item item)
-    {
-        if (item == null)
-            return;
-        // câp nhật trạng thái dựa trên type của item
-        switch (item._type)
-        {
-            case Item.ItemType.MUSHROOM:
-                this.GetComponent<Animator>().SetInteger("status", (int)eMarioStatus.BIG);
-                break;
-            case Item.ItemType.FIREFLOWER:
-                break;
-            case Item.ItemType.AMAZING_STAR:
-                break;
-            default:
-                break;
-        }
-    }
+    //private void updateStatusByItem(Item item)
+    //{
+    //    if (item == null)
+    //        return;
+    //    // câp nhật trạng thái dựa trên type của item
+    //    switch (item._type)
+    //    {
+    //        case Item.ItemType.Mushroom:
+    //            this.GetComponent<Animator>().SetInteger("status", (int)eMarioStatus.BIG);
+    //            break;
+    //        case Item.ItemType.FireFlower:
+    //            break;
+    //        case Item.ItemType.Amazing_Star:
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //}
 }

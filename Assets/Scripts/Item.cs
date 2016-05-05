@@ -1,56 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 
 // created by Ho Hoang Tung
 public class Item : MonoBehaviour{
 
     
-    public enum ItemType { MUSHROOM, FIREFLOWER, AMAZING_STAR, COIN };
+    public enum ItemType { Mushroom, FireFlower, Amazing_Star, Coin, Leaf };
 
-    public enum AppearMode { LEFT, RIGHT, INSTANT}
 
-    public static int[] IsUseAnimator = new int[]{-1, -1, -1, 1};
+    protected IMovement _imovement;
+    protected Rigidbody2D _rigidbody2d;
+    protected Animator _animator;
 
-    private SpriteRenderer _spriteRenderer;
-    private IMovement _imovement;
-    private Rigidbody2D _rigidbody2d;
-    private Animator _animator;
-
-    public ItemType _type = ItemType.MUSHROOM;
-    public Sprite[] _sprites;
+    public ItemType _type = ItemType.Mushroom;
+    //public Sprite[] _sprites;
     public Vector3 _speed;
-    public float _floatingUp;
-    public float _deltaUp;
-    public float _delayTime;
 
-    public bool IsRunable { get; set; }
-    public AppearMode _appearMode { get; set; }
-
-    private int type;
-    private float _height;
     private float _delayNoneHit;
+    
     // Use this for initialization
-	void Start () {
-        type = System.Convert.ToInt32(_type);
-
+	protected virtual void Start () {
+        // Nếu là leaf hoặc Fire Flower mà mario là small thì đổi thành Mushroom
         _rigidbody2d = GetComponent<Rigidbody2D>();
         
-        // Chọn sprite dựa theo enum chọn từ inspector
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.sprite = _sprites[type];
-
         _animator = GetComponent<Animator>();
-
-        checkeforEnableAnimator(type);
-
-
-        // Delta Up chọn từ inspector xác định độ cao tối đa trồi lên của item.
-        _height = this.transform.position.y + _deltaUp;
-
-        // Note: chọn hướng di chuyển trước, chọn kiểu di chuyển sau.
-        // Chọn hướng di chuyển.
-        runDirection();
 
         // Chọn kiểu di chuyển.
         _imovement = initMovement();
@@ -58,64 +31,70 @@ public class Item : MonoBehaviour{
         // delay lại không thôi vừa mơi chạm được cục gạch thì ăn item.
         // cho nữa giây sau mới ăn được.
         _delayNoneHit = 0.5f;
+        transform.position = new Vector3(0, 1, 1);
+        GetComponent<SpriteRenderer>().enabled = true;
 	}
 
     // Update is called once per frame
-	void Update () {
-        if (IsUseAnimator[type] == -1)
-            customRun();
+    protected virtual void Update()
+    {
+
         _delayNoneHit -= Time.deltaTime;
- 
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal"))
+        {
+            _animator.enabled = false;
+            if (_type == ItemType.Coin)
+                Destroy(this.gameObject);
+        }
+        run();
+
 	}
 
-    private void customRun()
-    {
-        // Runable là flag để xác định item có bắt đầu chạy hay không.
-        if (IsRunable == false)
-        {
-            // Kiểm tra độ cao đã tròi lên nếu quá giới hạn đặt ra trước thì không trồi lên nữa
-            if (this.transform.position.y <= _height)
-            {
-                this.gameObject.transform.position += new Vector3(0, _floatingUp, 0);
-            }
-            else
-            {
-                // Giảm Delay Time từ số đặt trước từ inspector đến 0.
-                // Nếu bé hơn 0 rồi thì bắt đầu Run
-                if (_delayTime > 0)
-                {
-                    _delayTime -= Time.deltaTime;
-                }
-                else
-                {
-                    IsRunable = true;
-                }
-            }
-        }
-        if (IsRunable == true && this._appearMode != AppearMode.INSTANT)
-        {
-            if (_rigidbody2d.isKinematic == true)
-                _rigidbody2d.isKinematic = false;
-
-            _imovement.Movement(this.gameObject);
-
-        }
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
+    protected void OnCollisionEnter2D(Collision2D collision)
     {
         if (_delayNoneHit > 0)
             return;
-        if (this._type == ItemType.COIN)
+        if (this._type == ItemType.Coin)
             return;
         string tag = collision.gameObject.tag;
         string name = collision.gameObject.name;
         if (tag == "Player")
         {
             Destroy(this.gameObject);
+            Mario mario = collision.gameObject.GetComponent<Mario>() as Mario;
+            updateStatusByItem(mario);
         }
         if (tag == "Ground")
             checkWithGround(collision);
+    }
+
+    protected void updateStatusByItem(Mario mario)
+    {
+        if (mario == null)
+            return;
+        // câp nhật trạng thái dựa trên type của item
+        switch (_type)
+        {
+            case Item.ItemType.Mushroom:
+                mario.GetComponent<Animator>().SetInteger("status", (int) Mario.eMarioStatus.BIG);
+                break;
+            case Item.ItemType.FireFlower:
+                mario.GetComponent<Animator>().SetInteger("status", (int) Mario.eMarioStatus.WHITE);
+                break;
+            case Item.ItemType.Amazing_Star:
+                break;
+            case Item.ItemType.Leaf:
+                mario.GetComponent<Animator>().SetInteger("status", (int)Mario.eMarioStatus.RACOON);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void run()
+    {
+        if (_imovement != null)
+            _imovement.Movement(this.gameObject);
     }
 
     private void checkWithGround(Collision2D collision)
@@ -129,11 +108,11 @@ public class Item : MonoBehaviour{
     {
         switch (_type)
         {
-            case ItemType.MUSHROOM:
+            case ItemType.Mushroom:
                 return new LinearMovement(_speed.x, _speed.y, _speed.z);
-            case ItemType.FIREFLOWER:
+            case ItemType.FireFlower:
                 return null;
-            case ItemType.AMAZING_STAR:
+            case ItemType.Amazing_Star:
                 return null;
             default:
                 return null;
@@ -141,39 +120,5 @@ public class Item : MonoBehaviour{
         }
     }
 
-    private void runDirection()
-    {
-        // Những item không di chuyển
-        switch (_type)
-        {
-            case ItemType.FIREFLOWER:
-                _appearMode = AppearMode.INSTANT;
-                break;
-            default:
-                break;
-        }
-
-        switch (_appearMode)
-        {
-            case AppearMode.LEFT:
-                this._speed.x = - Mathf.Abs(_speed.x);
-                break;
-            case AppearMode.RIGHT:
-                this._speed.x = Mathf.Abs(_speed.x);
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void checkeforEnableAnimator(int type)
-    {
-        if (IsUseAnimator[type] == 1)
-        {
-            _animator.enabled = true;
-            _animator.SetInteger("Status", System.Convert.ToInt32(_type));
-        }
-    }
-	
 
 }

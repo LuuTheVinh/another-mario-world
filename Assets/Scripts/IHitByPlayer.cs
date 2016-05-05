@@ -24,17 +24,16 @@ public class TroopaHitByPlayer : IHitByPlayer
 {
     public void Hit(Enemy enemy)
     {
-        Debug.Log("Hit");
         switch (enemy._aniamtor.GetInteger("status"))
         {
             case (int)Troopa.eStatus.Normal:
                 enemy._aniamtor.SetInteger("status", (int)Troopa.eStatus.Shell);
                 enemy.SetSpeed(Vector3.zero);
                 break;
-            case (int)Troopa.eStatus.Shell:
-                enemy._aniamtor.SetInteger("status", (int)Troopa.eStatus.SpeedShell);
-                enemy.SetSpeed(new Vector3(0.1f, 0f, 0f));
-                break;
+            //case (int)Troopa.eStatus.Shell:
+            //    enemy._aniamtor.SetInteger("status", (int)Troopa.eStatus.SpeedShell);
+            //    enemy.SetSpeed(new Vector3(0.1f, 0f, 0f));
+            //    break;
             case (int)Troopa.eStatus.SpeedShell:
                 enemy._aniamtor.SetInteger("status", (int)Troopa.eStatus.Shell);
                 enemy.SetSpeed(Vector3.zero);
