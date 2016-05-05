@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ad578cf74563bb247b97caedcfbb7a7e
-timeCreated: 1462292122
+timeCreated: 1462381599
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -136,7 +136,7 @@ TextureImporter:
     21300258: backgrounds-objects_130
     21300260: backgrounds-objects_131
     21300262: backgrounds-objects_132
-    21300264: backgrounds-objects_133
+    21300264: white_cloud
     21300266: backgrounds-objects_134
     21300268: backgrounds-objects_135
     21300270: backgrounds-objects_136
@@ -185,6 +185,15 @@ TextureImporter:
     21300356: brick_smash_2
     21300358: brick_smash_3
     21300360: brick_smash_4
+    21300362: blueblock_topleft
+    21300364: blueblock_top
+    21300366: blueblock_topright
+    21300368: blueblock_left
+    21300370: blueblock_inside
+    21300372: blueblock_right
+    21300374: blueblock_botleft
+    21300376: blueblock_bot
+    21300378: blueblock_botright
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -1304,21 +1313,6 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: backgrounds-objects_89
-      rect:
-        serializedVersion: 2
-        x: 316
-        y: 1109
-        width: 64
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -32, y: 64}
-        - {x: -32, y: -64}
-        - {x: 32, y: -64}
-        - {x: 32, y: 64}
     - name: backgrounds-objects_90
       rect:
         serializedVersion: 2
@@ -1863,7 +1857,7 @@ TextureImporter:
         - {x: -16, y: -16}
         - {x: 16, y: -16}
         - {x: 16, y: 16}
-    - name: backgrounds-objects_133
+    - name: white_cloud
       rect:
         serializedVersion: 2
         x: 670
@@ -2444,6 +2438,105 @@ TextureImporter:
         y: 1300
         width: 4
         height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: blueblock_topleft
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 1221
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: blueblock_top
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 1221
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: blueblock_topright
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 1221
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: blueblock_left
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 1205
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: blueblock_inside
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 1205
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: blueblock_right
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 1205
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: blueblock_botleft
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 1109
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: blueblock_bot
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 1109
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: blueblock_botright
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 1109
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -24,7 +24,6 @@ public class TroopaHitByPlayer : IHitByPlayer
 {
     public void Hit(Enemy enemy)
     {
-        Debug.Log("Hit");
         switch (enemy._aniamtor.GetInteger("status"))
         {
             case (int)Troopa.eStatus.Normal:

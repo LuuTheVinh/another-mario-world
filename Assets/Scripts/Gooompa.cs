@@ -20,11 +20,14 @@ public class Gooompa : Enemy {
         base.Update();
         if (_imovement != null)
             _imovement.Movement(this.gameObject);
+
 	}
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
+
         base.OnCollisionEnter2D(collision);
+
     }
 
     public override void SetSpeed(Vector3 s)

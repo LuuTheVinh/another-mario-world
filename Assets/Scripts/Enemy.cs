@@ -4,7 +4,7 @@ using System.Collections;
 
 public abstract class Enemy: MonoBehaviour {
     public enum eMoveDirection { LEFT, RIGHT, UP, DOWN, NONE }
-
+    public enum eStatus { Normal, Die, Hit}
     [HideInInspector]
     public Animator _aniamtor;
 
@@ -12,7 +12,7 @@ public abstract class Enemy: MonoBehaviour {
     protected IHitByPlayer _hitbyplayer;
 
     public eMoveDirection _moveDirection;
-
+    public bool _canHitByShell;
     public Vector3 _speed;
     public bool _isSmart;
     protected virtual void Start()
@@ -25,12 +25,16 @@ public abstract class Enemy: MonoBehaviour {
 
     protected virtual void Update()
     {
-
+        if (this.GetComponent<Renderer>().isVisible == false && _aniamtor.GetInteger("status") == (int)eStatus.Hit)
+            _aniamtor.SetTrigger("outofscreen");
     }
 
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
+        if (this._aniamtor.GetInteger("status") == 2)
+            return;
+        string name = collision.gameObject.name;
         string tag = collision.gameObject.tag;
         if (tag == "Player")
             checkHitByPlayer(collision);
@@ -38,7 +42,10 @@ public abstract class Enemy: MonoBehaviour {
             checkWithGround(collision);
         if (tag == "Enemy")
             checkWithEnemy(collision);
+        if (name == "block")
+            checkWithBlock(collision);
     }
+
 
     public virtual void SetSpeed(Vector3 s)
     {
@@ -52,6 +59,7 @@ public abstract class Enemy: MonoBehaviour {
     {
         if (collision.collider is EdgeCollider2D)
             return;
+
         float top = collision.collider.bounds.max.y;
         if (top - this.GetComponent<Collider2D>().bounds.min.y > 0.5)
         {
@@ -86,6 +94,17 @@ public abstract class Enemy: MonoBehaviour {
         {
             // Mario die.
         }
+    }
+
+    private void checkWithBlock(Collision2D collision)
+    {
+        Animator anim = collision.gameObject.GetComponent<Animator>();
+        if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Normal") == false)
+        {
+            this._aniamtor.SetInteger("status", (int)eStatus.Hit);
+
+        }
+
     }
 
     protected void runDirection()

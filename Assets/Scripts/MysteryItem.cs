@@ -52,7 +52,7 @@ public class MysteryItem : MonoBehaviour {
     }
     private void checkHit(GameObject obj)
     {
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsTag("Mystery Item Normal") == false)
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsTag("Normal") == false)
             return;
         // Nếu mario đang rơi thì không tính
         if (obj.GetComponent<Rigidbody2D>().velocity.y < 0)
