@@ -69,10 +69,11 @@ public class Mario : MonoBehaviour {
             //updateStatusByItem(item);
         }
 
-        if(tag == "Enemy")
-        {
-            this.GotHit();
-        }
+        // Tung
+        //if(tag == "Enemy")
+        //{
+        //    this.GotHit();
+        //}
     }
 
     //private void updateStatusByItem(Item item)
@@ -103,14 +104,15 @@ public class Mario : MonoBehaviour {
         {
             case eMarioStatus.SMALL:
                 {
-                    if (!this.GetComponentInChildren<GroundCheck>().IsAttack)
-                    {
-                        Die();
-                    }
-                    else
-                    {
-                    }
-
+                    // Tung
+                    //if (!this.GetComponentInChildren<GroundCheck>().IsAttack)
+                    //{
+                    //    Die();
+                    //}
+                    //else
+                    //{
+                    //}
+                    Die();
                     break;
                 }
             case eMarioStatus.BIG:

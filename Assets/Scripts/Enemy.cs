@@ -118,6 +118,7 @@ public abstract class Enemy: MonoBehaviour {
         else
         {
             // Mario die.
+            (col.gameObject.GetComponent<Mario>() as Mario).GotHit();
         }
     }
 
