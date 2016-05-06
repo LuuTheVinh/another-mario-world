@@ -77,6 +77,8 @@ public class MarioController : MonoBehaviour {
                 JumpWithAnimate(false);     // nhảy bình thường
             }
         }
+        else
+            _timer = 0;
 
         if (Input.GetButtonUp("Jump") && !_canJump)
         {
@@ -84,6 +86,12 @@ public class MarioController : MonoBehaviour {
         }
 
         Debug.Log("Timer: " + _timer);
+
+        // đá
+        if(Input.GetButtonDown("Attack"))
+        {
+            _animator.SetTrigger("kick");
+        }
     }
     
     public void JumpWithAnimate(bool max)
