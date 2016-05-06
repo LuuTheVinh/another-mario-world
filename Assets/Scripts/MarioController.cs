@@ -85,7 +85,7 @@ public class MarioController : MonoBehaviour {
             _canJump = true;
         }
 
-        Debug.Log("Timer: " + _timer);
+        //Debug.Log("Timer: " + _timer);
 
         // đá
         if(Input.GetButtonDown("Attack"))

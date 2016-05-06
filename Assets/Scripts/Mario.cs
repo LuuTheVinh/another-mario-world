@@ -27,6 +27,7 @@ public class Mario : MonoBehaviour {
     private Animator _animator;
 
     [HideInInspector] public eMarioStatus Status;
+    public static float PushUpForce;
 
     private float _protectTime = 0f;  // thời gian ko chết
 
@@ -43,6 +44,9 @@ public class Mario : MonoBehaviour {
         JumpForce = Mathf.Sqrt(2 * Physics.gravity.magnitude * _rigidbody2D.gravityScale * JumpHeight) + _rigidbody2D.mass + _rigidbody2D.drag;
         
         JumpMaxForce = Mathf.Sqrt(2 * Physics.gravity.magnitude * _rigidbody2D.gravityScale * HoldJumpHeight) + _rigidbody2D.mass + _rigidbody2D.drag;
+
+        PushUpForce = Mathf.Sqrt(2 * Physics.gravity.magnitude * _rigidbody2D.gravityScale * 1.5f) + _rigidbody2D.mass + _rigidbody2D.drag;
+    
     }
 	
 	// Update is called once per frame

@@ -91,6 +91,11 @@ public class MarioMovement : MonoBehaviour {
         //_spriteRenderer.flipX = true;
     }
 
+    public void EnemyPushUp()
+    {
+        _rigidbody2D.AddForce(Vector2.up * Mario.PushUpForce, ForceMode2D.Impulse);
+    }
+
     public void Jump(bool max = false)
     {
         if(!max)

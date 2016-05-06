@@ -11,7 +11,7 @@ public abstract class Enemy: MonoBehaviour {
     protected Rigidbody2D _rigidBody2D;
 
     protected IMovement _imovement;
-    protected IHitByPlayer _hitbyplayer;
+    [HideInInspector] public IHitByPlayer _hitbyplayer;
 
     public eMoveDirection _moveDirection;
     public bool _canHitByShell;
@@ -69,8 +69,20 @@ public abstract class Enemy: MonoBehaviour {
             checkWithEnemy(collision);
         if (name == "block")
             checkWithBlock(collision);
+        
     }
 
+    protected virtual void OnTriggerEnter2D(Collider2D collider)
+    {
+        string tag = collider.gameObject.tag;
+        if (tag == "Player")
+        {
+            if (_hitbyplayer != null)
+                _hitbyplayer.Hit(this);
+            (collider.gameObject.GetComponent<MarioMovement>() as MarioMovement).EnemyPushUp();
+        }
+
+    }
 
     public virtual void SetSpeed(Vector3 s)
     {
@@ -105,21 +117,8 @@ public abstract class Enemy: MonoBehaviour {
 
     protected virtual void checkHitByPlayer(Collision2D col)
     {
-        //if (_aniamtor.GetCurrentAnimatorStateInfo(0).IsName("GoompaNormal") == false)
-        //    return;
+        killPlayer(col.gameObject);
 
-        // Nếu goompa đang trong trạng thái normal và va chạm với player
-        // thì kiểm tra hướng va chạm.
-        Vector3 distance = (this.transform.position - col.gameObject.transform.position);
-        if (distance.y < 0 && Mathf.Abs(distance.x) < 0.65)
-        {
-            _hitbyplayer.Hit(this);
-        }
-        else
-        {
-            // Mario die.
-            (col.gameObject.GetComponent<Mario>() as Mario).GotHit();
-        }
     }
 
     protected virtual void checkWithBlock(Collision2D collision)
@@ -150,5 +149,10 @@ public abstract class Enemy: MonoBehaviour {
                 _speed.y = -Mathf.Abs(_speed.y);
                 break;
         }
+    }
+
+    public virtual void killPlayer(GameObject obj)
+    {
+        (obj.GetComponent<Mario>() as Mario).GotHit();
     }
 }

@@ -11,7 +11,7 @@ public class GoompaHitByPlayer : IHitByPlayer
 {
     public void Hit(Enemy enemy)
     {
-        if (enemy._aniamtor.GetCurrentAnimatorStateInfo(0).IsName("GoompaNormal") == false)
+        if (enemy._aniamtor.GetCurrentAnimatorStateInfo(0).IsTag("Normal") == false)
             return;
         // Hướng từ trên xuống, goompa chết.
         enemy._aniamtor.SetInteger("status", 1);

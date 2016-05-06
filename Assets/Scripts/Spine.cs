@@ -19,9 +19,7 @@ public class Spine : Enemy {
 	// Update is called once per frame
     protected override void Update()
     {
-
         base.Update();
-
         jump();
 	}
 
@@ -32,7 +30,7 @@ public class Spine : Enemy {
         _countingTime += Time.deltaTime;
         if (_countingTime >= _delayTime)
         {
-            Debug.Log("add force");
+
             _countingTime -= _delayTime;
             _rigidBody2D.AddForce(_forceJump);
         }
@@ -40,7 +38,7 @@ public class Spine : Enemy {
 
     protected override void checkHitByPlayer(Collision2D col)
     {
-        // Mario die.
+        killPlayer(col.gameObject);        
     }
 
     protected virtual void checkWithBlock(Collision2D collision)
