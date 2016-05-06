@@ -29,6 +29,11 @@ public class Troopa : Enemy {
 
     }
 
+    protected override void OnTriggerEnter2D(Collider2D collider)
+    {
+        base.OnTriggerEnter2D(collider);
+    }
+
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
@@ -38,8 +43,12 @@ public class Troopa : Enemy {
     {
         if (this._aniamtor.GetInteger("status") == (int)eStatus.Shell)
         {
+            Vector3 distance = this.transform.position - col.gameObject.transform.position;
             _aniamtor.SetInteger("status", (int)Troopa.eStatus.SpeedShell);
-            this.SetSpeed(new Vector3(0.3f, 0f, 0f));
+            if (distance.x <= 0)
+                this.SetSpeed(new Vector3(-0.3f, 0f, 0f));
+            else
+                this.SetSpeed(new Vector3(0.3f, 0f, 0f));
         }
         else
             base.checkHitByPlayer(col);

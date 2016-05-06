@@ -83,7 +83,7 @@ public class MarioController : MonoBehaviour {
             _canJump = true;
         }
 
-        Debug.Log("Timer: " + _timer);
+        //Debug.Log("Timer: " + _timer);
     }
     
     public void JumpWithAnimate(bool max)
