@@ -17,6 +17,10 @@ public abstract class Enemy: MonoBehaviour {
     public bool _canHitByShell;
     public Vector3 _speed;
     public bool _isSmart;
+
+    //flag báo đã chết để không giết mario
+    protected bool _isDie;
+
     protected virtual void Start()
     {
         _aniamtor = GetComponent<Animator>();
@@ -62,14 +66,14 @@ public abstract class Enemy: MonoBehaviour {
         string name = collision.gameObject.name;
         string tag = collision.gameObject.tag;
         if (tag == "Player")
-            checkHitByPlayer(collision);
+            killPlayer(collision.gameObject);
         if (tag == "Ground")
             checkWithGround(collision);
         if (tag == "Enemy")
             checkWithEnemy(collision);
         if (name == "block")
             checkWithBlock(collision);
-        
+
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collider)
@@ -77,9 +81,7 @@ public abstract class Enemy: MonoBehaviour {
         string tag = collider.gameObject.tag;
         if (tag == "Player")
         {
-            if (_hitbyplayer != null)
-                _hitbyplayer.Hit(this);
-            (collider.gameObject.GetComponent<MarioMovement>() as MarioMovement).EnemyPushUp();
+            checkHitByPlayer(collider.gameObject);
         }
 
     }
@@ -113,12 +115,22 @@ public abstract class Enemy: MonoBehaviour {
     protected virtual void checkWithEnemy(Collision2D collision)
     {
         back();
+    
     }
 
-    protected virtual void checkHitByPlayer(Collision2D col)
+    protected virtual void checkHitByPlayer(GameObject obj)
     {
-        killPlayer(col.gameObject);
+        //killPlayer(col.gameObject);
+        if (obj.GetComponent<Rigidbody2D>().velocity.y >= 0)
+            this.killPlayer(obj);
+        else
+        {
+            _isDie = true;
 
+            if (_hitbyplayer != null)
+                _hitbyplayer.Hit(this);
+            (obj.GetComponent<MarioMovement>() as MarioMovement).EnemyPushUp();
+        }
     }
 
     protected virtual void checkWithBlock(Collision2D collision)
@@ -153,6 +165,7 @@ public abstract class Enemy: MonoBehaviour {
 
     public virtual void killPlayer(GameObject obj)
     {
-        (obj.GetComponent<Mario>() as Mario).GotHit();
+        if (_isDie == false)
+            (obj.GetComponent<Mario>() as Mario).GotHit();
     }
 }
