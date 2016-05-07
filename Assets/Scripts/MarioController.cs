@@ -92,12 +92,29 @@ public class MarioController : MonoBehaviour {
         {
             _animator.SetTrigger("kick");
         }
+
+        // ngồi
+        //if(Input.GetAxis("Vertical") < 0)
+        if(_animator.GetInteger("status") != 0 && Input.GetKey("down"))
+        {
+            if (!_animator.GetBool("isSitting"))
+            {
+                _animator.SetBool("isSitting", true);
+            }
+        }
+        else if(_animator.GetBool("isSitting"))
+        {
+            _animator.SetBool("isSitting", false);
+        }
     }
     
     public void JumpWithAnimate(bool max)
     {
         if (!_canJump)
+        {
+            _timer = 0;
             return;
+        }
 
         _animator.SetBool("isJumping", true);
         _animator.SetTrigger("Jump");

@@ -24,7 +24,7 @@ public class MarioMovement : MonoBehaviour {
         // Move();
 
         // nếu mà ko chạm 2 bên hoặc chạm 2 bên mà đi ngược lại thì đi được
-        if (_direction == 0 || _direction * h < 0)
+        if ((_direction == 0 || _direction * h < 0) && !this.GetComponent<Animator>().GetBool("isSitting"))
         {
             _rigidbody2D.AddForce(Vector2.right * _mario.MovingForce * h);
             if (Mathf.Abs(_rigidbody2D.velocity.x) > _mario.MaxSpeed)
@@ -60,16 +60,16 @@ public class MarioMovement : MonoBehaviour {
 
     void OnCollisionStay2D(Collision2D col)
     {
-        var contactPoint = col.contacts[0].point;
+        var thisBounds = this.GetComponent<Collider2D>().bounds;
 
-        // chạm top
-        if (contactPoint.y > col.collider.bounds.max.y)
+        // chạm top / bot
+        if (thisBounds.min.y > col.collider.bounds.max.y || thisBounds.max.y < col.collider.bounds.min.y)
         {
             _direction = 0;
         }
         else
         {
-            if (contactPoint.x < col.collider.bounds.center.x)
+            if (thisBounds.min.x < col.collider.bounds.center.x)
                 _direction = 1;     // trái
             else
                 _direction = -1;    // phải
