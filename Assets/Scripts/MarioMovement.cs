@@ -6,8 +6,9 @@ public class MarioMovement : MonoBehaviour {
     private Mario _mario;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody2D;
-
-    private int _direction = 1;
+    
+    [HideInInspector] public bool CollidingSide = false;
+    private int _direction = 0;
 
     // Use this for initialization
     void Start () {
@@ -22,12 +23,18 @@ public class MarioMovement : MonoBehaviour {
         float h = Input.GetAxis("Horizontal");
         // Move();
 
-        _rigidbody2D.AddForce(Vector2.right * _mario.MovingForce * h);
-
-
-        if (Mathf.Abs(_rigidbody2D.velocity.x) > _mario.MaxSpeed)
+        // nếu mà ko chạm 2 bên hoặc chạm 2 bên mà đi ngược lại thì đi được
+        if (_direction == 0 || _direction * h < 0)
         {
-            _rigidbody2D.velocity = new Vector2(Mathf.Sign(_rigidbody2D.velocity.x) * _mario.MaxSpeed, _rigidbody2D.velocity.y);
+            _rigidbody2D.AddForce(Vector2.right * _mario.MovingForce * h);
+            if (Mathf.Abs(_rigidbody2D.velocity.x) > _mario.MaxSpeed)
+            {
+                _rigidbody2D.velocity = new Vector2(Mathf.Sign(_rigidbody2D.velocity.x) * _mario.MaxSpeed, _rigidbody2D.velocity.y);
+            }
+        }
+        else if (this.transform.localScale.x * h > 0)
+        {
+            CollidingSide = false;
         }
 
         // lật hình mario
@@ -36,13 +43,42 @@ public class MarioMovement : MonoBehaviour {
         if (h > 0 && sign > 0 && this.transform.localScale.x != -1)
         {
             //_spriteRenderer.flipX = true;
+            // phải
             this.transform.localScale = new Vector3(-1, 1, 1);
         }
         else if (h < 0 && sign < 0 && this.transform.localScale.x != 1)
         {
             // _spriteRenderer.flipX = false;
+            // trái
             this.transform.localScale = new Vector3(1, 1, 1);
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+    }
+
+    void OnCollisionStay2D(Collision2D col)
+    {
+        var contactPoint = col.contacts[0].point;
+
+        // chạm top
+        if (contactPoint.y > col.collider.bounds.max.y)
+        {
+            _direction = 0;
+        }
+        else
+        {
+            if (contactPoint.x < col.collider.bounds.center.x)
+                _direction = 1;     // trái
+            else
+                _direction = -1;    // phải
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D col)
+    {
+        _direction = 0;
     }
 
     public void GotoLeft()
@@ -72,28 +108,4 @@ public class MarioMovement : MonoBehaviour {
     {
         //_rigidbody2D.AddForce(Vector2.right * 100 * (_spriteRenderer.flipX == true ? 1 : -1));
     }
-
-    //private float Speed = 0f;
-    //private float MaxSpeed = 3f;
-    //private float Acceleration = 5.0f;
-    //private float Deceleration = 5.0f;
-
-    //void Move()
-    //{
-    //    if((Input.GetKey("left")) && (Speed < MaxSpeed))
-    //        Speed = Speed - Acceleration * Time.deltaTime;
-    //    else if ((Input.GetKey("right")) && (Speed > -MaxSpeed))
-    //        Speed = Speed + Acceleration * Time.deltaTime;
-    //    else
-    //    {
-    //        if (Speed > Deceleration * Time.deltaTime)
-    //            Speed = Speed - Deceleration   * Time.deltaTime;
-    //        else if (Speed < -Deceleration * Time.deltaTime)
-    //            Speed = Speed + Deceleration * Time.deltaTime;
-    //        else
-    //            Speed = 0;
-    //    }
-
-    //    transform.Translate(new Vector2(Speed * Time.deltaTime, 0));
-    //}
 }

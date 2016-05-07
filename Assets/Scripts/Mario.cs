@@ -29,6 +29,8 @@ public class Mario : MonoBehaviour {
     [HideInInspector] public eMarioStatus Status;
     public static float PushUpForce;
 
+    private float _protectTime = 0f;  // thời gian ko chết
+
     // Use this for initialization
     void Start () {
         _spriteRenderer = this.GetComponent<SpriteRenderer>();
@@ -50,16 +52,16 @@ public class Mario : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        //test, chỉnh lại size collider theo sprite
-        //Vector2 spriteSize = _spriteRenderer.sprite.bounds.size;
-        //if(_boxCollider2D.size != spriteSize)
-        //{
-        //    _boxCollider2D.size = spriteSize;
-        //}
-
         if(Status != (eMarioStatus)_animator.GetInteger("status"))
         {
             Status = (eMarioStatus)_animator.GetInteger("status");
+        }
+
+        if(_protectTime > 0)
+        {
+            _protectTime -= Time.deltaTime;
+
+            Debug.Log("Protect in " + _protectTime);
         }
 	}
 
@@ -72,12 +74,7 @@ public class Mario : MonoBehaviour {
             //Item item = collision.gameObject.GetComponents(typeof(Item))[0] as Item;
             //updateStatusByItem(item);
         }
-
-        // Tung
-        //if(tag == "Enemy")
-        //{
-        //    this.GotHit();
-        //}
+        
     }
 
     //private void updateStatusByItem(Item item)
@@ -104,33 +101,36 @@ public class Mario : MonoBehaviour {
     /// </summary>
     public void GotHit()
     {
+        if (_protectTime > 0)
+            return;
+        
         switch (Status)
         {
             case eMarioStatus.SMALL:
                 {
-                    // Tung
-                    //if (!this.GetComponentInChildren<GroundCheck>().IsAttack)
-                    //{
-                    //    Die();
-                    //}
-                    //else
-                    //{
-                    //}
                     Die();
-                    break;
+                    return;
                 }
             case eMarioStatus.BIG:
-                _animator.SetInteger("status", (int)eMarioStatus.SMALL);
-                break;
+                {
+                    _animator.SetInteger("status", (int)eMarioStatus.SMALL);
+                    break;
+                }
             case eMarioStatus.WHITE:
-                _animator.SetInteger("status", (int)eMarioStatus.BIG);
-                break;
+                {
+                    _animator.SetInteger("status", (int)eMarioStatus.BIG);
+                    break;
+                }
             case eMarioStatus.RACOON:
-                _animator.SetInteger("status", (int)eMarioStatus.BIG);
-                break;
+                {
+                    _animator.SetInteger("status", (int)eMarioStatus.BIG);
+                    break;
+                }
             default:
                 break;
         }
+
+        _protectTime = 3.0f;
     }
 
     private void Die()

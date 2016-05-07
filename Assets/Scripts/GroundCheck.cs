@@ -14,6 +14,7 @@ public class GroundCheck : MonoBehaviour {
         _animator = this.GetComponentInParent<Animator>();
         _spriteRenderer = this.GetComponentInParent<SpriteRenderer>();
         _boxCollider = this.GetComponent<BoxCollider2D>();
+
     }
 	
 	// Update is called once per frame
@@ -21,9 +22,12 @@ public class GroundCheck : MonoBehaviour {
         _boxCollider.offset = new Vector2(_boxCollider.offset.x, -_spriteRenderer.sprite.bounds.size.y / 2);
     }
 
-    void OnTriggerEnter2D()
+    void OnTriggerEnter2D(Collider2D col)
     {
-        _animator.SetBool("isJumping", false);
+        if (col.gameObject.tag == "Ground")
+        {
+            _animator.SetBool("isJumping", false);
+        }
 
         //nếu enemy tấn công được
         // if (...)
@@ -31,7 +35,7 @@ public class GroundCheck : MonoBehaviour {
         // else
     }
 
-    void OnTriggerExit2D()
+    void OnTriggerExit2D(Collider2D col)
     {
         IsAttack = false;
     }
