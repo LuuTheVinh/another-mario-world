@@ -139,7 +139,11 @@ public class Troopa : Enemy {
     {
         base.checkWithGround(collision);
         if (collision.gameObject.transform.parent != null && collision.gameObject.transform.parent.gameObject.tag == "Brick")
-            checkWithBrick(collision);
+        {
+            float top = collision.collider.bounds.max.y;
+            if (top - this.GetComponent<Collider2D>().bounds.min.y > 0.5)
+                checkWithBrick(collision);
+        }
     }
 
     protected override void checkWithEnemy(Collision2D collision)

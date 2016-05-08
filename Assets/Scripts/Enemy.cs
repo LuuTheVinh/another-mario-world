@@ -21,6 +21,7 @@ public abstract class Enemy: MonoBehaviour {
     //flag báo đã chết để không giết mario
     protected bool _isDie;
 
+    protected bool _isSleep;
     protected virtual void Start()
     {
         _aniamtor = GetComponent<Animator>();
@@ -29,22 +30,27 @@ public abstract class Enemy: MonoBehaviour {
 
         // Chọn hướng di chuyển.
         runDirection();
-
+        _isSleep = true;
     }
 
     protected virtual void Update()
     {
-        //if (_renderer.isVisible)
-        //    _rigidBody2D.WakeUp();
-        //else
-        //{
-        //    _rigidBody2D.Sleep();
-        //}
+        checkWakeUp();
+
+        if (_isSleep == true)
+            return;
         if (checkDestroyHit())
             _aniamtor.SetTrigger("outofscreen");
 
         if (_imovement != null)
             _imovement.Movement(this.gameObject);
+    }
+
+    private void checkWakeUp()
+    {
+        if (_isSleep == true && _renderer.isVisible == true)
+            _isSleep = false;
+
     }
 
     private bool checkDestroyHit()
@@ -136,11 +142,19 @@ public abstract class Enemy: MonoBehaviour {
     protected virtual void checkWithBlock(Collision2D collision)
     {
         Animator anim = collision.gameObject.GetComponent<Animator>();
-        if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Normal") == false)
+        string parenttag = collision.gameObject.transform.parent.gameObject.tag;
+        if (parenttag == "Brick")
+            if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Normal") == false)
+            {
+                this._aniamtor.SetInteger("status", (int)eStatus.Hit);
+            }
+        else
         {
-            this._aniamtor.SetInteger("status", (int)eStatus.Hit);
+            if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Hit") == true)
+            {
+                this._aniamtor.SetInteger("status", (int)eStatus.Hit);
+            }
         }
-
     }
 
     protected virtual void runDirection()

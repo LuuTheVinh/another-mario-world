@@ -6,8 +6,9 @@ public class EnemyHitStateEvent : StateMachineBehaviour {
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(60, 400));
 
+        //animator.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(60, 400));
+        animator.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(600, 3500));
     }
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

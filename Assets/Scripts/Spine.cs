@@ -20,6 +20,8 @@ public class Spine : Enemy {
     protected override void Update()
     {
         base.Update();
+        if (_isSleep == true)
+            return;
         jump();
 	}
 
