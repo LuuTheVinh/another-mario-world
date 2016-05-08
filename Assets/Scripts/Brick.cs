@@ -21,6 +21,18 @@ public class Brick : MonoBehaviour {
             collideWithPlayer(collision.gameObject);
     }
 
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        
+        string tag = collider.gameObject.tag;
+        if (tag == "Enemy")
+        {
+            if (collider is EdgeCollider2D)
+                return;
+            collider.gameObject.GetComponent<Enemy>()._aniamtor.SetInteger("status", (int)Enemy.eStatus.Hit);
+        }
+    }
+
     private void collideWithPlayer(GameObject gameObject)
     {
         Vector3 distance = this.transform.position - gameObject.transform.position;

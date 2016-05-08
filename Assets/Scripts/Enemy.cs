@@ -71,14 +71,15 @@ public abstract class Enemy: MonoBehaviour {
             return;
         string name = collision.gameObject.name;
         string tag = collision.gameObject.tag;
+
         if (tag == "Player")
             killPlayer(collision.gameObject);
         if (tag == "Ground")
             checkWithGround(collision);
         if (tag == "Enemy")
             checkWithEnemy(collision);
-        if (name == "block")
-            checkWithBlock(collision);
+        //if (name == "block")
+        //    checkWithBlock(collision);
 
     }
 
@@ -106,9 +107,11 @@ public abstract class Enemy: MonoBehaviour {
             return;
 
         float top = collision.collider.bounds.max.y;
-        if (top - this.GetComponent<Collider2D>().bounds.min.y > 0.5)
+        Collider2D thisCollider = this.GetComponent<Collider2D>();
+        if (top - thisCollider.bounds.min.y > 0.5)
         {
             this.back();
+
         }
     }
 
@@ -139,23 +142,33 @@ public abstract class Enemy: MonoBehaviour {
         }
     }
 
-    protected virtual void checkWithBlock(Collision2D collision)
-    {
-        Animator anim = collision.gameObject.GetComponent<Animator>();
-        string parenttag = collision.gameObject.transform.parent.gameObject.tag;
-        if (parenttag == "Brick")
-            if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Normal") == false)
-            {
-                this._aniamtor.SetInteger("status", (int)eStatus.Hit);
-            }
-        else
-        {
-            if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Hit") == true)
-            {
-                this._aniamtor.SetInteger("status", (int)eStatus.Hit);
-            }
-        }
-    }
+    //protected virtual void checkWithBlock(Collision2D collision)
+    //{
+    //    return;
+    //    Animator anim = collision.gameObject.GetComponent<Animator>();
+    //    string parenttag = collision.gameObject.transform.parent.gameObject.tag;
+    //    GameObject parent = collision.gameObject.transform.parent.gameObject;
+    //    //if (parenttag == "Brick")
+    //    //{
+    //    //    if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Normal") == false)
+    //    //    {
+    //    //        this._aniamtor.SetInteger("status", (int)eStatus.Hit);
+    //    //    }
+    //    //}
+    //    //else
+    //    //{
+    //    //    Debug.Log(anim.GetNextAnimatorStateInfo(0).IsName("Normal"));
+    //    //    Debug.Log(anim.GetNextAnimatorStateInfo(0).IsName("Hit"));
+    //    //    Debug.Log(anim.GetNextAnimatorStateInfo(0).IsName("Discovered"));
+    //    //    if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Normal") == false && anim.GetCurrentAnimatorStateInfo(0).IsTag("Discovered") == false)
+    //    //    {
+    //    //        this._aniamtor.SetInteger("status", (int)eStatus.Hit);
+    //    //    }
+
+    //    //}
+    //    if (collision.gameObject.transform.position.y > parent.transform.position.y)
+    //        this._aniamtor.SetInteger("status", (int)eStatus.Hit);
+    //}
 
     protected virtual void runDirection()
     {

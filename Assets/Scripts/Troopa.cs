@@ -124,6 +124,7 @@ public class Troopa : Enemy {
             this.SetSpeed(new Vector3(-0.3f, 0f, 0f));
         else
             this.SetSpeed(new Vector3(0.3f, 0f, 0f));
+        _rigidBody2D.velocity = Vector2.zero;
     }
     public override void back()
     {

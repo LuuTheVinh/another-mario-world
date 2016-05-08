@@ -45,10 +45,10 @@ public class MysteryItem : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D collider)
     {
         string tag = collider.gameObject.tag;
-        // Kiểm tra bị player đội từ dưới  
-        if (tag == "Player")
-            checkHit(collider.gameObject);
-
+        if (tag == "Enemy")
+        {
+            collider.gameObject.GetComponent<Enemy>()._aniamtor.SetInteger("status",(int) Enemy.eStatus.Hit);
+        }
     }
     private void checkHit(GameObject obj)
     {
