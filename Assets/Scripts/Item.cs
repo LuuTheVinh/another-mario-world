@@ -100,7 +100,7 @@ public class Item : MonoBehaviour{
     private void checkWithGround(Collision2D collision)
     {
         float top = collision.collider.bounds.max.y;
-        if (top - this.GetComponent<Collider2D>().bounds.min.y > 0.5)
+        if (top - this.GetComponent<Collider2D>().bounds.min.y > 0.75)
             (_imovement as LinearMovement).Xspeed = -(_imovement as LinearMovement).Xspeed;
     }
 

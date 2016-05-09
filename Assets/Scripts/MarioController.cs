@@ -90,7 +90,8 @@ public class MarioController : MonoBehaviour {
         // đá
         if(Input.GetButtonDown("Attack"))
         {
-            _animator.SetTrigger("kick");
+            // Tung
+            kick();
         }
 
         // ngồi
@@ -123,5 +124,11 @@ public class MarioController : MonoBehaviour {
         _canJump = false;
         _marioMovement.Jump(max);
         _timer = 0;
+    }
+
+    public void kick()
+    {
+        // Tung
+        _animator.SetTrigger("kick");
     }
 }

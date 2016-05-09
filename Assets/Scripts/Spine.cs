@@ -20,6 +20,8 @@ public class Spine : Enemy {
     protected override void Update()
     {
         base.Update();
+        if (_isSleep == true)
+            return;
         jump();
 	}
 
@@ -36,10 +38,10 @@ public class Spine : Enemy {
         }
     }
 
-    protected override void checkHitByPlayer(Collision2D col)
-    {
-        killPlayer(col.gameObject);        
-    }
+    //protected override void checkHitByPlayer(Collision2D col)
+    //{
+    //    killPlayer(col.gameObject);        
+    //}
 
     protected virtual void checkWithBlock(Collision2D collision)
     {

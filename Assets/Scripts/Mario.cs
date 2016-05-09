@@ -61,7 +61,7 @@ public class Mario : MonoBehaviour {
         {
             _protectTime -= Time.deltaTime;
 
-            Debug.Log("Protect in " + _protectTime);
+            //Debug.Log("Protect in " + _protectTime);
         }
 	}
 

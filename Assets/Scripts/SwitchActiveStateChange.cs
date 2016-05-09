@@ -1,14 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyHitStateEvent : StateMachineBehaviour {
+public class SwitchActiveStateChange : StateMachineBehaviour {
 
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
-        //animator.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(60, 400));
-        animator.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(600, 3500));
+        animator.gameObject.transform.position -= new Vector3(0f, 0.25f, 0f);
     }
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -17,10 +15,10 @@ public class EnemyHitStateEvent : StateMachineBehaviour {
 	//}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-        
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        Destroy(animator.gameObject);   
+    }
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
 	//override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {

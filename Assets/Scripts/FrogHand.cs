@@ -20,9 +20,9 @@ public class FrogHand : Enemy {
     }
 
 
-    protected override void checkHitByPlayer(Collision2D col)
-    {
-        (col.gameObject.GetComponent<Mario>() as Mario).GotHit();
+    //protected override void checkHitByPlayer(Collision2D col)
+    //{
+    //    (col.gameObject.GetComponent<Mario>() as Mario).GotHit();
 
-    }
+    //}
 }
