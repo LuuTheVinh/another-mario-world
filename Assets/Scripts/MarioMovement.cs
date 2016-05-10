@@ -98,7 +98,7 @@ public class MarioMovement : MonoBehaviour {
 
     public void Jump(bool max = false)
     {
-        if(!max)
+        if (!max)
             _rigidbody2D.AddForce(Vector2.up * _mario.JumpForce, ForceMode2D.Impulse);
         else
             _rigidbody2D.AddForce(Vector2.up * _mario.JumpMaxForce, ForceMode2D.Impulse);
