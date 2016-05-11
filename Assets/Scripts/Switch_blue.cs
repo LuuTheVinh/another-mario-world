@@ -5,7 +5,7 @@ public class Switch_blue : MonoBehaviour {
 
     public GameObject _gameObject;
     public GameObject _sourceObject;
-
+    public Object _scene;
     private Animator _animator;
 	// Use this for initialization
 	void Start () {
@@ -39,6 +39,8 @@ public class Switch_blue : MonoBehaviour {
         Quaternion rotation = _gameObject.transform.rotation;
         Object.Instantiate(_sourceObject, position, rotation);
         _sourceObject.transform.parent = _gameObject.transform.parent;
+        _sourceObject.GetComponentInChildren<Door>()._scene = this._scene;
+        Debug.Log(_scene.name);
         Destroy(_gameObject);
     }
 }
