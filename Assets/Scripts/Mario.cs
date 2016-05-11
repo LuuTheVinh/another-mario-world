@@ -19,7 +19,7 @@ public class Mario : MonoBehaviour {
     public float MaxSpeed = 3.0f;
 
     [HideInInspector] public float JumpForce = 200.0f;
-    [HideInInspector] public float JumpMaxForce = 200.0f;
+    [HideInInspector] public float JumpMaxForce = 300.0f;
     
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider2D;

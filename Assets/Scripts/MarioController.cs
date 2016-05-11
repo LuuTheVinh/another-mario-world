@@ -5,14 +5,15 @@ public class MarioController : MonoBehaviour {
 
     public float DashSpeed = 1;
     public float HoldJumpTime = 0.25f;
+    public float HoldJumpForce = 300f;
 
     private Animator _animator;
     private MarioMovement _marioMovement;
     private Rigidbody2D _rigidbody2D;
     
     private float _timer = 0;   // đếm thời gian giữ nhảy
-
     private bool _canJump = true;
+    private bool _canHoldJump = false;
 
     // Use this for initialization
     void Start () {
@@ -61,57 +62,83 @@ public class MarioController : MonoBehaviour {
         }
 
         // nhảy
-        if (!_animator.GetBool("isJumping"))
+        if(Input.GetButtonDown("Jump"))
         {
-            if (Input.GetButton("Jump"))
+            if(!_animator.GetBool("isJumping"))
             {
-                _timer += Time.deltaTime;
+                this.JumpWithAnimate(false);
+                _canHoldJump = true;
+                _timer = 0;
+            }
+        }
 
-                if (_timer >= HoldJumpTime)
-                {
-                    JumpWithAnimate(true);  // nhảy tối đa
-                }
-            }
-            else if (Input.GetButtonUp("Jump"))
-            {
-                JumpWithAnimate(false);     // nhảy bình thường
-            }
+        if (Input.GetButton("Jump"))
+        {
+            _timer += Time.fixedDeltaTime;
         }
         else
-            _timer = 0;
-
-        if (Input.GetButtonUp("Jump") && !_canJump)
         {
-            _canJump = true;
+            _timer = 0;
         }
 
-        //Debug.Log("Timer: " + _timer);
+        Debug.Log("Timer: " + _timer);
+
+        if(_canHoldJump && _timer > HoldJumpTime && _rigidbody2D.velocity.y > 0)
+        {
+            _rigidbody2D.AddForce(Vector2.up * HoldJumpForce, ForceMode2D.Force);
+            _canHoldJump = false;
+            _timer = 0;
+        }
 
         // đá
-        if(Input.GetButtonDown("Attack"))
+        if (Input.GetButtonDown("Attack"))
         {
             // Tung
             kick();
+        }
+
+        // ngồi
+        //if(Input.GetAxis("Vertical") < 0)
+        if(_animator.GetInteger("status") != 0 && Input.GetKey("down"))
+        {
+            if (!_animator.GetBool("isSitting"))
+            {
+                _animator.SetBool("isSitting", true);
+            }
+        }
+        else if(_animator.GetBool("isSitting"))
+        {
+            _animator.SetBool("isSitting", false);
         }
     }
     
     public void JumpWithAnimate(bool max)
     {
-        if (!_canJump)
+        if (_animator.GetBool("isJumping"))
+        {
             return;
+        }
 
         _animator.SetBool("isJumping", true);
         _animator.SetTrigger("Jump");
         _animator.ResetTrigger("dash");
 
-        _canJump = false;
+        //_canJump = false;
         _marioMovement.Jump(max);
-        _timer = 0;
     }
 
     public void kick()
     {
         // Tung
         _animator.SetTrigger("kick");
+    }
+
+    public void Grounded()
+    {
+        Debug.Log("Grounded");
+        _animator.SetBool("isJumping", false);
+        //_canJump = true;
+        _canHoldJump = false;
+        _timer = 0;
     }
 }
