@@ -81,7 +81,7 @@ public class MarioController : MonoBehaviour {
             _timer = 0;
         }
 
-        Debug.Log("Timer: " + _timer);
+        //Debug.Log("Timer: " + _timer);
 
         if(_canHoldJump && _timer > HoldJumpTime && _rigidbody2D.velocity.y > 0)
         {
@@ -135,7 +135,7 @@ public class MarioController : MonoBehaviour {
 
     public void Grounded()
     {
-        Debug.Log("Grounded");
+        //Debug.Log("Grounded");
         _animator.SetBool("isJumping", false);
         //_canJump = true;
         _canHoldJump = false;

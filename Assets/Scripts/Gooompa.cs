@@ -33,12 +33,15 @@ public class Gooompa : Enemy {
     {
 
         base.OnCollisionEnter2D(collision);
+        if (collision.gameObject.name == "Hign_land_6")
+        {
+            float top = collision.collider.bounds.max.y;
+            Debug.Log(top);
+
+            Collider2D thisCollider = this.GetComponent<Collider2D>();
+            Debug.Log(thisCollider.bounds.min.y);
+        }
 
     }
 
-    public override void SetSpeed(Vector3 s)
-    {
-        base.SetSpeed(s);
-        _imovement = new LinearMovement(s.x, s.y, s.z);
-    }
 }

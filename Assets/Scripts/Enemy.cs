@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-public abstract class Enemy: MonoBehaviour {
+public abstract class Enemy : MonoBehaviour {
     public enum eMoveDirection { LEFT, RIGHT, UP, DOWN, NONE }
     public enum eStatus { Normal, Die, Hit}
     [HideInInspector]
@@ -27,7 +27,8 @@ public abstract class Enemy: MonoBehaviour {
         _aniamtor = GetComponent<Animator>();
         _renderer = GetComponent<Renderer>();
         _rigidBody2D = GetComponent<Rigidbody2D>();
-
+        //if (_rigidBody2D != null)
+        //    _rigidBody2D.velocity = new Vector2(_speed.x, _speed.y);
         // Chọn hướng di chuyển.
         runDirection();
         _isSleep = true;
@@ -44,6 +45,7 @@ public abstract class Enemy: MonoBehaviour {
 
         if (_imovement != null)
             _imovement.Movement(this.gameObject);
+
     }
 
     private void checkWakeUp()
@@ -83,6 +85,7 @@ public abstract class Enemy: MonoBehaviour {
 
     }
 
+
     protected virtual void OnTriggerEnter2D(Collider2D collider)
     {
         string tag = collider.gameObject.tag;
@@ -97,7 +100,9 @@ public abstract class Enemy: MonoBehaviour {
     {
         this._speed = s;
         _imovement = new LinearMovement(_speed.x, _speed.y, _speed.z);
-
+        //if (_rigidBody2D != null)
+        //    _rigidBody2D.velocity = new Vector2(_speed.x, _speed.y);
+            
     }
 
     // Nếu đụng vật khác thì đi ngược lại
@@ -105,13 +110,12 @@ public abstract class Enemy: MonoBehaviour {
     {
         if (collision.collider is EdgeCollider2D)
             return;
-
         float top = collision.collider.bounds.max.y;
         Collider2D thisCollider = this.GetComponent<Collider2D>();
         if (top - thisCollider.bounds.min.y > 0.5)
         {
             this.back();
-
+            Debug.Log("back");
         }
     }
 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 57f42258c314227409ccdf19a19daebf
-timeCreated: 1462717394
+guid: 16e6fc7aecc8d564d9332387fdf64e14
+timeCreated: 1463062957
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: blue_door_background_0
+    21300000: green_door_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -51,7 +51,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: blue_door_background_0
+    - name: green_door_0
       rect:
         serializedVersion: 2
         x: 1
