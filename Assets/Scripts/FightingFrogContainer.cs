@@ -12,6 +12,10 @@ public class FightingFrogContainer : MonoBehaviour {
     private GameObject _body;
     private eDirection _direction;
     private GameObject _mario;
+
+    private bool _isSleep;
+    private Renderer _renderer;
+
 	// Use this for initialization
 	void Start () {
         Transform[] trans = this.gameObject.GetComponentsInChildren<Transform>();
@@ -23,12 +27,16 @@ public class FightingFrogContainer : MonoBehaviour {
                 this._body = tran.gameObject;
         }
         _mario = GameObject.FindGameObjectWithTag("Player");
+        _isSleep = true;
+        _renderer = this.GetComponentInChildren<Renderer>();
 
 	}
 
     void FixedUpdate()
     {
-
+        checkWakeUp();
+        if (_isSleep == true)
+            return;
         _direction = checkDirection();
         if (_direction == eDirection.Left)
             _body.GetComponent<Animator>().SetBool("left", true);
@@ -38,10 +46,18 @@ public class FightingFrogContainer : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        if (_isSleep == true)
+            return;
         jump();
 	}
 
-    
+    private void checkWakeUp()
+    {
+        if (_isSleep == true && _renderer.isVisible == true)
+            _isSleep = false;
+
+    }
+
     private void jump()
     {
         _countingTimeJump += Time.deltaTime;

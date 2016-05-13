@@ -96,7 +96,7 @@ public class MarioController : MonoBehaviour {
             _timer = 0;
         }
 
-        Debug.Log("Timer: " + _timer);
+        //Debug.Log("Timer: " + _timer);
 
         if(_canHoldJump && _timer > HoldJumpTime && _rigidbody2D.velocity.y > 0)
         {
