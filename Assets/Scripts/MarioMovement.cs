@@ -8,13 +8,18 @@ public class MarioMovement : MonoBehaviour {
     private Rigidbody2D _rigidbody2D;
     
     [HideInInspector] public bool CollidingSide = false;
+    [HideInInspector] public bool grounded;
     private int _direction = 0;
-
+    
     // Use this for initialization
     void Start () {
         _mario = this.GetComponent<Mario>();
         _spriteRenderer = this.GetComponent<SpriteRenderer>();
         _rigidbody2D = this.GetComponent<Rigidbody2D>();
+    }
+
+    void Update()
+    {
     }
 	
 	// Update is called once per frame
@@ -26,6 +31,7 @@ public class MarioMovement : MonoBehaviour {
         // nếu mà ko chạm 2 bên hoặc chạm 2 bên mà đi ngược lại thì đi được
         if ((_direction == 0 || _direction * h < 0) && !this.GetComponent<Animator>().GetBool("isSitting"))
         {
+            Debug.Log("Moving...");
             _rigidbody2D.AddForce(Vector2.right * _mario.MovingForce * h);
             if (Mathf.Abs(_rigidbody2D.velocity.x) > _mario.MaxSpeed)
             {
@@ -60,8 +66,8 @@ public class MarioMovement : MonoBehaviour {
 
     void OnCollisionStay2D(Collision2D col)
     {
-        var thisBounds = this.GetComponent<Collider2D>().bounds;
-
+        var thisBounds = this.GetComponent<CircleCollider2D>().bounds;
+        
         // chạm top / bot
         if (thisBounds.min.y > col.collider.bounds.max.y || thisBounds.max.y < col.collider.bounds.min.y)
         {
@@ -98,6 +104,8 @@ public class MarioMovement : MonoBehaviour {
 
     public void Jump(bool max = false)
     {
+        //Grounded = false;
+
         if (!max)
             _rigidbody2D.AddForce(Vector2.up * _mario.JumpForce, ForceMode2D.Impulse);
         else
