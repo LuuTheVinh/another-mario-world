@@ -18,6 +18,8 @@ public class Mario : MonoBehaviour {
     public float MovingForce = 20.0f;
     public float MaxSpeed = 3.0f;
 
+    public GameObject CheckPoint;
+
     [HideInInspector] public float JumpForce = 200.0f;
     [HideInInspector] public float JumpMaxForce = 300.0f;
     
@@ -140,8 +142,22 @@ public class Mario : MonoBehaviour {
         _rigidbody2D.velocity = new Vector2(0, 0);
         this.GetComponent<MarioMovement>().Jump();
 
-        //this.GetComponent<BoxCollider2D>().enabled = false;
-        //this.GetComponent<MarioController>().enabled = false;
-        //this.GetComponent<MarioMovement>().enabled = false;
+        Invoke("returnCheckPoint", 3);
+    }
+
+    private void returnCheckPoint()
+    {
+        // test
+        this.transform.position = CheckPoint.transform.position;
+
+        this.GetComponent<Animator>().SetBool("isDead", false);
+        _rigidbody2D.velocity = new Vector2(0, 0);
+
+        this.GetComponent<Animator>().enabled = true;
+        this.GetComponent<Mario>().enabled = true;
+        this.GetComponent<MarioController>().enabled = true;
+        this.GetComponent<MarioMovement>().enabled = true;
+        this.GetComponent<BoxCollider2D>().enabled = true;
+        this.GetComponent<CircleCollider2D>().enabled = true;
     }
 }

@@ -6,14 +6,17 @@ public class MarioController : MonoBehaviour {
     public float DashSpeed = 1;
     public float HoldJumpTime = 0.25f;
     public float HoldJumpForce = 300f;
+    
+    public Transform groundCheck;
 
     private Animator _animator;
     private MarioMovement _marioMovement;
     private Rigidbody2D _rigidbody2D;
     
     private float _timer = 0;   // đếm thời gian giữ nhảy
-    private bool _canJump = true;
     private bool _canHoldJump = false;
+    private bool _grounded;
+    private bool _canJump = false;
 
     // Use this for initialization
     void Start () {
@@ -21,10 +24,35 @@ public class MarioController : MonoBehaviour {
         _marioMovement = this.GetComponent<MarioMovement>();
         _rigidbody2D = this.GetComponent<Rigidbody2D>();
     }
-	
+
+    void Update()
+    {
+        _grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+
+        if (_grounded)
+        {
+            Grounded();
+        }
+
+        // nhảy
+        if (Input.GetButtonDown("Jump") && _grounded)
+        {
+            _canJump = true;
+        }
+
+        if (Input.GetButton("Jump") && _canHoldJump)
+        {
+            _timer += Time.deltaTime;
+        }
+        else
+        {
+            _timer = 0;
+        }
+    }
+    
 	// Update is called once per frame
 	void FixedUpdate() {
-
+        
         var h = Input.GetAxis("Horizontal");
 
         if (h != 0)
@@ -61,29 +89,16 @@ public class MarioController : MonoBehaviour {
             _animator.ResetTrigger("dash");
         }
 
-        // nhảy
-        if(Input.GetButtonDown("Jump"))
-        {
-            if(!_animator.GetBool("isJumping"))
-            {
-                this.JumpWithAnimate(false);
-                _canHoldJump = true;
-                _timer = 0;
-            }
-        }
-
-        if (Input.GetButton("Jump"))
-        {
-            _timer += Time.fixedDeltaTime;
-        }
-        else
-        {
-            _timer = 0;
-        }
-
         //Debug.Log("Timer: " + _timer);
 
-        if(_canHoldJump && _timer > HoldJumpTime && _rigidbody2D.velocity.y > 0)
+        // nhảy
+        if (_canJump)
+        {
+            this.JumpWithAnimate(false);
+            _canHoldJump = true;
+        }
+
+        if (_canHoldJump && _timer > HoldJumpTime && _rigidbody2D.velocity.y > 0)
         {
             _rigidbody2D.AddForce(Vector2.up * HoldJumpForce, ForceMode2D.Force);
             _canHoldJump = false;
@@ -98,7 +113,6 @@ public class MarioController : MonoBehaviour {
         }
 
         // ngồi
-        //if(Input.GetAxis("Vertical") < 0)
         if(_animator.GetInteger("status") != 0 && Input.GetKey("down"))
         {
             if (!_animator.GetBool("isSitting"))
@@ -110,6 +124,7 @@ public class MarioController : MonoBehaviour {
         {
             _animator.SetBool("isSitting", false);
         }
+
     }
     
     public void JumpWithAnimate(bool max)
@@ -119,11 +134,11 @@ public class MarioController : MonoBehaviour {
             return;
         }
 
+        _canJump = false;
         _animator.SetBool("isJumping", true);
         _animator.SetTrigger("Jump");
         _animator.ResetTrigger("dash");
-
-        //_canJump = false;
+        
         _marioMovement.Jump(max);
     }
 
@@ -135,10 +150,6 @@ public class MarioController : MonoBehaviour {
 
     public void Grounded()
     {
-        //Debug.Log("Grounded");
         _animator.SetBool("isJumping", false);
-        //_canJump = true;
-        _canHoldJump = false;
-        _timer = 0;
     }
 }

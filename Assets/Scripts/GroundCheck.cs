@@ -19,7 +19,7 @@ public class GroundCheck : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        _boxCollider.offset = new Vector2(_boxCollider.offset.x, -_spriteRenderer.sprite.bounds.size.y / 2 + _boxCollider.bounds.size.y / 2);
+        //_boxCollider.offset = new Vector2(_boxCollider.offset.x, -_spriteRenderer.sprite.bounds.size.y / 2 + _boxCollider.bounds.size.y / 2);
     }
 
     void OnTriggerEnter2D(Collider2D col)
