@@ -21,6 +21,7 @@ public class DoorOut : MonoBehaviour {
         _colorEnd = Color.white;
         _player.SetActive(false);
         _player.GetComponent<Transform>().position = this.transform.position;
+       // _player.GetComponent<Transform>().localScale = new Vector3(-1.0f, 1.0f, 1.0f);
 	}
 	
 	// Update is called once per frame

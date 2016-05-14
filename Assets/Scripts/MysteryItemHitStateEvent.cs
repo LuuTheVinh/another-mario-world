@@ -13,6 +13,7 @@ public class MysteryItemHitStateEvent : StateMachineBehaviour {
         bool init = false;
         switch (itemtype)
         {
+            case Item.ItemType.Flygon:
             case Item.ItemType.Coin:
                 init = true;
                 break;
