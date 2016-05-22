@@ -5,9 +5,6 @@ public class DoorOut : MonoBehaviour {
 
     public GameObject _player;
 
-    private Color _colorStart;
-    private Color _colorEnd;
-
     // Chờ 1 giây mở cửa.
     private bool _isActive;
 
@@ -17,11 +14,8 @@ public class DoorOut : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        _colorStart = new Color(1.0f, 1.0f, 1.0f, 0.0f);
-        _colorEnd = Color.white;
         _player.SetActive(false);
         _player.GetComponent<Transform>().position = this.transform.position;
-        _player.GetComponent<Transform>().localScale = new Vector3(-1.0f, 1.0f, 1.0f);
         _countTime = 0.0f;
 	}
 	
@@ -50,10 +44,12 @@ public class DoorOut : MonoBehaviour {
 
     private void FadeOutObject()
     {
+        //Debug.Log("Fade Out");
         _countTime += Time.deltaTime;
         var renderer = _player.GetComponent<SpriteRenderer>();
         if (_countTime <= _duration)
         {
+            //Debug.Log("Fade...");
             renderer.color = new Color(
                 renderer.color.r,
                 renderer.color.g,
