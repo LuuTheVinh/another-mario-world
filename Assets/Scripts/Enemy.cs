@@ -115,7 +115,7 @@ public abstract class Enemy : MonoBehaviour {
         if (top - thisCollider.bounds.min.y > 0.5)
         {
             this.back();
-            Debug.Log("back");
+    
         }
     }
 

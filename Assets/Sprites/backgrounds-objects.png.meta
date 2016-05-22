@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ad578cf74563bb247b97caedcfbb7a7e
-timeCreated: 1462436351
+timeCreated: 1463144099
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -102,7 +102,7 @@ TextureImporter:
     21300190: backgrounds-objects_96
     21300192: backgrounds-objects_97
     21300194: backgrounds-objects_98
-    21300196: backgrounds-objects_99
+    21300196: swing_object
     21300198: backgrounds-objects_100
     21300200: backgrounds-objects_101
     21300202: backgrounds-objects_102
@@ -1412,7 +1412,7 @@ TextureImporter:
         - {x: -32, y: -16}
         - {x: 32, y: -16}
         - {x: 32, y: 16}
-    - name: backgrounds-objects_99
+    - name: swing_object
       rect:
         serializedVersion: 2
         x: 661

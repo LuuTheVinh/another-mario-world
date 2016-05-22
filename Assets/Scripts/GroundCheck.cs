@@ -26,7 +26,8 @@ public class GroundCheck : MonoBehaviour {
     {
         if (col.gameObject.tag == "Ground")
         {
-            this.GetComponentInParent<MarioController>().Grounded();
+            if (this.GetComponentInParent<MarioController>() != null)
+                this.GetComponentInParent<MarioController>().Grounded();
         }
 
         //nếu enemy tấn công được

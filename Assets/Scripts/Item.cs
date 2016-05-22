@@ -5,7 +5,7 @@ using System.Collections;
 public class Item : MonoBehaviour{
 
     
-    public enum ItemType { Mushroom, FireFlower, Amazing_Star, Coin, Leaf };
+    public enum ItemType { Mushroom, FireFlower, Amazing_Star, Coin, Leaf, Flygon };
 
 
     protected IMovement _imovement;
@@ -32,13 +32,16 @@ public class Item : MonoBehaviour{
         // cho nữa giây sau mới ăn được.
         _delayNoneHit = 0.5f;
         transform.position = new Vector3(0, 1, 1);
-        GetComponent<SpriteRenderer>().enabled = true;
+
+        if (GetComponent<SpriteRenderer>() != null)
+            GetComponent<SpriteRenderer>().enabled = true;
 	}
 
     // Update is called once per frame
     protected virtual void Update()
     {
-
+        if (_animator == null)
+            return;
         _delayNoneHit -= Time.deltaTime;
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Normal"))
         {

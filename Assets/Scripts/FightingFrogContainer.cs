@@ -87,7 +87,8 @@ public class FightingFrogContainer : MonoBehaviour {
 
     private eDirection checkDirection()
     {
-        Vector3 distance = this.transform.position - _mario.transform.position;
+ 
+        Vector3 distance = this.gameObject.GetComponent<Transform>().position - _mario.transform.position;
         if (distance.x >= 0)
             return eDirection.Left;
         else
