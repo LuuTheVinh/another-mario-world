@@ -160,4 +160,13 @@ public class Mario : MonoBehaviour {
         this.GetComponent<BoxCollider2D>().enabled = true;
         this.GetComponent<CircleCollider2D>().enabled = true;
     }
+
+    private void checkHoleDie()
+    {
+        // kiểm tra chết do rớt xuống hố.
+        if (this.transform.position.y < GameObject.Find("/Controller").GetComponent<SceneController>()._botGame)
+        { 
+            // Die
+        }
+    }
 }

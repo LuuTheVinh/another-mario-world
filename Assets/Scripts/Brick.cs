@@ -18,7 +18,7 @@ public class Brick : MonoBehaviour {
     {
         string tag = collision.gameObject.tag;
         if (tag == "Player")
-            collideWithPlayer(collision.gameObject);
+            collideWithPlayer(collision);
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -33,21 +33,26 @@ public class Brick : MonoBehaviour {
         }
     }
 
-    private void collideWithPlayer(GameObject gameObject)
+    private void collideWithPlayer(Collision2D coll)
     {
-        Vector3 distance = this.transform.position - gameObject.transform.position;
-        if (gameObject.GetComponent<Rigidbody2D>().velocity.y < 0)
+        Vector3 distance = this.transform.position - coll.gameObject.transform.position;
+        if (coll.gameObject.GetComponent<Rigidbody2D>().velocity.y < 0)
             return;
-        if (distance.y > 0 && Mathf.Abs(distance.x) < 0.3 )
+        if (distance.y > 0 && Mathf.Abs(distance.x) < 0.3)
         {
-            int status = gameObject.GetComponent<Animator>().GetInteger("status");
-            if (status == (int)Mario.eMarioStatus.SMALL)
+            float centerX = coll.collider.bounds.center.x;
+            Collider2D thisCollider = this.GetComponent<Collider2D>();
+            if (centerX > thisCollider.bounds.min.x && centerX < thisCollider.bounds.max.x)
             {
-                _animator.SetTrigger("push");
-            }
-            else if (status >= (int) Mario.eMarioStatus.BIG)
-            {
-                _animator.SetTrigger("smash");
+                int status = coll.gameObject.GetComponent<Animator>().GetInteger("status");
+                if (status == (int)Mario.eMarioStatus.SMALL)
+                {
+                    _animator.SetTrigger("push");
+                }
+                else if (status >= (int)Mario.eMarioStatus.BIG)
+                {
+                    _animator.SetTrigger("smash");
+                }
             }
         }
     }

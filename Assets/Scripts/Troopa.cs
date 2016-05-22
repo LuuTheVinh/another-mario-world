@@ -104,14 +104,14 @@ public class Troopa : Enemy {
     //    }
     //}
 
-    protected override void checkHitByPlayer(GameObject obj)
+    protected override void checkHitByPlayer(Collider2D col)
     {
         if (this._aniamtor.GetInteger("status") == (int)eStatus.Shell)
         {
-            speedSlide(obj);
+            speedSlide(col.gameObject);
         }
         else
-            base.checkHitByPlayer(obj);
+            base.checkHitByPlayer(col);
         _isDie = false;
     }
 

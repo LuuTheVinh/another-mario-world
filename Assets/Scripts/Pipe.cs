@@ -12,6 +12,7 @@ public class Pipe : MonoBehaviour {
     private GameObject _enemy;
 
     public float _goompaAppearTime;
+    public int _maxGoompa;
     private float _goopaCountTime = 0f;
     private List<GameObject> _listGoompa = new List<GameObject>();
 	// Use this for initialization
@@ -47,7 +48,7 @@ public class Pipe : MonoBehaviour {
         }
         //Vector3 vp = Camera.current.WorldToViewportPoint(this.gameObject.transform.position);
         if (this.gameObject.GetComponent<Renderer>().isVisible){
-            if (_listGoompa.Count < 3)
+            if (_listGoompa.Count < _maxGoompa)
             {
                 _goopaCountTime += Time.deltaTime;
                 if (_goopaCountTime >= _goompaAppearTime)

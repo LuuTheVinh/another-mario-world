@@ -27,7 +27,7 @@ public class FlatSwingObjectCollider : MonoBehaviour {
     }
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log("trgiger");
+        //Debug.Log("trgiger");
         if (collider.gameObject.name == "head" || collider.name == "tail")
         {
             this.transform.parent.GetComponent<Swing_Object>().back();

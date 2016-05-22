@@ -39,7 +39,7 @@ public class MysteryItem : MonoBehaviour {
         string tag = collision.gameObject.tag;
         // Kiểm tra bị player đội từ dưới  
         if (tag == "Player")
-           checkHit(collision.gameObject);
+           checkHit(collision);
 
     }
     void OnTriggerEnter2D(Collider2D collider)
@@ -50,34 +50,40 @@ public class MysteryItem : MonoBehaviour {
             collider.gameObject.GetComponent<Enemy>()._aniamtor.SetInteger("status",(int) Enemy.eStatus.Hit);
         }
     }
-    private void checkHit(GameObject obj)
+    private void checkHit(Collision2D collision)
     {
         if (_animator.GetCurrentAnimatorStateInfo(0).IsTag("Normal") == false)
             return;
         // Nếu mario đang rơi thì không tính
-        if (obj.GetComponent<Rigidbody2D>().velocity.y < 0)
+        if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.y < 0)
             return;
 
 
         // Khoảng cách giữa vật mở item và player.
         // Dùng x và y để xác định hướng
-        Vector3 distance = (this.transform.position - obj.transform.position).normalized;
+        Vector3 distance = (this.transform.position - collision.gameObject.transform.position).normalized;
 
         // Nếu player đấm từ dưới lên thì mở item
-        if (distance.y > 0 && Mathf.Abs(distance.x) < 0.5f)
+        if (distance.y > 0)
         {
-            // trigger hit làm nảy vật mở item lên
-            this._animator.SetTrigger("hit");
-            // Xác định player đội chệch về trái hay phải để xác định hướng chạy của item.
-            if (distance.x < 0)
+            //float top = collision.collider.bounds.max.y;
+            float centerX = collision.collider.bounds.center.x;
+            Collider2D thisCollider = this.GetComponent<Collider2D>();
+            //if (top - thisCollider.bounds.min.y > 0.5)
+            if (centerX > thisCollider.bounds.min.x && centerX < thisCollider.bounds.max.x)
             {
-                (_itemPrefab.GetComponent<Item>() as Item)._speed.x = -Mathf.Abs((_itemPrefab.GetComponent<Item>() as Item)._speed.x);
+                // trigger hit làm nảy vật mở item lên
+                this._animator.SetTrigger("hit");
+                // Xác định player đội chệch về trái hay phải để xác định hướng chạy của item.
+                if (distance.x < 0)
+                {
+                    (_itemPrefab.GetComponent<Item>() as Item)._speed.x = -Mathf.Abs((_itemPrefab.GetComponent<Item>() as Item)._speed.x);
+                }
+                else
+                {
+                    (_itemPrefab.GetComponent<Item>() as Item)._speed.x = Mathf.Abs((_itemPrefab.GetComponent<Item>() as Item)._speed.x);
+                }
             }
-            else
-            {
-                (_itemPrefab.GetComponent<Item>() as Item)._speed.x = Mathf.Abs((_itemPrefab.GetComponent<Item>() as Item)._speed.x);
-            }
-
         }
     }
 

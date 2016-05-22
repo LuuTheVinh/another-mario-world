@@ -5,7 +5,7 @@ public class SceneController : MonoBehaviour {
     // scenecotroller cho bắt đầu màn chơi.
     public GameObject[] _nonDestroyObjects;
 
-    public GameObject _player;
+    public float _botGame;
     void Awake()
     {
         foreach (GameObject obj in _nonDestroyObjects)

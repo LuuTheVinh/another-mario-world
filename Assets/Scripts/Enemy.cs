@@ -45,7 +45,10 @@ public abstract class Enemy : MonoBehaviour {
 
         if (_imovement != null)
             _imovement.Movement(this.gameObject);
-
+        if (this.transform.position.y < GameObject.Find("/Controller").GetComponent<SceneController>()._botGame)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void checkWakeUp()
@@ -91,7 +94,7 @@ public abstract class Enemy : MonoBehaviour {
         string tag = collider.gameObject.tag;
         if (tag == "Player")
         {
-            checkHitByPlayer(collider.gameObject);
+            checkHitByPlayer(collider);
         }
 
     }
@@ -111,8 +114,10 @@ public abstract class Enemy : MonoBehaviour {
         if (collision.collider is EdgeCollider2D)
             return;
         float top = collision.collider.bounds.max.y;
+        float centerX = collision.collider.bounds.center.x;
         Collider2D thisCollider = this.GetComponent<Collider2D>();
         if (top - thisCollider.bounds.min.y > 0.5)
+        //if (centerX > thisCollider.bounds.min.x && centerX < thisCollider.bounds.max.x)
         {
             this.back();
     
@@ -131,18 +136,33 @@ public abstract class Enemy : MonoBehaviour {
     
     }
 
-    protected virtual void checkHitByPlayer(GameObject obj)
+    protected virtual void checkHitByPlayer(Collider2D col)
     {
         //killPlayer(col.gameObject);
-        if (obj.GetComponent<Rigidbody2D>().velocity.y >= 0)
-            this.killPlayer(obj);
+        //if (col.gameObject.GetComponent<Rigidbody2D>().velocity.y >= 0)
+        //    this.killPlayer(col.gameObject);
+        //else
+        if (col.gameObject.GetComponent<Rigidbody2D>().velocity.y < 0)
+        {
+            float top = col.bounds.max.y;
+            float centerX = col.bounds.center.x;
+            Collider2D thisCollider = this.GetComponent<Collider2D>();
+            if (centerX > thisCollider.bounds.min.x && centerX < thisCollider.bounds.max.x)
+            {
+                _isDie = true;
+
+                if (_hitbyplayer != null)
+                    _hitbyplayer.Hit(this);
+                (col.gameObject.GetComponent<MarioMovement>() as MarioMovement).EnemyPushUp();
+            }
+            else
+            {
+                this.killPlayer(col.gameObject);
+            }
+        }
         else
         {
-            _isDie = true;
-
-            if (_hitbyplayer != null)
-                _hitbyplayer.Hit(this);
-            (obj.GetComponent<MarioMovement>() as MarioMovement).EnemyPushUp();
+            this.killPlayer(col.gameObject);
         }
     }
 
