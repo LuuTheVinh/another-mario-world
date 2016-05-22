@@ -26,13 +26,19 @@ public class MarioMovement : MonoBehaviour {
 	void FixedUpdate () {
 
         float h = Input.GetAxis("Horizontal");
-        // Move();
 
         // nếu mà ko chạm 2 bên hoặc chạm 2 bên mà đi ngược lại thì đi được
         if ((_direction == 0 || _direction * h < 0) && !this.GetComponent<Animator>().GetBool("isSitting"))
         {
-            Debug.Log("Moving...");
-            _rigidbody2D.AddForce(Vector2.right * _mario.MovingForce * h);
+            if(this.GetComponent<Animator>().GetBool("isJumping"))
+            {
+                if(_rigidbody2D.velocity.x * h < 0)
+                {
+                    _rigidbody2D.velocity = new Vector2(0, _rigidbody2D.velocity.y);
+                }
+            }
+
+            _rigidbody2D.AddForce(Vector2.right * _mario.MovingForce * (h * 2));
             if (Mathf.Abs(_rigidbody2D.velocity.x) > _mario.MaxSpeed)
             {
                 _rigidbody2D.velocity = new Vector2(Mathf.Sign(_rigidbody2D.velocity.x) * _mario.MaxSpeed, _rigidbody2D.velocity.y);
@@ -66,16 +72,17 @@ public class MarioMovement : MonoBehaviour {
 
     void OnCollisionStay2D(Collision2D col)
     {
-        var thisBounds = this.GetComponent<CircleCollider2D>().bounds;
-        
+        var thisCircleBounds = this.GetComponent<CircleCollider2D>().bounds;
+        var thisBoxBounds = this.GetComponent<BoxCollider2D>().bounds;
+
         // chạm top / bot
-        if (thisBounds.min.y > col.collider.bounds.max.y || thisBounds.max.y < col.collider.bounds.min.y)
+        if (thisCircleBounds.min.y > col.collider.bounds.max.y || thisBoxBounds.max.y < col.collider.bounds.min.y)
         {
             _direction = 0;
         }
         else
         {
-            if (thisBounds.min.x < col.collider.bounds.center.x)
+            if (thisCircleBounds.max.x < col.collider.bounds.center.x)
                 _direction = 1;     // trái
             else
                 _direction = -1;    // phải
@@ -104,8 +111,6 @@ public class MarioMovement : MonoBehaviour {
 
     public void Jump(bool max = false)
     {
-        //Grounded = false;
-
         if (!max)
             _rigidbody2D.AddForce(Vector2.up * _mario.JumpForce, ForceMode2D.Impulse);
         else
