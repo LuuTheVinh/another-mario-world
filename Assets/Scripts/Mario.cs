@@ -77,6 +77,11 @@ public class Mario : MonoBehaviour {
             //updateStatusByItem(item);
         }
         
+        if (tag == "Hole")
+        {
+            _animator.SetInteger("status", (int)eMarioStatus.SMALL);
+            this.Die();
+        }
     }
 
     //private void updateStatusByItem(Item item)
@@ -135,7 +140,7 @@ public class Mario : MonoBehaviour {
         _protectTime = 3.0f;
     }
 
-    private void Die()
+    public void Die()
     {
         this.GetComponent<Animator>().SetBool("isDead", true);
 
@@ -147,8 +152,8 @@ public class Mario : MonoBehaviour {
 
     private void returnCheckPoint()
     {
-        // test
         this.transform.position = CheckPoint.transform.position;
+        this.transform.localScale = new Vector3(-1, 1, 1);
 
         this.GetComponent<Animator>().SetBool("isDead", false);
         _rigidbody2D.velocity = new Vector2(0, 0);
@@ -165,8 +170,9 @@ public class Mario : MonoBehaviour {
     {
         // kiểm tra chết do rớt xuống hố.
         if (this.transform.position.y < GameObject.Find("/Controller").GetComponent<SceneController>()._botGame)
-        { 
+        {
             // Die
+            this.Die();
         }
     }
 }

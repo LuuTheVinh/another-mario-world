@@ -6,8 +6,10 @@ public class MarioController : MonoBehaviour {
     public float DashSpeed = 1;
     public float HoldJumpTime = 0.25f;
     public float HoldJumpForce = 300f;
+    public LayerMask WhatIsGround;
     
     public Transform groundCheck;
+    private float _groundedRadius = 0.1f;
 
     private Animator _animator;
     private MarioMovement _marioMovement;
@@ -27,7 +29,16 @@ public class MarioController : MonoBehaviour {
 
     void Update()
     {
-        _grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+        // check ground
+        _grounded = false;
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, _groundedRadius, WhatIsGround);
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].gameObject != gameObject)
+                _grounded = true;
+        }
 
         if (_grounded)
         {

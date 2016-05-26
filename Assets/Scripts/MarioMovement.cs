@@ -2,10 +2,16 @@
 using System.Collections;
 
 public class MarioMovement : MonoBehaviour {
-    
+
+    public Transform sideCheck;
+    public Transform ceilCheck;
+    private float _radiusCheck = 0.2f;
+    public LayerMask whatCheckSide;
+
     private Mario _mario;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody2D;
+    private BoxCollider2D _boxCollider2D;
     
     [HideInInspector] public bool CollidingSide = false;
     [HideInInspector] public bool grounded;
@@ -16,6 +22,7 @@ public class MarioMovement : MonoBehaviour {
         _mario = this.GetComponent<Mario>();
         _spriteRenderer = this.GetComponent<SpriteRenderer>();
         _rigidbody2D = this.GetComponent<Rigidbody2D>();
+        _boxCollider2D = this.GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -27,8 +34,11 @@ public class MarioMovement : MonoBehaviour {
 
         float h = Input.GetAxis("Horizontal");
 
+        bool sideCollide = Physics2D.OverlapArea(ceilCheck.position, sideCheck.position, whatCheckSide);
+
         // nếu mà ko chạm 2 bên hoặc chạm 2 bên mà đi ngược lại thì đi được
-        if ((_direction == 0 || _direction * h < 0) && !this.GetComponent<Animator>().GetBool("isSitting"))
+        //if ((_direction == 0 || _direction * h < 0) && !this.GetComponent<Animator>().GetBool("isSitting"))
+        if ((!sideCollide || this.transform.localScale.x * h > 0) && !this.GetComponent<Animator>().GetBool("isSitting"))
         {
             if(this.GetComponent<Animator>().GetBool("isJumping"))
             {
@@ -76,7 +86,7 @@ public class MarioMovement : MonoBehaviour {
         var thisBoxBounds = this.GetComponent<BoxCollider2D>().bounds;
 
         // chạm top / bot
-        if (thisCircleBounds.min.y > col.collider.bounds.max.y || thisBoxBounds.max.y < col.collider.bounds.min.y)
+        if (thisCircleBounds.min.y >= col.collider.bounds.max.y || thisBoxBounds.max.y <= col.collider.bounds.min.y)
         {
             _direction = 0;
         }
