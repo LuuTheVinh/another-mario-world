@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ad578cf74563bb247b97caedcfbb7a7e
-timeCreated: 1463144099
+timeCreated: 1465037305
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -1389,14 +1389,52 @@ TextureImporter:
     - name: backgrounds-objects_97
       rect:
         serializedVersion: 2
-        x: 886
-        y: 1150
-        width: 94
-        height: 30
+        x: 842
+        y: 1067
+        width: 193
+        height: 113
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+      outline:
+      - - {x: 19.5, y: -38.5}
+        - {x: 13.5, y: -14.5}
+        - {x: 11.5, y: -13.5}
+        - {x: 8.5, y: -13.5}
+        - {x: 10.5, y: -5.5}
+        - {x: 11.5, y: 0.5}
+        - {x: 11.5, y: 6.5}
+        - {x: -0.5, y: 18.5}
+        - {x: -16.5, y: 25.5}
+        - {x: -25.5, y: 25.5}
+        - {x: -21.5, y: 26.5}
+        - {x: -11.5, y: 25.5}
+        - {x: -4.5, y: 25.5}
+        - {x: -2.5, y: 27.5}
+        - {x: 5.5, y: 24.5}
+        - {x: 11.5, y: 24.5}
+        - {x: 11.5, y: -10.5}
+        - {x: 15.5, y: -16.5}
+        - {x: 95.5, y: -24.5}
+        - {x: 96.5, y: -20.5}
+        - {x: 96.5, y: 24.5}
+        - {x: 85.5, y: 26.5}
+        - {x: 84.5, y: 23.5}
+        - {x: 80.5, y: 29.5}
+        - {x: 59.5, y: 56.5}
+        - {x: -73.5, y: 56.5}
+        - {x: -96.5, y: 51.5}
+        - {x: -96.5, y: -23.5}
+        - {x: -24.5, y: -19.5}
+        - {x: -23.5, y: -12.5}
+        - {x: -11.5, y: -12.5}
+        - {x: -13.5, y: -12.5}
+        - {x: -21.5, y: -18.5}
+        - {x: -26.5, y: -31.5}
+        - {x: -20.5, y: -56.5}
+        - {x: 17.5, y: -56.5}
+        - {x: 25.5, y: -49.5}
+        - {x: 23.5, y: -42.5}
     - name: backgrounds-objects_98
       rect:
         serializedVersion: 2
@@ -1459,63 +1497,6 @@ TextureImporter:
         y: 1131
         width: 112
         height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: backgrounds-objects_103
-      rect:
-        serializedVersion: 2
-        x: 842
-        y: 1110
-        width: 106
-        height: 38
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -53, y: 19}
-        - {x: -53, y: -19}
-        - {x: 53, y: -19}
-        - {x: 53, y: 8}
-        - {x: 36, y: 19}
-    - name: backgrounds-objects_104
-      rect:
-        serializedVersion: 2
-        x: 952
-        y: 1108
-        width: 77
-        height: 40
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 33.5, y: 20}
-        - {x: 32.5, y: 19}
-        - {x: 32.5, y: 20}
-        - {x: -38.5, y: 20}
-        - {x: -38.5, y: -18}
-        - {x: -37.5, y: -20}
-        - {x: 38.5, y: -20}
-        - {x: 38.5, y: 20}
-    - name: backgrounds-objects_105
-      rect:
-        serializedVersion: 2
-        x: 1025
-        y: 1142
-        width: 5
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: backgrounds-objects_106
-      rect:
-        serializedVersion: 2
-        x: 1030
-        y: 1140
-        width: 5
-        height: 5
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1717,22 +1698,6 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: backgrounds-objects_124
-      rect:
-        serializedVersion: 2
-        x: 918
-        y: 1067
-        width: 42
-        height: 41
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -21, y: -20.5}
-        - {x: 21, y: -20.5}
-        - {x: 21, y: 16.5}
-        - {x: 20, y: 20.5}
-        - {x: -21, y: 20.5}
     - name: backgrounds-objects_125
       rect:
         serializedVersion: 2

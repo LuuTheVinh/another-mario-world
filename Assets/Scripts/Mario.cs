@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Mario : MonoBehaviour {
     
@@ -19,6 +20,8 @@ public class Mario : MonoBehaviour {
     public float MaxSpeed = 3.0f;
 
     public GameObject CheckPoint;
+    public GameObject OverUI;
+    public GameObject GameManager;
 
     [HideInInspector] public float JumpForce = 200.0f;
     [HideInInspector] public float JumpMaxForce = 300.0f;
@@ -63,24 +66,42 @@ public class Mario : MonoBehaviour {
         {
             _protectTime -= Time.deltaTime;
 
-            //Debug.Log("Protect in " + _protectTime);
+            protectedEffect();
+
+            Debug.Log("Protect in " + _protectTime);
+            
         }
 	}
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        string tag = collision.gameObject.tag;
-        string name = collision.gameObject.name;
-        if (tag == "Item")
-        {
-            //Item item = collision.gameObject.GetComponents(typeof(Item))[0] as Item;
-            //updateStatusByItem(item);
-        }
+        
         
         if (tag == "Hole")
         {
             _animator.SetInteger("status", (int)eMarioStatus.SMALL);
             this.Die();
+        }
+        
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.gameObject.tag == "Hole")
+        {
+            _animator.SetInteger("status", (int)eMarioStatus.SMALL);
+            this.Die();
+        }
+
+        string tag = col.gameObject.tag;
+        if (tag == "Item")
+        {
+            var coin = col.gameObject.GetComponent<FreeCoin>();
+            if (coin == null)
+                return;
+
+            if (coin._type == Item.ItemType.Coin)
+                GameManager.GetComponent<GameManager>().UpdateCoin();
         }
     }
 
@@ -143,11 +164,15 @@ public class Mario : MonoBehaviour {
     public void Die()
     {
         this.GetComponent<Animator>().SetBool("isDead", true);
+        Camera.main.GetComponent<CameraShake>().shakeDuration = 0.25f;
+        Camera.main.GetComponent<CameraShake>().enabled = true;
+
+        Camera.main.GetComponent<FollowCamera>().enabled = false;
 
         _rigidbody2D.velocity = new Vector2(0, 0);
         this.GetComponent<MarioMovement>().Jump();
 
-        Invoke("returnCheckPoint", 3);
+        Invoke("showOverUI", 2);
     }
 
     private void returnCheckPoint()
@@ -166,6 +191,16 @@ public class Mario : MonoBehaviour {
         this.GetComponent<CircleCollider2D>().enabled = true;
     }
 
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+    }
+
+    private void showOverUI()
+    {
+        OverUI.SetActive(true);
+    }
+
     private void checkHoleDie()
     {
         // kiểm tra chết do rớt xuống hố.
@@ -174,5 +209,27 @@ public class Mario : MonoBehaviour {
             // Die
             this.Die();
         }
+    }
+
+    private void protectedEffect()
+    {
+        if(_protectTime < 0)
+        {
+            _protectTime = 0;
+            return;
+        }
+
+        var alpha = 1.0f;
+
+        if(_spriteRenderer.color.a == 1 && _protectTime > 0)
+        {
+            alpha = 0.5f;
+        }
+        _spriteRenderer.color = new Color(_spriteRenderer.color.r, 
+                                          _spriteRenderer.color.r, 
+                                          _spriteRenderer.color.b, 
+                                          alpha);
+
+        Invoke("protectedEffect", 1.0f);
     }
 }
