@@ -20,6 +20,14 @@ public class MarioController : MonoBehaviour {
     private bool _grounded;
     private bool _canJump = false;
 
+    public GameObject _bullet_big;
+    public GameObject _bullet_small;
+    public GameObject _bullet_bar;
+
+    public float _fireBulletCountDown;
+    private const float COUNT_JUMP_FIRE = 0.33f;
+    public static float _speedBulletCountDown = COUNT_JUMP_FIRE;
+
     // Use this for initialization
     void Start () {
         _animator = this.GetComponent<Animator>();
@@ -54,11 +62,20 @@ public class MarioController : MonoBehaviour {
         if (Input.GetButton("Jump") && _canHoldJump)
         {
             _timer += Time.deltaTime;
+            _speedBulletCountDown -= Time.deltaTime;
+            if (_speedBulletCountDown < 0)
+            {
+                _speedBulletCountDown = COUNT_JUMP_FIRE;
+            }
         }
         else
         {
             _timer = 0;
+            _speedBulletCountDown = COUNT_JUMP_FIRE;
+
         }
+        if (_bullet_bar != null)
+            _bullet_bar.GetComponent<BulletBar>().updateBar(1 - _frezeeBullet / _fireBulletCountDown);
     }
     
 	// Update is called once per frame
@@ -120,7 +137,13 @@ public class MarioController : MonoBehaviour {
         if (Input.GetButtonDown("Attack"))
         {
             // Tung
-            kick();
+            //kick();
+            //if (_speedBulletCountDown < COUNT_JUMP_FIRE && _speedBulletCountDown > 0)
+            //    speedFire();
+            //else
+            if (GetComponent<Mario>().Status == Mario.eMarioStatus.WHITE)
+                fire();
+  
         }
 
         // ngồi
@@ -135,6 +158,58 @@ public class MarioController : MonoBehaviour {
         {
             _animator.SetBool("isSitting", false);
         }
+
+        if (_frezeeBullet < _fireBulletCountDown && _frezeeBullet > 0)
+        {
+            _frezeeBullet += Time.deltaTime;
+            if (_frezeeBullet > _fireBulletCountDown)
+                _frezeeBullet = 0;
+        }
+    }
+
+    private static float _frezeeBullet;
+    private void fire()
+    {
+
+        GameObject bullet;
+        if (this.gameObject.GetComponent<Rigidbody2D>().velocity.y > 0)
+        {
+            _frezeeBullet = _fireBulletCountDown / 2;
+            bullet = (GameObject)Object.Instantiate(
+                _bullet_big,
+                this.transform.position,
+                this.transform.rotation);
+        }
+        else
+        {
+            if (_frezeeBullet > 0)
+                return;
+            _frezeeBullet = Time.deltaTime;
+             bullet = (GameObject)Object.Instantiate(
+                _bullet_small,
+                this.transform.position,
+                this.transform.rotation);
+        }
+
+        int dir = (int)this.gameObject.GetComponent<MarioMovement>()._dir;
+        bullet.GetComponent<Bullet>()._speed *= dir;
+    }
+
+    private static float _speedFire;
+    private void speedFire()
+    {
+        if (_speedFire > 0)
+            return;
+        if (_speedBulletCountDown == COUNT_JUMP_FIRE)
+            return;
+        _speedBulletCountDown = COUNT_JUMP_FIRE;
+        _frezeeBullet = Time.deltaTime;
+        GameObject bullet = (GameObject)Object.Instantiate(
+            _bullet_big,
+            this.transform.position,
+            this.transform.rotation);
+        int dir = (int)this.gameObject.GetComponent<MarioMovement>()._dir;
+        bullet.GetComponent<Bullet>()._speed *= dir;
 
     }
     

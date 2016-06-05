@@ -14,6 +14,18 @@ public class RedPiranhaPlant : Enemy {
     {
 
         base.Update();
+        if (_aniamtor.GetCurrentAnimatorStateInfo(0).IsName("Destroy"))
+            Destroy(this.gameObject);
+    }
 
+    public override void hitByBullet(float dmg)
+    {
+        if (_canHitByFire == false)
+            return;
+        _hp -= dmg;
+        if (this._hp <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

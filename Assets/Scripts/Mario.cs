@@ -120,12 +120,15 @@ public class Mario : MonoBehaviour {
                 }
             case eMarioStatus.BIG:
                 {
-                    _animator.SetInteger("status", (int)eMarioStatus.SMALL);
+                    //_animator.SetInteger("status", (int)eMarioStatus.SMALL);
+                    Die();
                     break;
                 }
             case eMarioStatus.WHITE:
                 {
                     _animator.SetInteger("status", (int)eMarioStatus.BIG);
+                    SceneController.setBulletPanelActive(false);
+
                     break;
                 }
             case eMarioStatus.RACOON:
@@ -146,6 +149,12 @@ public class Mario : MonoBehaviour {
 
         _rigidbody2D.velocity = new Vector2(0, 0);
         this.GetComponent<MarioMovement>().Jump();
+
+        var controller = GameObject.Find("/Controller");
+        if (controller != null)
+        {
+            controller.GetComponent<SceneController>().downLife();
+        }
 
         Invoke("returnCheckPoint", 3);
     }

@@ -20,6 +20,12 @@ public class FreeCoin : Item {
         {
             // Bỏ tiền vô túi nè.
             Destroy(this.gameObject);
+
+            var controller = GameObject.Find("/Controller");
+            if (controller != null)
+            {
+                controller.GetComponent<SceneController>().upCoin();
+            }
         }
     }
 }

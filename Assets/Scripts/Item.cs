@@ -83,6 +83,7 @@ public class Item : MonoBehaviour{
                 break;
             case Item.ItemType.FireFlower:
                 mario.GetComponent<Animator>().SetInteger("status", (int) Mario.eMarioStatus.WHITE);
+                SceneController.setBulletPanelActive(true);
                 break;
             case Item.ItemType.Amazing_Star:
                 break;

@@ -6,19 +6,24 @@ public class Troopa : Enemy {
     public enum eStatus { Normal, Shell, Hit, SpeedShell}
     private bool _flagHit;
     private bool _justSlide;
+
+    private Vector3 _tempSpeed;
     protected override void Start()
     {
 
         base.Start();
 
         _imovement = new LinearMovement(_speed.x, _speed.y, _speed.z);
-        _hitbyplayer = new TroopaHitByPlayer();
+        //_hitbyplayer = new TroopaHitByPlayer();
         if ((_imovement as LinearMovement).Xspeed > 0)
             _aniamtor.SetBool("left", false);
         else
             _aniamtor.SetBool("left", true);
     }
 
+
+    private const float _SHELLSTATCOUNTDOWN = 3.0f;
+    private float _shell_stat_countdown;
     protected override void Update()
     {
         //if (_renderer.isVisible)
@@ -29,6 +34,16 @@ public class Troopa : Enemy {
         //}
         base.Update();
 
+        if (_aniamtor.GetInteger("status") == (int)Troopa.eStatus.Shell)
+        {
+            _shell_stat_countdown -= Time.deltaTime;
+            if (_shell_stat_countdown <= 0)
+            {
+                _shell_stat_countdown = _SHELLSTATCOUNTDOWN;
+                _aniamtor.SetInteger("status", (int)Troopa.eStatus.Normal);
+                this.SetSpeed(_tempSpeed);
+            }
+        }
         
     }
 
@@ -167,4 +182,24 @@ public class Troopa : Enemy {
         }
     }
 
+    public override void hitByBullet(float dmg)
+    {
+        if (_canHitByFire == false)
+            return;
+        if (this.GetComponent<Animator>().GetInteger("status") == (int)Troopa.eStatus.Shell)
+            return;
+        _hp -= dmg;
+        if (_hp <= 0)
+        {
+            this.GetComponent<Animator>().SetInteger("status", (int)Enemy.eStatus.Hit);
+        }
+        else
+        {
+            this.GetComponent<Animator>().SetInteger("status", (int)Troopa.eStatus.Shell);
+            _shell_stat_countdown = _SHELLSTATCOUNTDOWN;
+            _tempSpeed = _speed;
+            this.SetSpeed(Vector3.zero);
+
+        }
+    }
 }

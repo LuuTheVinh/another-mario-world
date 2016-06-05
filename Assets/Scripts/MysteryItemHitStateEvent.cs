@@ -16,6 +16,12 @@ public class MysteryItemHitStateEvent : StateMachineBehaviour {
             case Item.ItemType.Flygon:
             case Item.ItemType.Coin:
                 init = true;
+                
+                var controller = GameObject.Find("/Controller");
+                if (controller != null)
+                {
+                    controller.GetComponent<SceneController>().upCoin();
+                }
                 break;
             case Item.ItemType.Leaf:
                 Animator mario_animator = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Animator>();
