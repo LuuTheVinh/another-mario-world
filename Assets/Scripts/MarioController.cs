@@ -117,8 +117,6 @@ public class MarioController : MonoBehaviour {
             _animator.ResetTrigger("dash");
         }
 
-        //Debug.Log("Timer: " + _timer);
-
         // nhảy
         if (_canJump)
         {

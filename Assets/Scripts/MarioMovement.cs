@@ -5,8 +5,11 @@ public class MarioMovement : MonoBehaviour {
 
     public Transform sideCheck;
     public Transform ceilCheck;
+    public Transform groundCheck;
     private float _radiusCheck = 0.2f;
     public LayerMask whatCheckSide;
+
+    public GameObject hitPrefaps;
 
     private Mario _mario;
     private SpriteRenderer _spriteRenderer;
@@ -121,7 +124,11 @@ public class MarioMovement : MonoBehaviour {
 
     public void EnemyPushUp()
     {
-        _rigidbody2D.AddForce(Vector2.up * Mario.PushUpForce, ForceMode2D.Impulse);
+        //_rigidbody2D.AddForce(Vector2.up * Mario.PushUpForce, ForceMode2D.Impulse);
+        _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
+        this.Jump(false);
+
+        var hit = Instantiate(hitPrefaps, groundCheck.position, this.transform.rotation) as GameObject;
     }
 
     public void Jump(bool max = false)
