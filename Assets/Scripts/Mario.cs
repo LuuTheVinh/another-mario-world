@@ -14,6 +14,15 @@ public class Mario : MonoBehaviour {
         RACOON = 3,
     }
 
+    public enum eWeapontype
+    {
+        none,
+        fire,
+        boomerang
+    }
+
+    public eWeapontype WeaponType;
+
     public float JumpHeight = 2;    // nhảy bt
     public float HoldJumpHeight = 4; // nhấn giữ để nhảy
     public float MovingForce = 20.0f;
@@ -36,6 +45,7 @@ public class Mario : MonoBehaviour {
 
     private float _protectTime = 0f;  // thời gian ko chết
 
+    [HideInInspector] public int Shield;
     // Use this for initialization
     void Start () {
         _spriteRenderer = this.GetComponent<SpriteRenderer>();
@@ -51,7 +61,9 @@ public class Mario : MonoBehaviour {
         JumpMaxForce = Mathf.Sqrt(2 * Physics.gravity.magnitude * _rigidbody2D.gravityScale * HoldJumpHeight) + _rigidbody2D.mass + _rigidbody2D.drag;
 
         PushUpForce = Mathf.Sqrt(2 * Physics.gravity.magnitude * _rigidbody2D.gravityScale * 1.5f) + _rigidbody2D.mass + _rigidbody2D.drag;
-    
+
+        Color softBlue = new Color(51, 51 * 2, 51 * 3, 51 * 4);
+        _spriteRenderer.color = softBlue;
     }
 	
 	// Update is called once per frame
@@ -68,8 +80,12 @@ public class Mario : MonoBehaviour {
 
             protectedEffect();
 
-            Debug.Log("Protect in " + _protectTime);
+            //Debug.Log("Protect in " + _protectTime);
             
+        }
+        if (Shield > 0)
+        {
+            flashShield();
         }
 	}
 
@@ -131,7 +147,17 @@ public class Mario : MonoBehaviour {
     {
         if (_protectTime > 0)
             return;
-        
+        if (Shield > 0)
+        {
+            --Shield;
+
+            if (Shield == 0)
+            {
+                this._spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+            }
+            return;
+        }
+
         switch (Status)
         {
             case eMarioStatus.SMALL:
@@ -231,5 +257,28 @@ public class Mario : MonoBehaviour {
                                           alpha);
 
         Invoke("protectedEffect", 1.0f);
+    }
+
+
+    private static int _flashflag;
+    private void flashShield()
+    {
+        if (Shield <= 0)
+            return;
+        Color softBlue = new Color(0.2f, 0.4f, 0.6f, 0.8f);
+        Color softRed = new Color(0.8f, 0.2f, 0.4f, 0.8f);
+        if ((_flashflag & 1) == 1)
+        {
+            _flashflag = ~_flashflag;
+            _spriteRenderer.color = softBlue;
+        }
+        else
+        {
+            _flashflag = ~_flashflag;
+            _spriteRenderer.color = softRed;
+        }            
+
+        Invoke("flashShield", 1.0f);
+
     }
 }

@@ -63,6 +63,7 @@ public class Troopa : Enemy {
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         string tag = collision.gameObject.tag;
+
         if (tag == "Player")
         {
             int status = _aniamtor.GetInteger("status");
@@ -85,12 +86,6 @@ public class Troopa : Enemy {
         }
         else 
             base.OnCollisionEnter2D(collision);
-    }
-
-    private void checkWithBrick(Collision2D col)
-    {
-        if (_aniamtor.GetInteger("status") == (int) eStatus.SpeedShell)
-            col.gameObject.GetComponent<Animator>().SetTrigger("smash");
     }
 
     public override void killPlayer(GameObject obj)
@@ -162,6 +157,12 @@ public class Troopa : Enemy {
         }
     }
 
+    private void checkWithBrick(Collision2D col)
+    {
+        if (_aniamtor.GetInteger("status") == (int)eStatus.SpeedShell)
+            col.gameObject.GetComponent<Animator>().SetTrigger("smash");
+    }
+
     protected override void checkWithEnemy(Collision2D collision)
     {
         eStatus status = (eStatus)_aniamtor.GetInteger("status");
@@ -182,11 +183,13 @@ public class Troopa : Enemy {
         }
     }
 
-    public override void hitByBullet(float dmg)
+    public override void hitByBullet(float dmg, Bullet.eType type)
     {
         if (_canHitByFire == false)
             return;
-        if (this.GetComponent<Animator>().GetInteger("status") == (int)Troopa.eStatus.Shell)
+        // shell kháng các loại weapon, trừ boomerang
+        if (this.GetComponent<Animator>().GetInteger("status") == (int)Troopa.eStatus.Shell &&
+            type != Bullet.eType.boomerang)
             return;
         _hp -= dmg;
         if (_hp <= 0)

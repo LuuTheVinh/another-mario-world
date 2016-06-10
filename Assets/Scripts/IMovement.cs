@@ -31,6 +31,7 @@ public class LinearMovement : IMovement
         Xspeed,
         _yspeed,
         _zspeed);
+
     }
 }
 

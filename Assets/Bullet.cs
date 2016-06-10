@@ -6,26 +6,21 @@ public class Bullet : MonoBehaviour {
 
     public enum eType
     {
-        big,
-        small,
-        sin
+        fire,
+        boomerang
     }
 
+
     public float _speed;
-    public float _amp;
-    public float _rad;
+
     private IMove _move;
 
     public float _damage;
+    [HideInInspector] public eType _type;
 	// Use this for initialization
 	void Start () {
-        if (true)
-            _move = new LinearMove();
-        if (false)
-        {
-           _move = new SinMove(this.gameObject);
-         //   GetComponent<Animator>().SetInteger("type", (int)eMoveType.sin);
-        }
+        _move = new LinearMove();
+        _type = eType.fire;
 	}
 	
 	// Update is called once per frame
@@ -36,22 +31,27 @@ public class Bullet : MonoBehaviour {
         //    Destroy(this.gameObject);
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    protected virtual void OnTriggerEnter2D(Collider2D collider)
     {
         string tag = collider.gameObject.tag;
         string name = collider.gameObject.name;
         if (tag == "Enemy")
         {
-            Destroy(this.gameObject);
-
-            collider.gameObject.GetComponent<Enemy>().hitByBullet(this._damage);
-
+            collideWithEnemy(collider);
         }
         if (tag == "Ground")
         {
-            Destroy(this.gameObject);
-
+            collideWithGround(collider);
         }
     }
 
+    protected virtual void collideWithEnemy(Collider2D collider)
+    {
+        Destroy(this.gameObject);
+        collider.gameObject.GetComponent<Enemy>().hitByBullet(this._damage, _type);
+    }
+    protected virtual void collideWithGround(Collider2D collider)
+    {
+        Destroy(this.gameObject);
+    }
 }

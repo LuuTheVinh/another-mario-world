@@ -18,6 +18,8 @@ public abstract class Enemy : MonoBehaviour {
     public Vector3 _speed;
     public bool _isSmart;
     public bool _canHitByFire;
+    public bool _canHitByBoomerang;
+    public bool _CanHitByHammer;
     //flag báo đã chết để không giết mario
     protected bool _isDie;
 
@@ -47,10 +49,10 @@ public abstract class Enemy : MonoBehaviour {
 
         if (_imovement != null)
             _imovement.Movement(this.gameObject);
-        if (this.transform.position.y < GameObject.Find("/Controller").GetComponent<SceneController>()._botGame)
-        {
-            Destroy(this.gameObject);
-        }
+        //if (this.transform.position.y < GameObject.Find("/Controller").GetComponent<SceneController>()._botGame)
+        //{
+        //    Destroy(this.gameObject);
+        //}
     }
 
     private void checkWakeUp()
@@ -63,8 +65,6 @@ public abstract class Enemy : MonoBehaviour {
     private bool checkDestroyHit()
     {
         if (_renderer.isVisible == true)
-            return false;
-        if (this.transform.position.y > 0)
             return false;
         if (_aniamtor.GetInteger("status") != (int)eStatus.Hit)
             return false;
@@ -160,6 +160,7 @@ public abstract class Enemy : MonoBehaviour {
             }
             else
             {
+
                 this.killPlayer(col.gameObject);
             }
         }
@@ -220,12 +221,19 @@ public abstract class Enemy : MonoBehaviour {
     public virtual void killPlayer(GameObject obj)
     {
         if (_isDie == false)
+        {
+            if (obj.GetComponent<Mario>().Shield > 0)
+                this.GetComponent<Animator>().SetInteger("status", (int)Enemy.eStatus.Hit);
+
             (obj.GetComponent<Mario>() as Mario).GotHit();
+        }
     }
 
-    public virtual void hitByBullet(float dmg)
+    public virtual void hitByBullet(float dmg, Bullet.eType type)
     {
         if (_canHitByFire == false)
+            return;
+        if (_canHitByBoomerang == false)
             return;
         _hp -= dmg;
         if (this._hp <= 0)

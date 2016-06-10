@@ -13,6 +13,7 @@ public class Pipe : MonoBehaviour {
 
     public float _goompaAppearTime;
     public int _maxGoompa;
+
     private float _goopaCountTime = 0f;
     private List<GameObject> _listGoompa = new List<GameObject>();
 	// Use this for initialization
@@ -20,7 +21,7 @@ public class Pipe : MonoBehaviour {
         initPipetype();
         
         if (_prefabs != null && _prefabs.name != "Goompa")
-            (this.transform.FindChild(  "approach_bound")
+            (this.transform.FindChild("approach_bound")
                 .GetComponent(typeof(PipeApproachBound)) as PipeApproachBound)
                 .Enemy = _enemy;
 	}

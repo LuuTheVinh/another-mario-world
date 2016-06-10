@@ -5,7 +5,7 @@ using System.Collections;
 public class Item : MonoBehaviour{
 
     
-    public enum ItemType { Mushroom, FireFlower, Amazing_Star, Coin, Leaf, Flygon };
+    public enum ItemType { Mushroom, FireFlower, Amazing_Star, Coin, Leaf, Flygon, Boomerang, Shield};
 
 
     protected IMovement _imovement;
@@ -30,11 +30,14 @@ public class Item : MonoBehaviour{
 
         // delay lại không thôi vừa mơi chạm được cục gạch thì ăn item.
         // cho nữa giây sau mới ăn được.
-        _delayNoneHit = 0.5f;
-        transform.position = new Vector3(0, 1, 1);
-
+        if (this.transform.parent != null)
+        {
+            _delayNoneHit = 0.5f;
+            transform.position = new Vector3(0, 1, 1);
+        }
         if (GetComponent<SpriteRenderer>() != null)
             GetComponent<SpriteRenderer>().enabled = true;
+
 	}
 
     // Update is called once per frame
@@ -55,6 +58,7 @@ public class Item : MonoBehaviour{
 
     protected void OnCollisionEnter2D(Collision2D collision)
     {
+
         if (_delayNoneHit > 0)
             return;
         if (this._type == ItemType.Coin)
@@ -81,14 +85,25 @@ public class Item : MonoBehaviour{
             case Item.ItemType.Mushroom:
                 mario.GetComponent<Animator>().SetInteger("status", (int) Mario.eMarioStatus.BIG);
                 break;
+            case Item.ItemType.Boomerang:
+                mario.GetComponent<Animator>().SetInteger("status", (int) Mario.eMarioStatus.WHITE);
+                SceneController.setBoomerangPanelActive(true);
+                mario.WeaponType = Mario.eWeapontype.boomerang;
+                
+                break;
             case Item.ItemType.FireFlower:
                 mario.GetComponent<Animator>().SetInteger("status", (int) Mario.eMarioStatus.WHITE);
                 SceneController.setBulletPanelActive(true);
+                mario.WeaponType = Mario.eWeapontype.fire;
+
                 break;
             case Item.ItemType.Amazing_Star:
                 break;
             case Item.ItemType.Leaf:
                 mario.GetComponent<Animator>().SetInteger("status", (int)Mario.eMarioStatus.RACOON);
+                break;
+            case ItemType.Shield:
+                mario.GetComponent<Mario>().Shield = 3;
                 break;
             default:
                 break;

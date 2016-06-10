@@ -74,4 +74,9 @@ public class SceneController : MonoBehaviour {
             bullet_pannel.transform.FindChild("bullet").gameObject.SetActive(isActive);
         }
     }
+
+    public static void setBoomerangPanelActive(bool p)
+    {
+        //throw new System.NotImplementedException();
+    }
 }

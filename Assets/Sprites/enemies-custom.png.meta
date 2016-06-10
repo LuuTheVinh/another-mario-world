@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a4849e8b7ed3bcd43836dc13ebedbdeb
-timeCreated: 1462122369
+timeCreated: 1465210723
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -8,6 +8,10 @@ TextureImporter:
     21300002: red_speed_shell_1
     21300004: red_speed_shell_3
     21300006: red_speed_shell_4
+    21300008: boomerang_1
+    21300010: boomerang_2
+    21300012: boomerang_3
+    21300014: boomerang_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -94,6 +98,50 @@ TextureImporter:
         y: 883
         width: 16
         height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: boomerang_1
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 932
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: boomerang_2
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 933
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: boomerang_3
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 910
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: boomerang_4
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 912
+        width: 16
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
