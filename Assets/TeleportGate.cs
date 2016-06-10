@@ -5,14 +5,11 @@ public class TeleportGate : MonoBehaviour {
 
     // Nếu cống này là cống vào thì set outpipe là cống khác, inpie null
 
-
-
-    public GameObject _InPipe;
     public GameObject _OutPipe;
 
     public enum eDir { left, right, top, bottom}
     public eDir _Direction;
-
+    public eDir _Out_Dir;
     [HideInInspector] public GameObject _Player;
 
     private bool _isDisapearing;
@@ -52,8 +49,6 @@ public class TeleportGate : MonoBehaviour {
         {
             _time += Time.deltaTime;
             playerMove(_Direction, _time, 2.0f);
-            Debug.Log(_time);
-            Debug.Log(gameObject.transform.parent.name);
             if (_time > _timeAnim)
             {
                 _isDisapearing = false;
@@ -124,7 +119,6 @@ public class TeleportGate : MonoBehaviour {
 
     private void player_appear(GameObject go)
     {
-        Debug.Log("apearing");
         _Player = go;
         _Player.transform.position = this.transform.position;
         _Player.GetComponent<Rigidbody2D>().isKinematic = true;
@@ -132,6 +126,15 @@ public class TeleportGate : MonoBehaviour {
         _oldPosition = _Player.transform.position;
         _isAppearing = true;
         _Player.transform.position = this.transform.position;
+        if (_Out_Dir == eDir.left)
+        {
+            _Player.GetComponent<SpriteRenderer>().flipX = false;
+        }
+        else
+        {
+            _Player.GetComponent<SpriteRenderer>().flipX = true;
+        }
+
     }
 
     private void finish()

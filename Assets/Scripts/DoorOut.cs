@@ -5,6 +5,7 @@ public class DoorOut : MonoBehaviour {
 
     public GameObject _player;
 
+    public GameObject _cam;
     // Chờ 1 giây mở cửa.
     private bool _isActive;
 
@@ -14,7 +15,11 @@ public class DoorOut : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-       // _player.SetActive(false);
+        if (_player == null)
+        {
+            _player = getPlayerFromPreviousScene();
+            setFollowCamera(_player);
+        }
         _player.GetComponent<Transform>().position = this.transform.position;
         _countTime = 0.0f;
         _isFinishFade = false;
@@ -28,6 +33,28 @@ public class DoorOut : MonoBehaviour {
             0.0f);
 
 	}
+
+    private void setFollowCamera(GameObject player)
+    {
+        if (_cam != null)
+        {
+            _cam.GetComponent<FollowCamera>().target = player.transform;
+        }
+    }
+
+    private GameObject getPlayerFromPreviousScene()
+    {
+        var objs = GameObject.Find("Controller").GetComponent<SceneController>()._nonDestroyObjects;
+        foreach (var item in objs)
+        {
+            if (item.tag == "Player")
+            {
+                return item;
+            }
+        }
+        return null;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
