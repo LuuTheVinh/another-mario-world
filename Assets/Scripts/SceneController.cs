@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class SceneController : MonoBehaviour {
     // scenecotroller cho bắt đầu màn chơi.
     public GameObject[] _nonDestroyObjects;
-
     public float _botGame;
 
     public int _life;
@@ -21,7 +20,7 @@ public class SceneController : MonoBehaviour {
         Object.DontDestroyOnLoad(this);
 
         //_player.SetActive(false);
-        
+        GetComponent<AudioSource>().Play();
     }
 
     public void downLife()
