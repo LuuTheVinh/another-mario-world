@@ -17,11 +17,15 @@ public abstract class Enemy : MonoBehaviour {
     public bool _canHitByShell;
     public Vector3 _speed;
     public bool _isSmart;
-
+    public bool _canHitByFire;
+    public bool _canHitByBoomerang;
+    public bool _CanHitByHammer;
     //flag báo đã chết để không giết mario
     protected bool _isDie;
 
     protected bool _isSleep;
+
+    public float _hp;
     protected virtual void Start()
     {
         _aniamtor = GetComponent<Animator>();
@@ -45,10 +49,10 @@ public abstract class Enemy : MonoBehaviour {
 
         if (_imovement != null)
             _imovement.Movement(this.gameObject);
-        if (this.transform.position.y < GameObject.Find("/Controller").GetComponent<SceneController>()._botGame)
-        {
-            Destroy(this.gameObject);
-        }
+        //if (this.transform.position.y < GameObject.Find("/Controller").GetComponent<SceneController>()._botGame)
+        //{
+        //    Destroy(this.gameObject);
+        //}
     }
 
     private void checkWakeUp()
@@ -61,8 +65,6 @@ public abstract class Enemy : MonoBehaviour {
     private bool checkDestroyHit()
     {
         if (_renderer.isVisible == true)
-            return false;
-        if (this.transform.position.y > 0)
             return false;
         if (_aniamtor.GetInteger("status") != (int)eStatus.Hit)
             return false;
@@ -84,8 +86,9 @@ public abstract class Enemy : MonoBehaviour {
         if (tag == "Enemy")
             checkWithEnemy(collision);
         //if (name == "block")
-        //    checkWithBlock(collision);
-
+        //    checkWithBlock(collision);    
+        if (tag == "Hole")
+            Destroy(this.gameObject);
     }
 
 
@@ -94,7 +97,7 @@ public abstract class Enemy : MonoBehaviour {
         string tag = collider.gameObject.tag;
         if (tag == "Player")
         {
-            checkHitByPlayer(collider);
+            //checkHitByPlayer(collider);
         }
 
     }
@@ -157,6 +160,7 @@ public abstract class Enemy : MonoBehaviour {
             }
             else
             {
+
                 this.killPlayer(col.gameObject);
             }
         }
@@ -217,6 +221,24 @@ public abstract class Enemy : MonoBehaviour {
     public virtual void killPlayer(GameObject obj)
     {
         if (_isDie == false)
+        {
+            if (obj.GetComponent<Mario>().Shield > 0)
+                this.GetComponent<Animator>().SetInteger("status", (int)Enemy.eStatus.Hit);
+
             (obj.GetComponent<Mario>() as Mario).GotHit();
+        }
+    }
+
+    public virtual void hitByBullet(float dmg, Bullet.eType type)
+    {
+        if (_canHitByFire == false)
+            return;
+        if (_canHitByBoomerang == false)
+            return;
+        _hp -= dmg;
+        if (this._hp <= 0)
+        {
+            this.GetComponent<Animator>().SetInteger("status", (int) Enemy.eStatus.Hit);
+        }
     }
 }

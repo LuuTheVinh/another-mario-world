@@ -19,13 +19,16 @@ public class MarioMovement : MonoBehaviour {
     [HideInInspector] public bool CollidingSide = false;
     [HideInInspector] public bool grounded;
     private int _direction = 0;
-    
+
+    public enum dir { left = -1, right =1};
+    [HideInInspector] public dir _dir;
     // Use this for initialization
     void Start () {
         _mario = this.GetComponent<Mario>();
         _spriteRenderer = this.GetComponent<SpriteRenderer>();
         _rigidbody2D = this.GetComponent<Rigidbody2D>();
         _boxCollider2D = this.GetComponent<BoxCollider2D>();
+        _dir = dir.right;
     }
 
     void Update()
@@ -70,12 +73,14 @@ public class MarioMovement : MonoBehaviour {
             //_spriteRenderer.flipX = true;
             // phải
             this.transform.localScale = new Vector3(-1, 1, 1);
+            _dir = dir.right;
         }
         else if (h < 0 && sign < 0 && this.transform.localScale.x != 1)
         {
             // _spriteRenderer.flipX = false;
             // trái
             this.transform.localScale = new Vector3(1, 1, 1);
+            _dir = dir.left;
         }
     }
 

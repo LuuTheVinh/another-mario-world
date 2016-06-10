@@ -16,6 +16,12 @@ public class MysteryItemHitStateEvent : StateMachineBehaviour {
             case Item.ItemType.Flygon:
             case Item.ItemType.Coin:
                 init = true;
+                
+                var controller = GameObject.Find("/Controller");
+                if (controller != null)
+                {
+                    controller.GetComponent<SceneController>().upCoin();
+                }
                 break;
             case Item.ItemType.Leaf:
                 Animator mario_animator = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Animator>();
@@ -50,8 +56,10 @@ public class MysteryItemHitStateEvent : StateMachineBehaviour {
         switch (itemtype)
         {
             case Item.ItemType.FireFlower:
+            case Item.ItemType.Boomerang:
                 Animator mario_animator = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Animator>();
-                if (mario_animator.GetInteger("status")==(int) Mario.eMarioStatus.SMALL)
+                //if (mario_animator.GetInteger("status")==(int) Mario.eMarioStatus.SMALL)
+                if (false)
                 {
                     item = _mushroomPrefab;
                     itemtype = Item.ItemType.Mushroom;

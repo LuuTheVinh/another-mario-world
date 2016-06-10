@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 57d5fac470ee7234aaa06e49ad95ffd2
-timeCreated: 1465035136
+timeCreated: 1465440474
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -91,23 +91,23 @@ TextureImporter:
     21300168: enemies_84
     21300170: enemies_85
     21300172: enemies_86
-    21300174: enemies_87
-    21300176: enemies_88
-    21300178: enemies_89
-    21300180: enemies_90
+    21300174: fire_spin_3
+    21300176: fire_spin_4
+    21300178: big_shell
+    21300180: big_shell_1
     21300182: enemies_91
-    21300184: enemies_92
+    21300184: supershellhit
     21300186: enemies_93
     21300188: enemies_94
     21300190: enemies_95
-    21300192: enemies_96
+    21300192: fire_spin_2
     21300194: enemies_97
     21300196: enemies_98
     21300198: enemies_99
-    21300200: enemies_100
-    21300202: enemies_101
+    21300200: cannon
+    21300202: fire_spin_1
     21300204: enemies_102
-    21300206: enemies_103
+    21300206: cannon_bullet
     21300208: enemies_104
     21300210: enemies_105
     21300212: enemies_106
@@ -196,6 +196,7 @@ TextureImporter:
     21300378: enemies_189
     21300380: enemies_190
     21300382: enemies_191
+    21300384: fire_spin_off
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -1245,29 +1246,29 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_87
+    - name: fire_spin_3
       rect:
         serializedVersion: 2
         x: 305
         y: 517
         width: 16
         height: 63
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_88
+    - name: fire_spin_4
       rect:
         serializedVersion: 2
         x: 327
         y: 517
         width: 16
         height: 63
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_89
+    - name: big_shell
       rect:
         serializedVersion: 2
         x: 6
@@ -1278,7 +1279,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_90
+    - name: big_shell_1
       rect:
         serializedVersion: 2
         x: 28
@@ -1300,7 +1301,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_92
+    - name: supershellhit
       rect:
         serializedVersion: 2
         x: 72
@@ -1358,15 +1359,15 @@ TextureImporter:
         - {x: 16, y: -24}
         - {x: 16, y: 14}
         - {x: 8, y: 24}
-    - name: enemies_96
+    - name: fire_spin_2
       rect:
         serializedVersion: 2
         x: 283
         y: 517
         width: 16
         height: 55
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: enemies_97
@@ -1410,26 +1411,26 @@ TextureImporter:
         - {x: -16, y: -16}
         - {x: 16, y: -16}
         - {x: 16, y: 16}
-    - name: enemies_100
+    - name: cannon
       rect:
         serializedVersion: 2
         x: 159
         y: 517
         width: 16
         height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_101
+    - name: fire_spin_1
       rect:
         serializedVersion: 2
         x: 261
         y: 517
         width: 16
         height: 40
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: enemies_102
@@ -1443,15 +1444,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_103
+    - name: cannon_bullet
       rect:
         serializedVersion: 2
         x: 40
         y: 518
         width: 16
         height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: enemies_104
@@ -2420,6 +2421,17 @@ TextureImporter:
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: fire_spin_off
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 517
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     outline: []

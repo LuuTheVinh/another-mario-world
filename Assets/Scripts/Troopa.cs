@@ -6,19 +6,24 @@ public class Troopa : Enemy {
     public enum eStatus { Normal, Shell, Hit, SpeedShell}
     private bool _flagHit;
     private bool _justSlide;
+
+    private Vector3 _tempSpeed;
     protected override void Start()
     {
 
         base.Start();
 
         _imovement = new LinearMovement(_speed.x, _speed.y, _speed.z);
-        _hitbyplayer = new TroopaHitByPlayer();
+        //_hitbyplayer = new TroopaHitByPlayer();
         if ((_imovement as LinearMovement).Xspeed > 0)
             _aniamtor.SetBool("left", false);
         else
             _aniamtor.SetBool("left", true);
     }
 
+
+    private const float _SHELLSTATCOUNTDOWN = 3.0f;
+    private float _shell_stat_countdown;
     protected override void Update()
     {
         //if (_renderer.isVisible)
@@ -29,6 +34,16 @@ public class Troopa : Enemy {
         //}
         base.Update();
 
+        if (_aniamtor.GetInteger("status") == (int)Troopa.eStatus.Shell)
+        {
+            _shell_stat_countdown -= Time.deltaTime;
+            if (_shell_stat_countdown <= 0)
+            {
+                _shell_stat_countdown = _SHELLSTATCOUNTDOWN;
+                _aniamtor.SetInteger("status", (int)Troopa.eStatus.Normal);
+                this.SetSpeed(_tempSpeed);
+            }
+        }
         
     }
 
@@ -48,6 +63,7 @@ public class Troopa : Enemy {
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         string tag = collision.gameObject.tag;
+
         if (tag == "Player")
         {
             int status = _aniamtor.GetInteger("status");
@@ -70,12 +86,6 @@ public class Troopa : Enemy {
         }
         else 
             base.OnCollisionEnter2D(collision);
-    }
-
-    private void checkWithBrick(Collision2D col)
-    {
-        if (_aniamtor.GetInteger("status") == (int) eStatus.SpeedShell)
-            col.gameObject.GetComponent<Animator>().SetTrigger("smash");
     }
 
     public override void killPlayer(GameObject obj)
@@ -147,6 +157,12 @@ public class Troopa : Enemy {
         }
     }
 
+    private void checkWithBrick(Collision2D col)
+    {
+        if (_aniamtor.GetInteger("status") == (int)eStatus.SpeedShell)
+            col.gameObject.GetComponent<Animator>().SetTrigger("smash");
+    }
+
     protected override void checkWithEnemy(Collision2D collision)
     {
         eStatus status = (eStatus)_aniamtor.GetInteger("status");
@@ -167,4 +183,26 @@ public class Troopa : Enemy {
         }
     }
 
+    public override void hitByBullet(float dmg, Bullet.eType type)
+    {
+        if (_canHitByFire == false)
+            return;
+        // shell kháng các loại weapon, trừ boomerang
+        if (this.GetComponent<Animator>().GetInteger("status") == (int)Troopa.eStatus.Shell &&
+            type != Bullet.eType.boomerang)
+            return;
+        _hp -= dmg;
+        if (_hp <= 0)
+        {
+            this.GetComponent<Animator>().SetInteger("status", (int)Enemy.eStatus.Hit);
+        }
+        else
+        {
+            this.GetComponent<Animator>().SetInteger("status", (int)Troopa.eStatus.Shell);
+            _shell_stat_countdown = _SHELLSTATCOUNTDOWN;
+            _tempSpeed = _speed;
+            this.SetSpeed(Vector3.zero);
+
+        }
+    }
 }
