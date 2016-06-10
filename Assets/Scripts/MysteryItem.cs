@@ -90,6 +90,13 @@ public class MysteryItem : MonoBehaviour {
                     (_itemPrefab.GetComponent<Item>() as Item)._speed.x = Mathf.Abs((_itemPrefab.GetComponent<Item>() as Item)._speed.x);
                 }
             }
+
+            // vinh
+            // nếu item == coin thì cộng tiền
+            if((_itemPrefab.GetComponent<Item>() as Item)._type == Item.ItemType.Coin)
+            {
+                col.gameObject.GetComponent<Mario>().GameManager.GetComponent<GameManager>().UpdateCoin();
+            }
         }
     }
 
