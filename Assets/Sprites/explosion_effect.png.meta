@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 4d26fe385f494ac459437d41c7e2984a
-timeCreated: 1465566660
+guid: b23b68f7b1103544ba1dafbc6d050962
+timeCreated: 1465568801
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Bullet_0
-    21300002: Bullet_1
-    21300004: Bullet_2
-    21300006: Bullet_3
+    21300000: explosion_effect_0
+    21300002: explosion_effect_1
+    21300004: explosion_effect_2
+    21300006: explosion_effect_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -33,7 +33,7 @@ TextureImporter:
   textureFormat: -1
   maxTextureSize: 2048
   textureSettings:
-    filterMode: 0
+    filterMode: -1
     aniso: 16
     mipBias: -1
     wrapMode: 1
@@ -48,52 +48,52 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 30
+  spritePixelsToUnits: 16
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Bullet_0
+    - name: explosion_effect_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 27
-        height: 30
+        y: 3
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Bullet_1
+    - name: explosion_effect_1
       rect:
         serializedVersion: 2
-        x: 37
-        y: 0
-        width: 26
-        height: 30
+        x: 18
+        y: 5
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Bullet_2
+    - name: explosion_effect_2
       rect:
         serializedVersion: 2
-        x: 74
-        y: 0
-        width: 26
-        height: 30
+        x: 34
+        y: 6
+        width: 11
+        height: 11
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Bullet_3
+    - name: explosion_effect_3
       rect:
         serializedVersion: 2
-        x: 110
-        y: 0
-        width: 27
-        height: 30
+        x: 51
+        y: 6
+        width: 10
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
