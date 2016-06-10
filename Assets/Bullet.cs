@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour {
         boomerang
     }
 
+    public GameObject ExplosionEffect;
 
     public float _speed;
 
@@ -35,6 +36,7 @@ public class Bullet : MonoBehaviour {
     {
         string tag = collider.gameObject.tag;
         string name = collider.gameObject.name;
+        
         if (tag == "Enemy")
         {
             collideWithEnemy(collider);
@@ -47,11 +49,13 @@ public class Bullet : MonoBehaviour {
 
     protected virtual void collideWithEnemy(Collider2D collider)
     {
+        Instantiate(ExplosionEffect, collider.gameObject.transform.position, this.transform.rotation);
         Destroy(this.gameObject);
         collider.gameObject.GetComponent<Enemy>().hitByBullet(this._damage, _type);
     }
     protected virtual void collideWithGround(Collider2D collider)
     {
+        Instantiate(ExplosionEffect, this.transform.position, this.transform.rotation);
         Destroy(this.gameObject);
     }
 }
