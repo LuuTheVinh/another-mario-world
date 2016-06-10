@@ -16,8 +16,9 @@ public class SceneController : MonoBehaviour {
         foreach (GameObject obj in _nonDestroyObjects)
 	    {
             Object.DontDestroyOnLoad(obj);
-            Object.DontDestroyOnLoad(this.gameObject);		    
 	    }
+        Object.DontDestroyOnLoad(this.gameObject);
+        Object.DontDestroyOnLoad(this);
 
         //_player.SetActive(false);
         
