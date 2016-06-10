@@ -5,12 +5,17 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
     public GameObject CoinValueUI;
+    public GameObject LifeValueUI;
+    public GameObject[] WeaponUI;
 
     private int _currentCoin = 0;
+    private int _currentLife = 3;
     private Text _coinValue;
 
-	// Use this for initialization
-	void Start () {
+    private Mario.eWeapontype _weaponType;
+
+    // Use this for initialization
+    void Start () {
     }
 	
 	// Update is called once per frame
@@ -23,6 +28,40 @@ public class GameManager : MonoBehaviour {
         _currentCoin += value;
 
         updateUI();
+    }
+
+    public void UpdateWeaponUI(Mario.eWeapontype type)
+    {
+        foreach (var item in WeaponUI)
+        {
+            item.SetActive(false);
+        }
+
+        switch (type)
+        {
+            case Mario.eWeapontype.none:
+                {
+                    break;
+                }
+            case Mario.eWeapontype.fire:
+                {
+                    WeaponUI[1].SetActive(true);
+                    break;
+                }
+            case Mario.eWeapontype.boomerang:
+                {
+                    WeaponUI[0].SetActive(true);
+                    break;
+                }
+            default:
+                break;
+        }
+    }
+
+    public void UpdateLife(int life)
+    {
+        _currentLife = life;
+        LifeValueUI.GetComponent<Text>().text = _currentLife.ToString();
     }
 
     private void updateUI()

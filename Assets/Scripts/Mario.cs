@@ -44,6 +44,7 @@ public class Mario : MonoBehaviour {
     public static float PushUpForce;
 
     private float _protectTime = 0f;  // thời gian ko chết
+    private int _life = 3;
 
     [HideInInspector] public int Shield;
     // Use this for initialization
@@ -91,14 +92,18 @@ public class Mario : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        
-        if (tag == "Hole")
+        if (collision.gameObject.tag == "Item")
         {
-            _animator.SetInteger("status", (int)eMarioStatus.SMALL);
-            this.Die();
+            var item = collision.gameObject.GetComponent<Item>();
+            if (item == null)
+                return;
+
+            if (item._type == Item.ItemType.Boomerang)
+                GameManager.GetComponent<GameManager>().UpdateWeaponUI(eWeapontype.boomerang);
+
+            if (item._type == Item.ItemType.FireFlower)
+                GameManager.GetComponent<GameManager>().UpdateWeaponUI(eWeapontype.fire);
         }
-        
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -168,16 +173,19 @@ public class Mario : MonoBehaviour {
             case eMarioStatus.BIG:
                 {
                     _animator.SetInteger("status", (int)eMarioStatus.SMALL);
+                    Die();
                     break;
                 }
             case eMarioStatus.WHITE:
                 {
-                    _animator.SetInteger("status", (int)eMarioStatus.BIG);
+                    _animator.SetInteger("status", (int)eMarioStatus.SMALL);
+                    Die();
                     break;
                 }
             case eMarioStatus.RACOON:
                 {
-                    _animator.SetInteger("status", (int)eMarioStatus.BIG);
+                    _animator.SetInteger("status", (int)eMarioStatus.SMALL);
+                    Die();
                     break;
                 }
             default:
@@ -189,6 +197,14 @@ public class Mario : MonoBehaviour {
 
     public void Die()
     {
+        _life--;
+        GameManager.GetComponent<GameManager>().UpdateLife(_life);
+
+        // weapon
+        WeaponType = eWeapontype.none;
+        GameManager.GetComponent<GameManager>().UpdateWeaponUI(eWeapontype.none);
+
+        // status
         this.GetComponent<Animator>().SetBool("isDead", true);
         Camera.main.GetComponent<CameraShake>().shakeDuration = 0.25f;
         Camera.main.GetComponent<CameraShake>().enabled = true;
@@ -198,7 +214,14 @@ public class Mario : MonoBehaviour {
         _rigidbody2D.velocity = new Vector2(0, 0);
         this.GetComponent<MarioMovement>().Jump();
 
-        Invoke("showOverUI", 2);
+        if (_life <= 0)
+        {
+            Invoke("showOverUI", 2);
+        }
+        else
+        {
+            Invoke("returnCheckPoint", 2);
+        }
     }
 
     private void returnCheckPoint()
@@ -215,6 +238,10 @@ public class Mario : MonoBehaviour {
         this.GetComponent<MarioMovement>().enabled = true;
         this.GetComponent<BoxCollider2D>().enabled = true;
         this.GetComponent<CircleCollider2D>().enabled = true;
+
+        Camera.main.GetComponent<FollowCamera>().enabled = true;
+
+        _animator.SetInteger("status", (int)eMarioStatus.WHITE);
     }
 
     public void PlayAgain()
