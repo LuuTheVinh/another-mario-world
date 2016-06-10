@@ -41,4 +41,15 @@ public class SuperShell : Enemy {
             flipLeft(true);
     }
 
+    public override void hitByBullet(float dmg, Bullet.eType type)
+    {
+        base.hitByBullet(dmg, type);
+
+        // animate
+        if (this._hp > 0)
+        {
+            this.GetComponent<Animator>().SetTrigger("gotHit");
+        }
+    }
+
 }
