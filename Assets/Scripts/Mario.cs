@@ -104,7 +104,7 @@ public class Mario : MonoBehaviour {
                 GameManager.GetComponent<GameManager>().UpdateCoin();
         }
     }
-
+    
     //private void updateStatusByItem(Item item)
     //{
     //    if (item == null)
@@ -123,7 +123,7 @@ public class Mario : MonoBehaviour {
     //            break;
     //    }
     //}
-    
+
     /// <summary>
     /// Mario đụng Enemy
     /// </summary>

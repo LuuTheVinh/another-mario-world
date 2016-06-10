@@ -42,4 +42,22 @@ public class FlatSwingObjectCollider : MonoBehaviour {
 
         }
     }
+
+    // vinh 
+    // gán cho player đi theo
+    void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            col.transform.parent = this.transform;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            col.transform.parent = null;
+        }
+    }
 }

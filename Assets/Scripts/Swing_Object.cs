@@ -30,28 +30,28 @@ public class Swing_Object : MonoBehaviour {
                 this.transform.position.x + _speed.x,
                 this.transform.position.y + _speed.y,
                 this.transform.position.z);
-            if (_player != null)
-            {
-                if (_player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsTag("Idle"))
-                    _player.transform.position = new Vector3(
-                        _player.transform.position.x + _speed.x,
-                        _player.transform.position.y + _speed.y,
-                        _player.transform.position.z);
-                if (_player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
-                {
-                    _player = null;
-                    return;
-                }
-                var playerBound = _player.GetComponent<BoxCollider2D>().bounds;
-                var thisBound = this.GetComponent<BoxCollider2D>().bounds;
-                if (playerBound.max.x < thisBound.min.x || playerBound.min.x > thisBound.max.x)
-                {
-                    _player = null;
-                }
-            }
+            //if (_player != null)
+            //{
+            //    if (_player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsTag("Idle"))
+            //        _player.transform.position = new Vector3(
+            //            _player.transform.position.x + _speed.x,
+            //            _player.transform.position.y + _speed.y,
+            //            _player.transform.position.z);
+            //    if (_player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
+            //    {
+            //        _player = null;
+            //        return;
+            //    }
+            //    var playerBound = _player.GetComponent<BoxCollider2D>().bounds;
+            //    var thisBound = this.GetComponent<BoxCollider2D>().bounds;
+            //    if (playerBound.max.x < thisBound.min.x || playerBound.min.x > thisBound.max.x)
+            //    {
+            //        _player = null;
+            //    }
+            //}
         }
-        
-	}
+
+    }
 
     public void run()
     {

@@ -122,7 +122,7 @@ public class MarioController : MonoBehaviour {
         }
 
         // ngồi
-        if(_animator.GetInteger("status") != 0 && Input.GetKey("down"))
+        if (_animator.GetInteger("status") != 0 && Input.GetKey("down"))
         {
             if (!_animator.GetBool("isSitting"))
             {
