@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour {
     }
 
     public GameObject ExplosionEffect;
+    public GameObject CoinEffect;
 
     public float _speed;
 
@@ -50,8 +51,22 @@ public class Bullet : MonoBehaviour {
     protected virtual void collideWithEnemy(Collider2D collider)
     {
         Instantiate(ExplosionEffect, collider.gameObject.transform.position, this.transform.rotation);
+        
         Destroy(this.gameObject);
         collider.gameObject.GetComponent<Enemy>().hitByBullet(this._damage, _type);
+        
+        // cộng tiền, find đỡ khỏi phải truyền object
+        var gamemanager = GameObject.Find("_GameManager");
+
+        if (gamemanager != null)
+        {
+            var status = collider.gameObject.GetComponent<Animator>().GetInteger("status");
+            if (status == (int)Enemy.eStatus.Hit)
+            {
+                gamemanager.GetComponent<GameManager>().UpdateCoin();
+                Instantiate(CoinEffect, collider.gameObject.transform.position, this.transform.rotation);
+            }
+        }
     }
     protected virtual void collideWithGround(Collider2D collider)
     {
