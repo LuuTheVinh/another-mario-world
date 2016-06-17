@@ -15,6 +15,7 @@ public class OverMenuController : MonoBehaviour {
 
 	public void OnPlayAgainButtonClick()
     {
+        this.gameObject.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 

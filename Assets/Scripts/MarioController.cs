@@ -9,7 +9,7 @@ public class MarioController : MonoBehaviour {
     public LayerMask WhatIsGround;
     
     public Transform groundCheck;
-    private float _groundedRadius = 0.1f;
+    public float groundedRadius = 0.175f;
 
     private Animator _animator;
     private MarioMovement _marioMovement;
@@ -43,7 +43,7 @@ public class MarioController : MonoBehaviour {
         // check ground
         _grounded = false;
 
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, _groundedRadius, WhatIsGround);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, groundedRadius, WhatIsGround);
 
         for (int i = 0; i < colliders.Length; i++)
         {
@@ -176,20 +176,20 @@ public class MarioController : MonoBehaviour {
     private void boomerang()
     {
         GameObject boomerang;
-        if (this.gameObject.GetComponent<Rigidbody2D>().velocity.y > 0)
-        {
-            // Jump Attack :
-            // không bị giới hạn countdown
-            // giảm nữa coldown (count down đối với ground atk)
-            // giảm nữa damage
-            // nhân đôi speed.
-            _frezeeBullet = _fireBulletCountDown / 2;
-            boomerang = (GameObject)Object.Instantiate(
-                _boomerang_small,
-                this.transform.position,
-                this.transform.rotation);
-        }
-        else
+        //if (this.gameObject.GetComponent<Rigidbody2D>().velocity.y > 0)
+        //{
+        //    // Jump Attack :
+        //    // không bị giới hạn countdown
+        //    // giảm nữa coldown (count down đối với ground atk)
+        //    // giảm nữa damage
+        //    // nhân đôi speed.
+        //    _frezeeBullet = _fireBulletCountDown / 2;
+        //    boomerang = (GameObject)Object.Instantiate(
+        //        _boomerang_small,
+        //        this.transform.position,
+        //        this.transform.rotation);
+        //}
+        //else
         {
             if (_frezeeBullet > 0)
                 return;
@@ -215,20 +215,20 @@ public class MarioController : MonoBehaviour {
     {
 
         GameObject bullet;
-        if (this.gameObject.GetComponent<Rigidbody2D>().velocity.y > 0)
-        {
-            // Jump Attack :
-            // không bị giới hạn countdown
-            // giảm nữa coldown (count down đối với ground atk)
-            // giảm nữa damage
-            // nhân đôi speed.
-            _frezeeBullet = _fireBulletCountDown / 2;
-            bullet = (GameObject)Object.Instantiate(
-                _bullet_small,
-                this.transform.position,
-                this.transform.rotation);
-        }
-        else
+        //if (this.gameObject.GetComponent<Rigidbody2D>().velocity.y > 0)
+        //{
+        //    // Jump Attack :
+        //    // không bị giới hạn countdown
+        //    // giảm nữa coldown (count down đối với ground atk)
+        //    // giảm nữa damage
+        //    // nhân đôi speed.
+        //    _frezeeBullet = _fireBulletCountDown / 2;
+        //    bullet = (GameObject)Object.Instantiate(
+        //        _bullet_small,
+        //        this.transform.position,
+        //        this.transform.rotation);
+        //}
+        //else
         {
             if (_frezeeBullet > 0)
                 return;
