@@ -31,6 +31,7 @@ public class Mario : MonoBehaviour {
     public GameObject CheckPoint;
     public GameObject OverUI;
     public GameObject GameManager;
+    public GameObject PlayUI;
 
     [HideInInspector] public float JumpForce = 200.0f;
     [HideInInspector] public float JumpMaxForce = 300.0f;
@@ -47,6 +48,14 @@ public class Mario : MonoBehaviour {
     private int _life = 3;
 
     [HideInInspector] public int Shield;
+    void Awake()
+    {
+        DontDestroyOnLoad(GameManager);
+        DontDestroyOnLoad(OverUI);
+        DontDestroyOnLoad(PlayUI);
+        DontDestroyOnLoad(this);
+    }
+
     // Use this for initialization
     void Start () {
         _spriteRenderer = this.GetComponent<SpriteRenderer>();
@@ -183,6 +192,7 @@ public class Mario : MonoBehaviour {
                     var soundmanager = SoundManager.getinstance();
                     if (soundmanager != null)
                         soundmanager.Play(SoundManager.eIdentify.small);
+
                     break;
                 }
             case eMarioStatus.RACOON:

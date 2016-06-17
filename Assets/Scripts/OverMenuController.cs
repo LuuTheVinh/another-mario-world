@@ -11,10 +11,11 @@ public class OverMenuController : MonoBehaviour {
         new Vector2(-100, -90)
     };
 
-    private int currentIndex = 0;
+    protected int currentIndex = 0;
 
 	public void OnPlayAgainButtonClick()
     {
+        this.gameObject.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 
@@ -23,7 +24,28 @@ public class OverMenuController : MonoBehaviour {
 
     }
 
-    void Update()
+    public virtual void CheckBtn()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            switch (currentIndex)
+            {
+                case 0:
+                    {
+                        OnPlayAgainButtonClick();
+                        break;
+                    }
+                case 1:
+                    {
+                        OnMenuButtonClick();
+                        break;
+                    }
+                default:
+                    break;
+            }
+        }
+    }
+    protected virtual void Update()
     {
         if(Input.GetKeyDown("up"))
         {
@@ -42,23 +64,6 @@ public class OverMenuController : MonoBehaviour {
             SelectIcon.transform.localPosition = indexPosition[currentIndex];
         }
 
-        if(Input.GetButtonDown("Jump"))
-        {
-            switch (currentIndex)
-            {
-                case 0:
-                    {
-                        OnPlayAgainButtonClick();
-                        break;
-                    }
-                case 1:
-                    {
-                        OnMenuButtonClick();
-                        break;
-                    }
-                default:
-                    break;
-            }
-        }
+        CheckBtn();
     }
 }

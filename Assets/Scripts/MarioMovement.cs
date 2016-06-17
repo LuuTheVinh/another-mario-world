@@ -53,7 +53,7 @@ public class MarioMovement : MonoBehaviour {
                     _rigidbody2D.velocity = new Vector2(0, _rigidbody2D.velocity.y);
                 }
             }
-
+            
             _rigidbody2D.AddForce(Vector2.right * _mario.MovingForce * ((h) * 1f));
             if (Mathf.Abs(_rigidbody2D.velocity.x) > _mario.MaxSpeed)
             {
