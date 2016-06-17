@@ -144,10 +144,11 @@ public class MarioController : MonoBehaviour {
             //else
             if (GetComponent<Mario>().Status == Mario.eMarioStatus.WHITE)
             {
-                if (GetComponent<Mario>().WeaponType ==  Mario.eWeapontype.fire)
+                if (GetComponent<Mario>().WeaponType == Mario.eWeapontype.fire)
                     fire();
                 if (GetComponent<Mario>().WeaponType == Mario.eWeapontype.boomerang)
                     boomerang();
+
             }
   
         }
@@ -198,6 +199,9 @@ public class MarioController : MonoBehaviour {
                _boomerang_big,
                this.transform.position,
                this.transform.rotation);
+            var soundmanager = SoundManager.getinstance();
+            if (soundmanager != null)
+                soundmanager.Play(SoundManager.eIdentify.shoot);
         }
 
         int dir = (int)this.gameObject.GetComponent<MarioMovement>()._dir;
@@ -237,6 +241,9 @@ public class MarioController : MonoBehaviour {
                 _bullet_big,
                 this.transform.position,
                 this.transform.rotation);
+             var soundmanager = SoundManager.getinstance();
+             if (soundmanager != null)
+                 soundmanager.Play(SoundManager.eIdentify.shoot);
         }
 
         int dir = (int)this.gameObject.GetComponent<MarioMovement>()._dir;

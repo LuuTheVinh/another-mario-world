@@ -178,8 +178,11 @@ public class Mario : MonoBehaviour {
                 }
             case eMarioStatus.WHITE:
                 {
-                    _animator.SetInteger("status", (int)eMarioStatus.SMALL);
-                    Die();
+                    _animator.SetInteger("status", (int)eMarioStatus.BIG);
+                    //Die();
+                    var soundmanager = SoundManager.getinstance();
+                    if (soundmanager != null)
+                        soundmanager.Play(SoundManager.eIdentify.small);
                     break;
                 }
             case eMarioStatus.RACOON:
@@ -217,11 +220,23 @@ public class Mario : MonoBehaviour {
         if (_life <= 0)
         {
             Invoke("showOverUI", 2);
+            var manager = SoundManager.getinstance();
+            if (manager != null)
+            {
+                manager.Play(SoundManager.eIdentify.gameover);
+                manager.Stop(SoundManager.eIdentify.background);
+            }
         }
         else
         {
             Invoke("returnCheckPoint", 2);
         }
+    }
+
+    public void pluslifeone()
+    {
+        ++_life;
+        GameManager.GetComponent<GameManager>().UpdateLife(_life);
     }
 
     private void returnCheckPoint()
@@ -241,7 +256,7 @@ public class Mario : MonoBehaviour {
 
         Camera.main.GetComponent<FollowCamera>().enabled = true;
 
-        _animator.SetInteger("status", (int)eMarioStatus.WHITE);
+        _animator.SetInteger("status", (int)eMarioStatus.BIG);
     }
 
     public void PlayAgain()

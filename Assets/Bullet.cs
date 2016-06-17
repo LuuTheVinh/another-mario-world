@@ -52,10 +52,29 @@ public class Bullet : MonoBehaviour {
         Instantiate(ExplosionEffect, collider.gameObject.transform.position, this.transform.rotation);
         Destroy(this.gameObject);
         collider.gameObject.GetComponent<Enemy>().hitByBullet(this._damage, _type);
+        //GameObject.Find("/Controller").GetComponent<SoundManager>().Play(SoundManager.eIdentify.bulletbreak);
+
     }
     protected virtual void collideWithGround(Collider2D collider)
     {
         Instantiate(ExplosionEffect, this.transform.position, this.transform.rotation);
         Destroy(this.gameObject);
+
+    }
+
+    void OnDestroy()
+    {
+        if (this._type == eType.fire)
+        {
+            var soundmanager = SoundManager.getinstance();
+            if (soundmanager != null)
+                soundmanager.Play(SoundManager.eIdentify.bulletbreak);
+        }
+        if (this._type == eType.boomerang)
+        {
+            var soundmanager = SoundManager.getinstance();
+            if (soundmanager != null)
+                soundmanager.Play(SoundManager.eIdentify.metalhit);
+        }
     }
 }
