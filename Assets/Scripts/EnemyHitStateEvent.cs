@@ -9,6 +9,9 @@ public class EnemyHitStateEvent : StateMachineBehaviour {
 
         //animator.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(60, 400));
         animator.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(600, 3500));
+        var soundmanager = SoundManager.getinstance();
+        if (soundmanager != null)
+            soundmanager.Play(SoundManager.eIdentify.enemydie);
     }
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -20,14 +20,19 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+	  
 	}
 
     public void UpdateCoin(int value = 1)
     {
         _currentCoin += value;
+        if (_currentCoin >= 150)
+        {
+            _currentCoin %= 120;
+            setCurrentLife(_currentCoin / 120);
+        }
 
-        updateUI();
+        updateCoinUI();
     }
 
     public void UpdateWeaponUI(Mario.eWeapontype type)
@@ -64,8 +69,20 @@ public class GameManager : MonoBehaviour {
         LifeValueUI.GetComponent<Text>().text = _currentLife.ToString();
     }
 
-    private void updateUI()
+    private void updateCoinUI()
     {
         CoinValueUI.GetComponent<Text>().text = _currentCoin.ToString();
+    }
+
+    public void setCurrentCoin(int value)
+    {
+        this._currentCoin = value;
+        updateCoinUI();
+    }
+
+    public void setCurrentLife(int value)
+    {
+        this._currentLife = value;
+        UpdateLife(value);
     }
 }

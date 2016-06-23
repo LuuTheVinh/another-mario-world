@@ -19,7 +19,13 @@ public class DoorOpenStateEvent : StateMachineBehaviour {
     {
         //GameObject mario = animator.gameObject.GetComponentInParent<Door>()._openner;
         Object nextscene = animator.gameObject.GetComponentInParent<Door>()._scene;
-        SceneManager.LoadScene(nextscene.name, LoadSceneMode.Single);
+        //SceneManager.LoadScene(nextscene.name, LoadSceneMode.Single);
+        Application.LoadLevel(animator.gameObject.GetComponentInParent<Door>().level);
+        var soundmanager = SoundManager.getinstance();
+        if (soundmanager != null)
+        {
+            soundmanager.Stop(SoundManager.eIdentify.background);
+        }
     }
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

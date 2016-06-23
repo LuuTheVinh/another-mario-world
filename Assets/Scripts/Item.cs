@@ -5,7 +5,7 @@ using System.Collections;
 public class Item : MonoBehaviour{
 
     
-    public enum ItemType { Mushroom, FireFlower, Amazing_Star, Coin, Leaf, Flygon, Boomerang, Shield};
+    public enum ItemType { Mushroom, FireFlower, Amazing_Star, Coin, Leaf, Flygon, Boomerang, Shield, Life};
 
 
     protected IMovement _imovement;
@@ -50,7 +50,9 @@ public class Item : MonoBehaviour{
         {
             _animator.enabled = false;
             if (_type == ItemType.Coin)
+            {
                 Destroy(this.gameObject);
+            }
         }
         run();
 
@@ -86,15 +88,38 @@ public class Item : MonoBehaviour{
                 mario.GetComponent<Animator>().SetInteger("status", (int) Mario.eMarioStatus.BIG);
                 break;
             case Item.ItemType.Boomerang:
-                mario.GetComponent<Animator>().SetInteger("status", (int) Mario.eMarioStatus.WHITE);
-                SceneController.setBoomerangPanelActive(true);
-                mario.WeaponType = Mario.eWeapontype.boomerang;
-                
+                if (mario.GetComponent<Animator>().GetInteger("status") == (int)Mario.eMarioStatus.WHITE
+                     && mario.WeaponType == Mario.eWeapontype.boomerang)
+                {
+                    mario.GameManager.GetComponent<GameManager>().UpdateCoin(5);
+                }
+                else
+                {
+                    mario.GetComponent<Animator>().SetInteger("status", (int)Mario.eMarioStatus.WHITE);
+                    SceneController.setBoomerangPanelActive(true);
+                    mario.WeaponType = Mario.eWeapontype.boomerang;
+                }
+                var soundmanager = SoundManager.getinstance();
+                if (soundmanager != null)
+                    soundmanager.Play(SoundManager.eIdentify.levelup);
+                mario.updateWeaponUI(ItemType.Boomerang);
                 break;
             case Item.ItemType.FireFlower:
-                mario.GetComponent<Animator>().SetInteger("status", (int) Mario.eMarioStatus.WHITE);
-                SceneController.setBulletPanelActive(true);
-                mario.WeaponType = Mario.eWeapontype.fire;
+                if (mario.GetComponent<Animator>().GetInteger("status") == (int)Mario.eMarioStatus.WHITE
+                    && mario.WeaponType == Mario.eWeapontype.fire)
+                {
+                    mario.GameManager.GetComponent<GameManager>().UpdateCoin(5);
+                }
+                else
+                {
+                    mario.GetComponent<Animator>().SetInteger("status", (int)Mario.eMarioStatus.WHITE);
+                    SceneController.setBulletPanelActive(true);
+                    mario.WeaponType = Mario.eWeapontype.fire;
+                }
+                var soundmanager2 = SoundManager.getinstance();
+                if (soundmanager2 != null)
+                    soundmanager2.Play(SoundManager.eIdentify.levelup);
+                mario.updateWeaponUI(ItemType.FireFlower);
 
                 break;
             case Item.ItemType.Amazing_Star:
@@ -104,6 +129,9 @@ public class Item : MonoBehaviour{
                 break;
             case ItemType.Shield:
                 mario.GetComponent<Mario>().Shield = 3;
+                break;
+            case ItemType.Life:
+                mario.GetComponent<Mario>().pluslifeone();
                 break;
             default:
                 break;

@@ -20,7 +20,6 @@ public class SceneController : MonoBehaviour {
         Object.DontDestroyOnLoad(this);
 
         //_player.SetActive(false);
-        GetComponent<AudioSource>().Play();
     }
 
     public void downLife()

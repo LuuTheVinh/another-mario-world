@@ -107,12 +107,22 @@ public class Mario : MonoBehaviour {
             if (item == null)
                 return;
 
-            if (item._type == Item.ItemType.Boomerang)
-                GameManager.GetComponent<GameManager>().UpdateWeaponUI(eWeapontype.boomerang);
+            //if (item._type == Item.ItemType.Boomerang)
+            //    GameManager.GetComponent<GameManager>().UpdateWeaponUI(eWeapontype.boomerang);
 
-            if (item._type == Item.ItemType.FireFlower)
-                GameManager.GetComponent<GameManager>().UpdateWeaponUI(eWeapontype.fire);
+            //if (item._type == Item.ItemType.FireFlower)
+            //    GameManager.GetComponent<GameManager>().UpdateWeaponUI(eWeapontype.fire);
         }
+    }
+
+    public void updateWeaponUI(Item.ItemType type)
+    {
+
+        if (type == Item.ItemType.Boomerang)
+            GameManager.GetComponent<GameManager>().UpdateWeaponUI(eWeapontype.boomerang);
+
+        if (type == Item.ItemType.FireFlower)
+            GameManager.GetComponent<GameManager>().UpdateWeaponUI(eWeapontype.fire);
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -235,6 +245,7 @@ public class Mario : MonoBehaviour {
             {
                 manager.Play(SoundManager.eIdentify.gameover);
                 manager.Stop(SoundManager.eIdentify.background);
+                manager.Stop(SoundManager.eIdentify.lavender);
             }
         }
         else
@@ -247,6 +258,11 @@ public class Mario : MonoBehaviour {
     {
         ++_life;
         GameManager.GetComponent<GameManager>().UpdateLife(_life);
+        var soundmanager = SoundManager.getinstance();
+        if (soundmanager != null)
+        {
+            soundmanager.Play(SoundManager.eIdentify.extralife);
+        }
     }
 
     private void returnCheckPoint()
@@ -332,5 +348,24 @@ public class Mario : MonoBehaviour {
 
         Invoke("flashShield", 1.0f);
 
+    }
+
+    public void resetvalue()
+    {
+        _life = 3;
+        _animator.SetInteger("status", (int)Mario.eMarioStatus.BIG);
+        this.WeaponType = eWeapontype.none;
+        GameManager.GetComponent<GameManager>().setCurrentCoin(0);
+        GameManager.GetComponent<GameManager>().setCurrentLife(3);
+        var door = GameObject.Find("/green_door_out");
+        this.CheckPoint = door;
+        this.returnCheckPoint();
+    }
+
+    public void OnDestroy()
+    {
+        Destroy(PlayUI);
+        Destroy(OverUI);
+        Destroy(GameManager);
     }
 }

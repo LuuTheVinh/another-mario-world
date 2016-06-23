@@ -70,6 +70,8 @@ public class Bullet : MonoBehaviour {
     }
     protected virtual void collideWithGround(Collider2D collider)
     {
+        if (collider is EdgeCollider2D)
+            return;
         Instantiate(ExplosionEffect, this.transform.position, this.transform.rotation);
         Destroy(this.gameObject);
 
@@ -83,11 +85,11 @@ public class Bullet : MonoBehaviour {
             if (soundmanager != null)
                 soundmanager.Play(SoundManager.eIdentify.bulletbreak);
         }
-        if (this._type == eType.boomerang)
-        {
-            var soundmanager = SoundManager.getinstance();
-            if (soundmanager != null)
-                soundmanager.Play(SoundManager.eIdentify.metalhit);
-        }
+        //if (this._type == eType.boomerang)
+        //{
+        //    var soundmanager = SoundManager.getinstance();
+        //    if (soundmanager != null)
+        //        soundmanager.Play(SoundManager.eIdentify.metalhit);
+        //}
     }
 }

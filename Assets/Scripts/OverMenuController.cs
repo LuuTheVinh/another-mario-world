@@ -16,7 +16,13 @@ public class OverMenuController : MonoBehaviour {
 	public void OnPlayAgainButtonClick()
     {
         this.gameObject.SetActive(false);
+        var mario = GameObject.FindGameObjectWithTag("Player");
+        mario.GetComponent<Mario>().resetvalue();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            Destroy(mario);
+        }
     }
 
     public void OnMenuButtonClick()

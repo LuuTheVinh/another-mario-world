@@ -18,6 +18,8 @@ public class Parallaxing : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        updateBackground();
+
 		// The previous frame had the current frame's camera position
 		previousCamPos = cam.position;
 
@@ -30,7 +32,8 @@ public class Parallaxing : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        if (backgrounds == null)
+            return;
 		// for each background
 		for (int i = 0; i < backgrounds.Length; i++) {
 			// the parallax is the opposite of the camera movement because the previous frame multiplied by the scale
@@ -49,4 +52,15 @@ public class Parallaxing : MonoBehaviour {
 		// set the previousCamPos to the camera's position at the end of the frame
 		previousCamPos = cam.position;
 	}
+
+    private void updateBackground()
+    {
+        var bgs = GameObject.FindGameObjectsWithTag("Background");
+        this.backgrounds = new Transform[bgs.Length];
+        for (int i = bgs.Length - 1; i >= 0 ; --i)
+        {
+
+            this.backgrounds[i] = bgs[i].transform;
+        }
+    }
 }

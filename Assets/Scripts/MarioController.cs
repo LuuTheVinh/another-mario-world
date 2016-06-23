@@ -30,12 +30,13 @@ public class MarioController : MonoBehaviour {
     public float _fireBulletCountDown;
     private const float COUNT_JUMP_FIRE = 0.33f;
     public static float _speedBulletCountDown = COUNT_JUMP_FIRE;
-
+    public bool enable;
     // Use this for initialization
     void Start () {
         _animator = this.GetComponent<Animator>();
         _marioMovement = this.GetComponent<MarioMovement>();
         _rigidbody2D = this.GetComponent<Rigidbody2D>();
+        enable = true;
     }
 
     void Update()
@@ -57,12 +58,12 @@ public class MarioController : MonoBehaviour {
         }
 
         // nhảy
-        if (Input.GetButtonDown("Jump") && _grounded)
+        if (Input.GetButtonDown("Jump") && _grounded && enable)
         {
             _canJump = true;
         }
 
-        if (Input.GetButton("Jump") && _canHoldJump)
+        if (Input.GetButton("Jump") && _canHoldJump && enable)
         {
             _timer += Time.deltaTime;
             _speedBulletCountDown -= Time.deltaTime;
@@ -88,7 +89,7 @@ public class MarioController : MonoBehaviour {
 
         if (h != 0)
         {
-            if (!_animator.GetBool("isRunning"))
+            if (!_animator.GetBool("isRunning") && enable)
             {
                 _animator.SetBool("isRunning", true);
             }
@@ -281,6 +282,12 @@ public class MarioController : MonoBehaviour {
         _animator.ResetTrigger("dash");
         
         _marioMovement.Jump(max);
+
+        var soundmanager = SoundManager.getinstance();
+        if (soundmanager != null)
+        {
+            soundmanager.Play(SoundManager.eIdentify.jump);
+        }
     }
 
     public void kick()

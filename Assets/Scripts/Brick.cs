@@ -52,6 +52,10 @@ public class Brick : MonoBehaviour {
                 else if (status >= (int)Mario.eMarioStatus.BIG)
                 {
                     _animator.SetTrigger("smash");
+                    var soundmanager = SoundManager.getinstance();
+                    if (soundmanager != null)
+                        soundmanager.Play(SoundManager.eIdentify.brickbreak);
+
                 }
             }
         }

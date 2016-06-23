@@ -6,6 +6,7 @@ public class Door : MonoBehaviour {
     [HideInInspector] public GameObject _openner;
     private Animator _animator;
     public Object _scene;
+    public int level;
 	// Use this for initialization
 	void Start () {
         _animator = GetComponentInChildren<Animator>();

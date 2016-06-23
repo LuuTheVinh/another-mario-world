@@ -20,6 +20,9 @@ public class FreeCoin : Item {
         {
             // Bỏ tiền vô túi nè.
             Destroy(this.gameObject);
+            var soundmanager = SoundManager.getinstance();
+            if (soundmanager != null)
+                soundmanager.Play(SoundManager.eIdentify.coinhit);
 
             var controller = GameObject.Find("/Controller");
             if (controller != null)

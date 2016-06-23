@@ -16,6 +16,9 @@ public class MysteryItemHitStateEvent : StateMachineBehaviour {
             case Item.ItemType.Flygon:
             case Item.ItemType.Coin:
                 init = true;
+                var soundmanager = SoundManager.getinstance();
+                if (soundmanager != null)
+                    soundmanager.Play(SoundManager.eIdentify.coinhit);
                 
                 var controller = GameObject.Find("/Controller");
                 if (controller != null)
@@ -69,6 +72,10 @@ public class MysteryItemHitStateEvent : StateMachineBehaviour {
                 {
                     init = true;
                 }
+                var soundmanager = SoundManager.getinstance();
+                if (soundmanager != null)
+                    soundmanager.Play(SoundManager.eIdentify.bonusAppear);
+
                 break;
             case Item.ItemType.Mushroom:
 

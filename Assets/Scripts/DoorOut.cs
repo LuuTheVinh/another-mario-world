@@ -19,20 +19,26 @@ public class DoorOut : MonoBehaviour {
         {
             _player = getPlayerFromPreviousScene();
             setFollowCamera(_player);
+            setCheckPoint(_player);
         }
         _player.GetComponent<Transform>().position = this.transform.position;
         _countTime = 0.0f;
         _isFinishFade = false;
 
         var renderer = _player.GetComponent<SpriteRenderer>();
-
         renderer.color = new Color(
             renderer.color.r,
             renderer.color.g,
             renderer.color.b,
             0.0f);
-
+        var soundmanager = SoundManager.getinstance();
+        soundmanager.Play(SoundManager.eIdentify.background);
 	}
+
+    private void setCheckPoint(GameObject _player)
+    {
+        _player.GetComponent<Mario>().CheckPoint = this.gameObject;
+    }
 
     private void setFollowCamera(GameObject player)
     {
@@ -67,7 +73,7 @@ public class DoorOut : MonoBehaviour {
         if (_isFinishFade == false)
             FadeOutObject();
         else
-            Destroy(this);
+            this.enabled = false;
 
 	}
 

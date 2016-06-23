@@ -33,6 +33,9 @@ public class Boomerang : Bullet {
         {
             collider.gameObject.GetComponent<Enemy>().hitByBullet(this._damage, _type);
             _listIgnore.Add(collider.gameObject);
+            var soundmanager = SoundManager.getinstance();
+            if (soundmanager != null)
+                soundmanager.Play(SoundManager.eIdentify.metalhit);
         }
     }
 

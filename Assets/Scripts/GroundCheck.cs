@@ -26,6 +26,8 @@ public class GroundCheck : MonoBehaviour {
     {
         if (col.gameObject.tag == "Ground")
         {
+            if (col.usedByEffector == true && col is EdgeCollider2D)
+                return;
             if (this.GetComponentInParent<MarioController>() != null)
                 this.GetComponentInParent<MarioController>().Grounded();
         }
