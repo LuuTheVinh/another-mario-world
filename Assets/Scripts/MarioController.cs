@@ -9,7 +9,7 @@ public class MarioController : MonoBehaviour {
     public LayerMask WhatIsGround;
     
     public Transform groundCheck;
-    public float groundedRadius = 0.3f;
+    public float groundedRadius = 0.175f;
 
     private Animator _animator;
     private MarioMovement _marioMovement;
@@ -62,9 +62,11 @@ public class MarioController : MonoBehaviour {
         if (Input.GetButtonDown("Jump") && _rigidbody2D.velocity.y <= 0)
         {
             _is_jump_press = true;
+            Invoke("Cancel_jump_press", 0.2f);
         }
         
-        // nhảy
+         //nhảy
+
         if (_is_jump_press && _grounded && enable)
         {
             _canJump = true;
@@ -326,4 +328,24 @@ public class MarioController : MonoBehaviour {
     {
         _animator.SetBool("isJumping", false);
     }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Ground")
+        {
+            if (Input.GetButtonDown("Jump") && enable)
+            {
+                _canJump = true;
+                _is_jump_press = false;
+            }
+        }
+    }
+
+    void Cancel_jump_press()
+    {
+        _is_jump_press = false;
+        Debug.Log("Cancel");
+    }
+
+
 }

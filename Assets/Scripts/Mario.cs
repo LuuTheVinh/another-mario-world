@@ -74,7 +74,7 @@ public class Mario : MonoBehaviour {
         PushUpForce = Mathf.Sqrt(2 * Physics.gravity.magnitude * _rigidbody2D.gravityScale * 1.5f) + _rigidbody2D.mass + _rigidbody2D.drag;
 
         Color softBlue = new Color(51, 51 * 2, 51 * 3, 51 * 4);
-        _spriteRenderer.color = softBlue;
+        //_spriteRenderer.color = softBlue;
     }
 	
 	// Update is called once per frame
