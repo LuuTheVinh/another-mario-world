@@ -7,7 +7,8 @@ public class Bullet : MonoBehaviour {
     public enum eType
     {
         fire,
-        boomerang
+        boomerang,
+        blunt
     }
 
     public GameObject ExplosionEffect;
@@ -46,6 +47,22 @@ public class Bullet : MonoBehaviour {
         {
             collideWithGround(collider);
         }
+
+    }
+
+    protected void OnTriggerExit2D(Collider2D collider)
+    {
+        string tag = collider.gameObject.tag;
+        string name = collider.gameObject.name;
+        
+        if (tag == "MainCamera")
+        {
+            if (name == "Bound_1")
+            {
+                // Nếu khuất khỏi màn hình thì destroy
+                Destroy(this.gameObject);
+            }
+        }
     }
 
     protected virtual void collideWithEnemy(Collider2D collider)
@@ -72,13 +89,16 @@ public class Bullet : MonoBehaviour {
     {
         if (collider is EdgeCollider2D)
             return;
-        Instantiate(ExplosionEffect, this.transform.position, this.transform.rotation);
+        // Nếu va chạm với block thuộc một cái secret item thì không destroy bullet. Nếu destroy thì bullet không va chạm với SecretItem
+        if (collider.GetComponentInParent<SecretItem>() != null)
+            return; 
         Destroy(this.gameObject);
 
     }
 
     void OnDestroy()
     {
+        Instantiate(ExplosionEffect, this.transform.position, this.transform.rotation);
         if (this._type == eType.fire)
         {
             var soundmanager = SoundManager.getinstance();

@@ -60,6 +60,7 @@ public class MysteryItemHitStateEvent : StateMachineBehaviour {
         {
             case Item.ItemType.FireFlower:
             case Item.ItemType.Boomerang:
+            case Item.ItemType.Blunt:
                 Animator mario_animator = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Animator>();
                 //if (mario_animator.GetInteger("status")==(int) Mario.eMarioStatus.SMALL)
                 if (false)

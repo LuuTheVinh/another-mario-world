@@ -61,9 +61,19 @@ public class CannonBullet : Enemy {
     protected virtual void OnTriggerEnter2D(Collider2D collider)
     {
         string tag = collider.gameObject.tag;
+        string name = collider.gameObject.name;
         if (tag == "Ground")
             checkWithGround(null);
         if (tag == "Player")
             killPlayer(collider.gameObject);
+        if (tag == "MainCamera")
+        {
+            if (name == "Bound_2")
+            {
+                var soundmanager = SoundManager.getinstance();
+                if (soundmanager != null)
+                    soundmanager.Play(SoundManager.eIdentify.cannon_attack);
+            }
+        }
     }
 }

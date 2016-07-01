@@ -12,6 +12,8 @@ public class DoorOut : MonoBehaviour {
     private const float _duration = 1.0f;
     private float _countTime;
     private bool _isFinishFade;
+
+    public SoundManager.eIdentify _background;
 	// Use this for initialization
 	void Start () {
 
@@ -32,7 +34,11 @@ public class DoorOut : MonoBehaviour {
             renderer.color.b,
             0.0f);
         var soundmanager = SoundManager.getinstance();
-        soundmanager.Play(SoundManager.eIdentify.background);
+        if (soundmanager != null)
+        {
+            soundmanager.StopAll();
+            soundmanager.Play(_background);
+        }
 	}
 
     private void setCheckPoint(GameObject _player)

@@ -20,8 +20,12 @@ public class Switch : MonoBehaviour {
         string tag = collider.gameObject.tag;
         if (tag == "Player")
         {
+
             foreach (var obj in _listObject)
             {
+                if (obj.name.Contains("hide_gate"))
+                    if (collider.gameObject.GetComponent<Animator>().GetInteger("status") == 1)
+                        continue;
                 obj.GetComponent < ISwitchable>()._switch_on();
             }
         }

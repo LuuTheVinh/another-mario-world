@@ -1,10 +1,14 @@
 fileFormatVersion: 2
 guid: 1b43f89bc2176954fb26c5c158141034
-timeCreated: 1462280819
+timeCreated: 1467188149
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: item_leaf
+    21300002: falling_object
+    21300004: sand_0
+    21300006: sand_1
+    21300008: sand_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -58,6 +62,50 @@ TextureImporter:
         y: 365
         width: 16
         height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: falling_object
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 346
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: sand_0
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 261
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: sand_1
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 261
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: sand_2
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 261
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

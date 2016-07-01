@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ad578cf74563bb247b97caedcfbb7a7e
-timeCreated: 1465037305
+timeCreated: 1467198155
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -11,11 +11,11 @@ TextureImporter:
     21300008: backgrounds-objects_4
     21300010: backgrounds-objects_5
     21300012: backgrounds-objects_6
-    21300014: backgrounds-objects_7
+    21300014: boom
     21300016: backgrounds-objects_8
     21300018: big_trunk_top
     21300020: trunk mid
-    21300022: backgrounds-objects_11
+    21300022: boom_thrower
     21300024: backgrounds-objects_12
     21300026: backgrounds-objects_13
     21300028: backgrounds-objects_14
@@ -334,7 +334,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: backgrounds-objects_7
+    - name: boom
       rect:
         serializedVersion: 2
         x: 783
@@ -356,7 +356,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: backgrounds-objects_11
+    - name: boom_thrower
       rect:
         serializedVersion: 2
         x: 881

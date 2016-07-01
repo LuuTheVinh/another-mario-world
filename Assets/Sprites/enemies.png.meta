@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 57d5fac470ee7234aaa06e49ad95ffd2
-timeCreated: 1465578783
+timeCreated: 1467217849
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -66,16 +66,16 @@ TextureImporter:
     21300118: enemies_59
     21300120: enemies_60
     21300122: enemies_61
-    21300124: enemies_62
-    21300126: enemies_63
-    21300128: enemies_64
-    21300130: enemies_65
-    21300132: enemies_66
-    21300134: enemies_67
-    21300136: enemies_68
-    21300138: enemies_69
-    21300140: enemies_70
-    21300142: enemies_71
+    21300124: blunt_0
+    21300126: blunt_1
+    21300128: blunt_2
+    21300130: blunt_3
+    21300132: blunt_4
+    21300134: blunt_5
+    21300136: blunt_6
+    21300138: fire_jump_0
+    21300140: fire_jump_1
+    21300142: fire_jump_2
     21300144: enemies_72
     21300146: enemies_73
     21300148: enemies_74
@@ -973,7 +973,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_62
+    - name: blunt_0
       rect:
         serializedVersion: 2
         x: 123
@@ -984,7 +984,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_63
+    - name: blunt_1
       rect:
         serializedVersion: 2
         x: 141
@@ -995,7 +995,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_64
+    - name: blunt_2
       rect:
         serializedVersion: 2
         x: 161
@@ -1006,7 +1006,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_65
+    - name: blunt_3
       rect:
         serializedVersion: 2
         x: 181
@@ -1017,7 +1017,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_66
+    - name: blunt_4
       rect:
         serializedVersion: 2
         x: 201
@@ -1028,7 +1028,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_67
+    - name: blunt_5
       rect:
         serializedVersion: 2
         x: 220
@@ -1039,7 +1039,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_68
+    - name: blunt_6
       rect:
         serializedVersion: 2
         x: 243
@@ -1050,7 +1050,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_69
+    - name: fire_jump_0
       rect:
         serializedVersion: 2
         x: 6
@@ -1061,7 +1061,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_70
+    - name: fire_jump_1
       rect:
         serializedVersion: 2
         x: 27
@@ -1072,7 +1072,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: enemies_71
+    - name: fire_jump_2
       rect:
         serializedVersion: 2
         x: 47

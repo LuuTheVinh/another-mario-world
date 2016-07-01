@@ -12,7 +12,10 @@ public class SoundManager : MonoBehaviour {
     }
 
     public List<AudioSource>  _audio = new List<AudioSource>();
-    public enum eIdentify { background, coinhit, brickbreak, bonusAppear, bulletbreak, enemydie, gameover, jump, levelup, shoot, small, metalhit, extralife, lavender }
+    public enum eIdentify {
+        background, coinhit, brickbreak, bonusAppear, bulletbreak, 
+        enemydie, gameover, jump, levelup, shoot,
+        small, metalhit, extralife, lavender, cannon_attack }
     private List<string> _names = new List<string>() { 
     };
 
@@ -49,4 +52,12 @@ public class SoundManager : MonoBehaviour {
             _audio[(int)name].Stop();
     }
 
+
+    public void StopAll()
+    {
+        foreach (var a in _audio)
+        {
+            a.Stop();
+        }
+    }
 }

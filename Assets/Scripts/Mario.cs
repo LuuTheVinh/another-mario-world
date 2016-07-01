@@ -18,7 +18,8 @@ public class Mario : MonoBehaviour {
     {
         none,
         fire,
-        boomerang
+        boomerang,
+        blunt
     }
 
     public eWeapontype WeaponType;
@@ -96,6 +97,7 @@ public class Mario : MonoBehaviour {
         if (Shield > 0)
         {
             flashShield();
+            Invoke("timeoutflashshield", 7.0f);
         }
 	}
 
@@ -217,6 +219,28 @@ public class Mario : MonoBehaviour {
 
         _protectTime = 3.0f;
     }
+
+    public void GotDirectHit()
+    {
+
+        switch (Status)
+        {
+            case eMarioStatus.SMALL:
+            case eMarioStatus.WHITE:
+            case eMarioStatus.BIG:
+            case eMarioStatus.RACOON:
+
+                {
+                    _animator.SetInteger("status", (int)eMarioStatus.SMALL);
+                    Die();
+                    break;
+                }
+
+            default:
+                break;
+        }
+    }
+
 
     public void Die()
     {
@@ -348,6 +372,12 @@ public class Mario : MonoBehaviour {
 
         Invoke("flashShield", 1.0f);
 
+    }
+
+    private void timeoutflashshield()
+    {
+        Shield = 0;
+        CancelInvoke("flashShield");
     }
 
     public void resetvalue()

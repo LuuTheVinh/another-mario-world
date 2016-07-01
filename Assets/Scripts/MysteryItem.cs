@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets;
 
 // created by Ho Hoang Tung
-public class MysteryItem : MonoBehaviour {
+public class MysteryItem : MonoBehaviour , ISwitchable{
     public enum Type { MYSTERY, BRICK, HIDE}
     public GameObject _itemPrefab;
     Animator _animator;
@@ -100,4 +101,9 @@ public class MysteryItem : MonoBehaviour {
         }
     }
 
+
+    public void _switch_on()
+    {
+        _animator.Play("ChosenState");
+    }
 }

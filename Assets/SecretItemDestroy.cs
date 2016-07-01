@@ -17,11 +17,14 @@ public class SecretItemDestroy : StateMachineBehaviour {
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         var secretitem = animator.gameObject.GetComponent<SecretItem>();
-
-        GameObject.Instantiate(secretitem._item,
-            animator.gameObject.transform.position + secretitem._position,
-            animator.gameObject.transform.rotation);
+        if (secretitem != null && secretitem._item != null)
+        {
+            GameObject.Instantiate(secretitem._item,
+                animator.gameObject.transform.position + secretitem._position,
+                animator.gameObject.transform.rotation);
+        }
         Destroy(animator.gameObject);
+        
     }
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

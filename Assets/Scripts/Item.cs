@@ -5,7 +5,7 @@ using System.Collections;
 public class Item : MonoBehaviour{
 
     
-    public enum ItemType { Mushroom, FireFlower, Amazing_Star, Coin, Leaf, Flygon, Boomerang, Shield, Life};
+    public enum ItemType { Mushroom, FireFlower, Amazing_Star, Coin, Leaf, Flygon, Boomerang, Shield, Life, Blunt};
 
 
     protected IMovement _imovement;
@@ -58,7 +58,7 @@ public class Item : MonoBehaviour{
 
 	}
 
-    protected void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
 
         if (_delayNoneHit > 0)
@@ -88,38 +88,67 @@ public class Item : MonoBehaviour{
                 mario.GetComponent<Animator>().SetInteger("status", (int) Mario.eMarioStatus.BIG);
                 break;
             case Item.ItemType.Boomerang:
+                var soundmanager = SoundManager.getinstance();
                 if (mario.GetComponent<Animator>().GetInteger("status") == (int)Mario.eMarioStatus.WHITE
                      && mario.WeaponType == Mario.eWeapontype.boomerang)
                 {
                     mario.GameManager.GetComponent<GameManager>().UpdateCoin(5);
+                    if (soundmanager != null)
+                        soundmanager.Play(SoundManager.eIdentify.coinhit);
                 }
                 else
                 {
                     mario.GetComponent<Animator>().SetInteger("status", (int)Mario.eMarioStatus.WHITE);
                     SceneController.setBoomerangPanelActive(true);
                     mario.WeaponType = Mario.eWeapontype.boomerang;
+                    if (soundmanager != null)
+                        soundmanager.Play(SoundManager.eIdentify.levelup);
+                    mario.updateWeaponUI(ItemType.Boomerang);
                 }
-                var soundmanager = SoundManager.getinstance();
-                if (soundmanager != null)
-                    soundmanager.Play(SoundManager.eIdentify.levelup);
-                mario.updateWeaponUI(ItemType.Boomerang);
+
                 break;
             case Item.ItemType.FireFlower:
+                var soundmanager2 = SoundManager.getinstance();
+
                 if (mario.GetComponent<Animator>().GetInteger("status") == (int)Mario.eMarioStatus.WHITE
                     && mario.WeaponType == Mario.eWeapontype.fire)
                 {
                     mario.GameManager.GetComponent<GameManager>().UpdateCoin(5);
+                    if (soundmanager2 != null)
+                        soundmanager2.Play(SoundManager.eIdentify.coinhit);
                 }
                 else
                 {
                     mario.GetComponent<Animator>().SetInteger("status", (int)Mario.eMarioStatus.WHITE);
                     SceneController.setBulletPanelActive(true);
                     mario.WeaponType = Mario.eWeapontype.fire;
+                    if (soundmanager2 != null)
+                        soundmanager2.Play(SoundManager.eIdentify.levelup);
+                    mario.updateWeaponUI(ItemType.FireFlower);
                 }
-                var soundmanager2 = SoundManager.getinstance();
-                if (soundmanager2 != null)
-                    soundmanager2.Play(SoundManager.eIdentify.levelup);
-                mario.updateWeaponUI(ItemType.FireFlower);
+
+
+                break;
+            case ItemType.Blunt:
+                var soundmanager3 = SoundManager.getinstance();
+
+                if (mario.GetComponent<Animator>().GetInteger("status") == (int)Mario.eMarioStatus.WHITE
+                    && mario.WeaponType == Mario.eWeapontype.blunt)
+                {
+                    mario.GameManager.GetComponent<GameManager>().UpdateCoin(5);
+                    if (soundmanager3 != null)
+                        soundmanager3.Play(SoundManager.eIdentify.coinhit);
+                }
+                else
+                {
+                    mario.GetComponent<Animator>().SetInteger("status", (int)Mario.eMarioStatus.WHITE);
+                    SceneController.setBulletPanelActive(true);
+                    mario.WeaponType = Mario.eWeapontype.blunt;
+                    if (soundmanager3 != null)
+                        soundmanager3.Play(SoundManager.eIdentify.levelup);
+                    mario.updateWeaponUI(ItemType.Blunt);
+                }
+
 
                 break;
             case Item.ItemType.Amazing_Star:

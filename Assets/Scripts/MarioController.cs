@@ -9,7 +9,7 @@ public class MarioController : MonoBehaviour {
     public LayerMask WhatIsGround;
     
     public Transform groundCheck;
-    public float groundedRadius = 0.175f;
+    public float groundedRadius = 0.3f;
 
     private Animator _animator;
     private MarioMovement _marioMovement;
@@ -25,12 +25,14 @@ public class MarioController : MonoBehaviour {
     public GameObject _bullet_bar;
     public GameObject _boomerang_big;
     public GameObject _boomerang_small;
-
+    public GameObject _blunt;
 
     public float _fireBulletCountDown;
     private const float COUNT_JUMP_FIRE = 0.33f;
     public static float _speedBulletCountDown = COUNT_JUMP_FIRE;
     public bool enable;
+
+    private bool _is_jump_press;
     // Use this for initialization
     void Start () {
         _animator = this.GetComponent<Animator>();
@@ -57,10 +59,16 @@ public class MarioController : MonoBehaviour {
             Grounded();
         }
 
+        if (Input.GetButtonDown("Jump") && _rigidbody2D.velocity.y <= 0)
+        {
+            _is_jump_press = true;
+        }
+        
         // nhảy
-        if (Input.GetButtonDown("Jump") && _grounded && enable)
+        if (_is_jump_press && _grounded && enable)
         {
             _canJump = true;
+            _is_jump_press = false;
         }
 
         if (Input.GetButton("Jump") && _canHoldJump && enable)
@@ -149,7 +157,8 @@ public class MarioController : MonoBehaviour {
                     fire();
                 if (GetComponent<Mario>().WeaponType == Mario.eWeapontype.boomerang)
                     boomerang();
-
+                if (GetComponent<Mario>().WeaponType == Mario.eWeapontype.blunt)
+                    blunt();
             }
   
         }
@@ -249,6 +258,23 @@ public class MarioController : MonoBehaviour {
 
         int dir = (int)this.gameObject.GetComponent<MarioMovement>()._dir;
         bullet.GetComponent<Bullet>()._speed *= dir;
+    }
+
+    private void blunt()
+    {
+        if (_frezeeBullet > 0)
+            return;
+        _frezeeBullet = Time.deltaTime;
+        int dir = (int)this.gameObject.GetComponent<MarioMovement>()._dir;
+
+        var bullet = (GameObject)Object.Instantiate(
+           _blunt,
+           new Vector2(this.transform.position.x + dir * 1, this.transform.position.y),
+           this.transform.rotation);
+        var soundmanager = SoundManager.getinstance();
+        if (soundmanager != null)
+            soundmanager.Play(SoundManager.eIdentify.shoot);
+        bullet.GetComponentInChildren<Blunt>()._Force.x *= dir;
     }
 
     private static float _speedFire;

@@ -38,7 +38,7 @@ public class Brick : MonoBehaviour {
         Vector3 distance = this.transform.position - coll.gameObject.transform.position;
         if (coll.gameObject.GetComponent<Rigidbody2D>().velocity.y < 0)
             return;
-        if (distance.y > 0 && Mathf.Abs(distance.x) < 0.3)
+        if (distance.y > 0 && Mathf.Abs(distance.x) < 0.5)
         {
             float centerX = coll.collider.bounds.center.x;
             Collider2D thisCollider = this.GetComponent<Collider2D>();

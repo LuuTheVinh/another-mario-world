@@ -133,6 +133,10 @@ public class MarioMovement : MonoBehaviour {
 
     public void Jump(bool max = false)
     {
+        // test bỏ vận tốc trọng lực, sau đó mới đẩy lên.
+        var temp = _rigidbody2D.velocity;
+        temp.y = 0;
+        _rigidbody2D.velocity = temp;
         if (!max)
             _rigidbody2D.AddForce(Vector2.up * _mario.JumpForce, ForceMode2D.Impulse);
         else
