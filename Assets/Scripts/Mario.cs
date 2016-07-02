@@ -378,6 +378,7 @@ public class Mario : MonoBehaviour {
     {
         Shield = 0;
         CancelInvoke("flashShield");
+        _spriteRenderer.color = Color.white;
     }
 
     public void resetvalue()
